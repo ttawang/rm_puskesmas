@@ -169,13 +169,13 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
-                $.get("{{ url('pendaftaranpasien/hapus') }}"+'/'+id, function (data) {
-                })
+                $.get("{{ url('pendaftaranpasien/hapus') }}"+'/'+id);
                 Swal.fire(
                 'Deleted!',
                 'Data telah dihapus',
                 'success'
                 )
+                tb.ajax.reload();
             }
         })
     });
