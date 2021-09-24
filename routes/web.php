@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PendaftaranPasienController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\JenisPemeriksaanController;
+use App\Http\Controllers\PemeriksaanController;
+use App\Http\Controllers\DiagnosaController;
+use App\Http\Controllers\ObatController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +42,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware('admin')->group(function () {
         Route::get('pendaftaranpasien', [PendaftaranPasienController::class, 'index']); 
         Route::get('pendaftaranpasien/get_data', [PendaftaranPasienController::class, 'get_data']);
+        Route::get('master/data-dokter', [DokterController::class, 'index']);
+        Route::get('master/data-dokter/get_data', [DokterController::class, 'get_data']);
+        Route::get('master/data-unit', [UnitController::class, 'index']);
+        Route::get('master/data-unit/get_data', [UnitController::class, 'get_data']);
+        Route::get('master/data-jenis-pemeriksaan', [JenisPemeriksaanController::class, 'index']);
+        Route::get('master/data-jenis-pemeriksaan/get_data', [JenisPemeriksaanController::class, 'get_data']);
+        Route::get('master/data-pemeriksaan', [PemeriksaanController::class, 'index']);
+        Route::get('master/data-pemeriksaan/get_data', [PemeriksaanController::class, 'get_data']);
+        Route::get('master/data-diagnosa', [DiagnosaController::class, 'index']);
+        Route::get('master/data-diagnosa/get_data', [DiagnosaController::class, 'get_data']);
+        Route::get('master/data-obat', [ObatController::class, 'index']);
+        Route::get('master/data-obat/get_data', [ObatController::class, 'get_data']);
     });
     Route::middleware(['admin_registrasi'])->group(function () {
         

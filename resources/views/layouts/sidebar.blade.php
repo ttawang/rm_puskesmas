@@ -35,6 +35,72 @@
               </li>    
             </ul>
           </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-dokter')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Dokter</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-unit')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Unit</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-jenis-pemeriksaan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Jenis Pemeriksaan</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-pemeriksaan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Pemeriksaan</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-diagnosa')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Diagnosa</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-obat')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Obat</p>
+                </a>
+              </li>    
+            </ul>
+          </li>
           
         </ul>
       </nav>
