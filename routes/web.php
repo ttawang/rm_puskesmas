@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('master/data-obat/get_data', [ObatController::class, 'get_data']);
         Route::post('pendaftaranpasien/simpan', [PendaftaranPasienController::class, 'simpan']);
         Route::get('pendaftaranpasien/edit/{id}', [PendaftaranPasienController::class, 'edit']);
+        Route::get('pendaftaranpasien/hapus/{id}', [PendaftaranPasienController::class, 'hapus']);
     });
     Route::middleware(['admin_registrasi'])->group(function () {
         

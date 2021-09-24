@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use DataTables;
 use DB;
 use Carbon\Carbon;
-use App\Models\User;
 
 class PendaftaranPasienController extends Controller
 {
@@ -63,7 +62,10 @@ class PendaftaranPasienController extends Controller
 
         return response()->json($data);
     }
-    public function hapus(){
+    public function hapus($id){
+        $data = DB::table('pasien')->delete($id);
+        DB::commit();
+        return response()->json($data);
         
     }
 }

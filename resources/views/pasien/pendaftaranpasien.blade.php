@@ -168,6 +168,9 @@ $(document).ready(function () {
         confirmButtonText: 'Hapus'
         }).then((result) => {
             if (result.isConfirmed) {
+                var id = $(this).data('id');
+                $.get("{{ url('pendaftaranpasien/hapus') }}"+'/'+id, function (data) {
+                })
                 Swal.fire(
                 'Deleted!',
                 'Data telah dihapus',
