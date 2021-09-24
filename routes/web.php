@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware('admin')->group(function () {
         Route::get('pendaftaranpasien', [PendaftaranPasienController::class, 'index']); 
         Route::get('pendaftaranpasien/get_data', [PendaftaranPasienController::class, 'get_data']);
+        Route::post('pendaftaranpasien/simpan', [PendaftaranPasienController::class, 'simpan']);
+        Route::get('pendaftaranpasien/edit/{id}', [PendaftaranPasienController::class, 'edit']);
     });
     Route::middleware(['admin_registrasi'])->group(function () {
         

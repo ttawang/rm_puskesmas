@@ -101,6 +101,7 @@
 <script src="{{url('AdminLTE-3.1.0/dist/js/pages/dashboard.js')}}"></script>
 
 <script type="text/javascript" src="{{url('DataTables/datatables.min.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>
