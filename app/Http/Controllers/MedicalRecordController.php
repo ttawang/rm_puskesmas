@@ -7,19 +7,19 @@ use DataTables;
 use DB;
 use Carbon\Carbon;
 
-class PemeriksaanController extends Controller
+class MedicalRecordController extends Controller
 {
     //
     public function index()
     {
-        $data['judul'] = 'Data Pemeriksaan';
-        return view('master.data-pemeriksaan',$data);
+        $data['judul'] = 'Medical Record';
+        return view('tindakan.medical-record',$data);
     }
 
     public function get_data(Request $request)
     {
     
-            $data = DB::table('pemeriksaan')->orderBy('id','desc')->get();
+            $data = DB::table('medical_record')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -41,11 +41,11 @@ class PemeriksaanController extends Controller
         try{
             if($id == ''){
                 $data['created_at'] = Carbon::now()->toDateString();
-                DB::table('pemeriksaan')->insert($data);
+                DB::table('medical_record')->insert($data);
                 //$arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now()->toDateString();
-                DB::table('pemeriksaan')->where(array('id' => $id))->update($data);
+                DB::table('medical_record')->where(array('id' => $id))->update($data);
                 //$arr = ['status' => '1'];
             }
             DB::commit();
@@ -54,16 +54,16 @@ class PemeriksaanController extends Controller
 			DB::rollback();
 			//$arr = ['status' => '0'];
 		}
-        //return redirect()->to('pendaftaranpasien');
+        //return redirect()->to('tindakan/medical-record');
         //return response()->json($arr);
     }
     public function edit($id){
-        $data = DB::table('pemeriksaan')->where('id','=',$id)->first();
+        $data = DB::table('medical_record')->where('id','=',$id)->first();
 
         return response()->json($data);
     }
     public function hapus($id){
-        $data = DB::table('pemeriksaan')->delete($id);
+        $data = DB::table('medical_record')->delete($id);
         DB::commit();
         return response()->json($data);
         

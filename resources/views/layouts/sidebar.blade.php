@@ -28,11 +28,44 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('pendaftaranpasien')}}" class="nav-link">
+                <a href="{{url('pasien/kunjungan-pasien')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Pendaftaran Pasien</p>
+                  <p>Kunjungan Pasien</p>
                 </a>
               </li>    
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('pasien/data-pasien')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('tindakan/medical-record')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Medical Record</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('tindakan/tindakan-pasien')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Tindakan Pasien</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">

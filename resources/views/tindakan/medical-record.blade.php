@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Daftar Pendaftaran
+                            <i class="mr-1"></i>Medical Record
                         </div>
                     </div>
                     <div class="card-body">
@@ -17,12 +17,12 @@
                         <!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button-->
                         <button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button>
                         <p>
-                        <table id="tabel_pasien" class="table table-striped table-bordered">
+                        <table id="tabel_medical_record" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th>No Kunjungan</th>
+                                    <th>Kuantitas</th>
+                                    <th>Jumlah</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -48,7 +48,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('pendaftaranpasien/simpan')}}" method="POST"-->
+                <!--form class="form-horizontal" action="{{url('tindakan/medical-record/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
@@ -101,11 +101,11 @@
                 <!--/form-->
             </div>
             <div class="modal-footer">
-                <button type="button" id="btn_hapus" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
                 <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
-                </form>
+            </form>
         </div>
     </div>
 </div>
@@ -117,10 +117,10 @@
 <script type="text/javascript">
 $(document).ready(function () { 
     //MENAMPILKAN DATA DENGAN DATATABLES
-    var tb = $('#tabel_pasien').DataTable({
+    var tb = $('#tabel_medical_record').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('pendaftaranpasien/get_data') }}",
+        ajax: "{{ url('tindakan/medical-record/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'nama', name: 'nama'},
@@ -138,7 +138,7 @@ $(document).ready(function () {
     //ShOW MODAL/FORM DENGAN GETTING DATA BERDASARKAN ID
     $('body').on('click', '#btn_edit', function () {
         var id = $(this).data('id');
-        $.get("{{ url('pendaftaranpasien/edit') }}"+'/'+id, function (data) {
+        $.get("{{ url('tindakan/medical-record/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
             $('[name=nama]').val(data.nama);
@@ -148,7 +148,7 @@ $(document).ready(function () {
     //MELAKUKAN CONTROLLER SIMPAN
     $("#btn_simpan").click(function(){
         $.ajax({
-            url: "{{ url('pendaftaranpasien/simpan')}} ",
+            url: "{{ url('tindakan/medical-record/simpan')}} ",
             type:'POST',
             data: $("#form_tambah").serialize(),
             headers : {
@@ -169,7 +169,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
-                $.get("{{ url('pendaftaranpasien/hapus') }}"+'/'+id);
+                $.get("{{ url('tindakan/medical-record/hapus') }}"+'/'+id);
                 Swal.fire(
                 'Deleted!',
                 'Data telah dihapus',

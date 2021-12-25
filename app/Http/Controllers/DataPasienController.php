@@ -7,19 +7,19 @@ use DataTables;
 use DB;
 use Carbon\Carbon;
 
-class PendaftaranPasienController extends Controller
+class DataPasienController extends Controller
 {
     //
     public function index()
     {
-        $data['judul'] = 'Pendaftaran Pasien';
-        return view('pasien.pendaftaranpasien',$data);
+        $data['judul'] = 'Data Pasien';
+        return view('pasien.data-pasien',$data);
     }
 
     public function get_data(Request $request)
     {
     
-            $data = DB::table('pasien')->orderBy('id','desc')->get();
+            $data = DB::table('data_pasien')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -41,11 +41,11 @@ class PendaftaranPasienController extends Controller
         try{
             if($id == ''){
                 $data['created_at'] = Carbon::now()->toDateString();
-                DB::table('pasien')->insert($data);
+                DB::table('data_pasien')->insert($data);
                 //$arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now()->toDateString();
-                DB::table('pasien')->where(array('id' => $id))->update($data);
+                DB::table('data_pasien')->where(array('id' => $id))->update($data);
                 //$arr = ['status' => '1'];
             }
             DB::commit();
@@ -58,12 +58,12 @@ class PendaftaranPasienController extends Controller
         //return response()->json($arr);
     }
     public function edit($id){
-        $data = DB::table('pasien')->where('id','=',$id)->first();
+        $data = DB::table('data_pasien')->where('id','=',$id)->first();
 
         return response()->json($data);
     }
     public function hapus($id){
-        $data = DB::table('pasien')->delete($id);
+        $data = DB::table('data_pasien')->delete($id);
         DB::commit();
         return response()->json($data);
         
