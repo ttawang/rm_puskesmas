@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DataTables;
-use DB;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Exception;
 
 class DataPasienController extends Controller
 {
