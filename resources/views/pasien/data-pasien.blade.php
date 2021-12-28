@@ -103,7 +103,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Agama</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="agama">
                                     <option selected>Pilih</option>
                                     <option value="agama">Islam</option>
                                     <option value="agama">Kristen</option>
@@ -231,7 +231,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-$(document).ready(function () { 
+$(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_data_pasien').DataTable({
         processing: true,
@@ -295,9 +295,9 @@ $(document).ready(function () {
             }
         })
     });
-    
+
 });
-  
+
 </script>
 
 @endsection
