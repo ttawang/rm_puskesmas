@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Poli</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="poli">
                                     {{-- tambahan --}}
                                     <option selected>Pilih Poli</option>
                                     @foreach ($poli as $i)
