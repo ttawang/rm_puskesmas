@@ -86,8 +86,12 @@
                             <label class="col-sm-4 col-form-label  text-secondary">Poli</label>
                             <div class="col-sm-8">
                                 <select class="custom-select rounded-0  text-secondary">
+                                    {{-- tambahan --}}
                                     <option selected>Pilih Poli</option>
-                                    <option value="poli">Poli</option>
+                                    @foreach ($poli as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -115,7 +119,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-$(document).ready(function () { 
+$(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_kunjungan').DataTable({
         processing: true,
@@ -179,9 +183,9 @@ $(document).ready(function () {
             }
         })
     });
-    
+
 });
-  
+
 </script>
 
 @endsection

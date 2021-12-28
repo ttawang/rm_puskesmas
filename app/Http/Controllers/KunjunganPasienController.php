@@ -13,12 +13,15 @@ class KunjunganPasienController extends Controller
     public function index()
     {
         $data['judul'] = 'Daftar Kunjungan';
+        //tambahan
+        $data['poli'] = DB::table('unit')->get();
+
         return view('pasien.kunjungan-pasien',$data);
     }
 
     public function get_data(Request $request)
     {
-    
+
             $data = DB::table('kunjungan_pasien')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -30,13 +33,13 @@ class KunjunganPasienController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-    
+
     }
     public function simpan(Request $request)
     {
         $id = $request->get('id');
         $data['nama'] = $request->get('nama');
-        
+
         DB::beginTransaction();
         try{
             if($id == ''){
@@ -49,7 +52,7 @@ class KunjunganPasienController extends Controller
                 //$arr = ['status' => '1'];
             }
             DB::commit();
-		
+
 		}catch (Exception $e){
 			DB::rollback();
 			//$arr = ['status' => '0'];
@@ -66,6 +69,6 @@ class KunjunganPasienController extends Controller
         $data = DB::table('kunjungan_pasien')->delete($id);
         DB::commit();
         return response()->json($data);
-        
+
     }
 }
