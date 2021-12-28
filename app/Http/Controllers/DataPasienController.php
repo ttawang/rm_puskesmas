@@ -18,7 +18,7 @@ class DataPasienController extends Controller
 
     public function get_data(Request $request)
     {
-    
+
             $data = DB::table('data_pasien')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -30,26 +30,26 @@ class DataPasienController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-    
+
     }
     public function simpan(Request $request)
     {
         $id = $request->get('id');
         $data['nama'] = $request->get('nama');
-        
+
         DB::beginTransaction();
         try{
             if($id == ''){
-                $data['created_at'] = Carbon::now()->toDateString();
+                $data['created_at'] = Carbon::now();
                 DB::table('data_pasien')->insert($data);
                 //$arr = ['status' => '1'];
             }else{
-                $data['updated_at'] = Carbon::now()->toDateString();
+                $data['updated_at'] = Carbon::now();
                 DB::table('data_pasien')->where(array('id' => $id))->update($data);
                 //$arr = ['status' => '1'];
             }
             DB::commit();
-		
+
 		}catch (Exception $e){
 			DB::rollback();
 			//$arr = ['status' => '0'];
@@ -66,6 +66,6 @@ class DataPasienController extends Controller
         $data = DB::table('data_pasien')->delete($id);
         DB::commit();
         return response()->json($data);
-        
+
     }
 }
