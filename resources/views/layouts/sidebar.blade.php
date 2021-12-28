@@ -1,12 +1,12 @@
     <!-- Brand Logo -->
     <p href="index3.html" class="brand-link">
-      <img src="AdminLTE-3.1.0/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: .8">
+        <img src="{{ url("AdminLTE-3.1.0/dist/img/AdminLTELogo.png") }}" alt="AdminLTE Logo" class="brand-image img-circle" style="opacity: .8">
       <span class="brand-text font-weight-light">Rekam Medis</span>
     </p>
-    
+
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      
+
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -20,7 +20,7 @@
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
 
@@ -32,7 +32,7 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Kunjungan Pasien</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -76,7 +76,7 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Data Dokter</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -87,7 +87,7 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Data Unit</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -98,7 +98,7 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Data Jenis Pemeriksaan</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -109,7 +109,7 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Data Pemeriksaan</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -120,7 +120,7 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Data Diagnosa</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -131,10 +131,10 @@
                   <i class="fas fa-user-edit"></i>
                   <p>Data Obat</p>
                 </a>
-              </li>    
+              </li>
             </ul>
           </li>
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
