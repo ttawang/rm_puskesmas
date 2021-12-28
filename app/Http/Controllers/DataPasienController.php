@@ -35,27 +35,45 @@ class DataPasienController extends Controller
     public function simpan(Request $request)
     {
         $id = $request->get('id');
+        $data['kode_pasien'] = $request->get('no_rekam_medis');
+        $data['tahun_rm'] = $request->get('tahun_rekam_medis');
+        $data['no_identitas'] = $request->get('no_identitas');
         $data['nama'] = $request->get('nama');
+        $data['tgl_lahir'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_lahir'))->format('Y-m-d');
+        $data['usia'] = $request->get('usia');
+        $data['agama'] = $request->get('agama');
+        $data['jenis_kelamin'] = $request->get('jenis_kelamin');
+        $data['gol_darah'] = $request->get('gol_darah');
+        $data['status_menikah'] = $request->get('status_menikah');
+        $data['pekerjaan'] = $request->get('pekerjaan');
+        $data['alamat'] = $request->get('alamat');
+        $data['kecamatan'] = $request->get('kecamatan');
+        $data['desa'] = $request->get('desa');
+        $data['alergi'] = $request->get('alergi');
+        $data['no_askes'] = $request->get('no_askes');
+        $data['nama_keluarga'] = $request->get('nama_keluarga');
+        $data['kelompok'] = $request->get('kel_pasien');
+        $data['status_pasien'] = $request->get('status_pasien');
 
         DB::beginTransaction();
         try{
             if($id == ''){
                 $data['created_at'] = Carbon::now();
                 DB::table('data_pasien')->insert($data);
-                //$arr = ['status' => '1'];
+                $arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now();
                 DB::table('data_pasien')->where(array('id' => $id))->update($data);
-                //$arr = ['status' => '1'];
+                $arr = ['status' => '1'];
             }
             DB::commit();
 
 		}catch (Exception $e){
 			DB::rollback();
-			//$arr = ['status' => '0'];
+			$arr = ['status' => '0'];
 		}
         //return redirect()->to('pendaftaranpasien');
-        //return response()->json($arr);
+        return response()->json($arr);
     }
     public function edit($id){
         $data = DB::table('data_pasien')->where('id','=',$id)->first();
