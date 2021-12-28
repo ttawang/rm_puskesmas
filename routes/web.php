@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\KunjunganPasienController;
+use App\Http\Controllers\RegistrasiPasienController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\JenisPemeriksaanController;
@@ -35,9 +35,9 @@ Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
- 
+
 Route::group(['middleware' => 'auth'], function () {
- 
+
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('home/get_data', [HomeController::class, 'get_data']);
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -78,11 +78,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('pasien/data-pasien/simpan', [DataPasienController::class, 'simpan']);
         Route::get('pasien/data-pasien/edit/{id}', [DataPasienController::class, 'edit']);
         Route::get('pasien/data-pasien/hapus/{id}', [DataPasienController::class, 'hapus']);
-        Route::get('pasien/kunjungan-pasien', [KunjunganPasienController::class, 'index']); 
-        Route::get('pasien/kunjungan-pasien/get_data', [KunjunganPasienController::class, 'get_data']);
-        Route::post('pasien/kunjungan-pasien/simpan', [KunjunganPasienController::class, 'simpan']);
-        Route::get('pasien/kunjungan-pasien/edit/{id}', [KunjunganPasienController::class, 'edit']);
-        Route::get('pasien/kunjungan-pasien/hapus/{id}', [KunjunganPasienController::class, 'hapus']);
+        Route::get('pasien/registrasi-pasien', [RegistrasiPasienController::class, 'index']);
+        Route::get('pasien/registrasi-pasien/get_data', [RegistrasiPasienController::class, 'get_data']);
+        Route::post('pasien/registrasi-pasien/simpan', [RegistrasiPasienController::class, 'simpan']);
+        Route::get('pasien/registrasi-pasien/edit/{id}', [RegistrasiPasienController::class, 'edit']);
+        Route::get('pasien/registrasi-pasien/hapus/{id}', [RegistrasiPasienController::class, 'hapus']);
         Route::get('tindakan/tindakan-pasien', [TindakanPasienController::class, 'index']);
         Route::get('tindakan/tindakan-pasien/get_data', [TindakanPasienController::class, 'get_data']);
         Route::post('tindakan/tindakan-pasien/simpan', [TindakanPasienController::class, 'simpan']);
@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
     });
     Route::middleware(['admin_registrasi'])->group(function () {
-        
+
     });
     Route::middleware(['admin_bagian_poli'])->group(function () {
 
@@ -112,5 +112,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['kepala_puskesmas'])->group(function () {
 
     });
- 
+
 });

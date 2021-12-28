@@ -28,9 +28,9 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('pasien/kunjungan-pasien')}}" class="nav-link">
+                <a href="{{url('pasien/registrasi-pasien')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Kunjungan Pasien</p>
+                  <p>Registrasi Pasien</p>
                 </a>
               </li>
             </ul>
