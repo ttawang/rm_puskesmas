@@ -22,13 +22,18 @@ class DataPasienController extends Controller
             $data = DB::table('data_pasien')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('tanggal_lahir', function($row){
+                    $tanggal = Carbon::createFromFormat('Y-m-d', $row->tgl_lahir)->format('d/m/Y');
+
+                    return $tanggal;
+                })
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
                     $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>'.
                         '<input type="hidden" id="nama'.$row->id.'" value="'.$row->nama.'">';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','tanggal_lahir'])
                 ->make(true);
 
     }

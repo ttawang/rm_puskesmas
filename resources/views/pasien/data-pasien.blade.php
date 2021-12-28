@@ -21,8 +21,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>No. Rekam Medis</th>
                                     <th>Nama Pasien</th>
                                     <th>Alamat</th>
+                                    <th>tanggal lahir</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -54,12 +56,6 @@
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No Daftar</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="no_daftar" placeholder="No Daftar">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_rekam_medis" placeholder="No Rekam Medis">
@@ -87,10 +83,11 @@
                             <label class="col-sm-4 col-form-label  text-secondary">Tanggal Lahir</label>
                             <div class="col-sm-8">
                                 <div class="input-group date">
-                                    <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}" readonly>
-                                        <div class="input-group-append">
+                                    {{-- <input type="text" class="form-control datetimepicker-input" name="tgl_lahir" value="{{date('d/m/Y')}}"> --}}
+                                    <input type="text" class="form-control" name="tgl_lahir">
+                                        {{-- <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
+                                        </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -105,45 +102,45 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="agama">
                                     <option selected>Pilih</option>
-                                    <option value="agama">Islam</option>
-                                    <option value="agama">Kristen</option>
-                                    <option value="agama">Katholik</option>
-                                    <option value="agama">Hindu</option>
-                                    <option value="agama">Budha</option>
-                                    <option value="agama">Konghucu</option>
-                                    <option value="agama">Lainnya</option>
+                                    <option value="islam">Islam</option>
+                                    <option value="kristen">Kristen</option>
+                                    <option value="katholik">Katholik</option>
+                                    <option value="hindu">Hindu</option>
+                                    <option value="budha">Budha</option>
+                                    <option value="konghucu">Konghucu</option>
+                                    <option value="lainnya">Lainnya</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="jenis_kelamin">
                                     <option selected>Pilih</option>
-                                    <option value="jenis_kelamin">Laki-laki</option>
-                                    <option value="jenis_kelamin">Perempuan</option>
+                                    <option value="laki">Laki-laki</option>
+                                    <option value="perempuan">Perempuan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Golongan Darah</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="gol_darah">
                                     <option selected>Pilih</option>
-                                    <option value="goldar">A</option>
-                                    <option value="goldar">B</option>
-                                    <option value="goldar">AB</option>
-                                    <option value="goldar">O</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="AB">AB</option>
+                                    <option value="O">O</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Status Menikah</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="status_menikah">
                                     <option selected>Pilih</option>
-                                    <option value="status_menikah">Sudah Menikah</option>
-                                    <option value="status_menikah">Belum Menikah</option>
+                                    <option value="sudah">Sudah Menikah</option>
+                                    <option value="belum">Belum Menikah</option>
                                 </select>
                             </div>
                         </div>
@@ -156,16 +153,16 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Alamat</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                                <textarea type="text" class="form-control" name="alamat" placeholder="Alamat"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Kecamatan</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="kecamatan">
                                     <option selected>Pilih</option>
-                                    <option value="kecamatan">kecamatan A</option>
-                                    <option value="kecamatan">kecamatan B</option>
+                                    <option value="a">kecamatan A</option>
+                                    <option value="b">kecamatan B</option>
                                 </select>
                             </div>
                         </div>
@@ -184,32 +181,32 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">No BPJS/Jamkesmas</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" name="no_bpjs" placeholder="Nomor"></textarea>
+                                <input class="form-control" name="no_askes" placeholder="Nomor">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Nama Keluarga</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" name="nama_keluarga" placeholder="Nama Keluarga"></textarea>
+                                <input class="form-control" name="nama_keluarga" placeholder="Nama Keluarga">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Kelompok Pasien</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="kel_pasien">
                                     <option selected>Pilih</option>
-                                    <option value="kelompok">UMUM</option>
-                                    <option value="kelompok">BPJS</option>
+                                    <option value="umum">UMUM</option>
+                                    <option value="bpjs">BPJS</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Status Pasien</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
+                                <select class="form-control select-cari-modal" name="status_pasien">
                                     <option selected>Pilih</option>
-                                    <option value="status">Aktif</option>
-                                    <option value="status">Non-aktif</option>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="nonaktif">Non-aktif</option>
                                 </select>
                             </div>
                         </div>
@@ -219,7 +216,7 @@
             <div class="modal-footer">
                 <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
+                <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
             </form>
         </div>
@@ -227,8 +224,6 @@
 </div>
 
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.11.2/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/fc-3.3.3/fh-3.1.9/kt-2.6.4/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/sb-1.2.1/sp-1.4.0/sl-1.3.3/datatables.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
 $(document).ready(function () {
@@ -239,8 +234,10 @@ $(document).ready(function () {
         ajax: "{{ url('pasien/data-pasien/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'kode_pasien', name: 'kode_pasien'},
             {data: 'nama', name: 'nama'},
-            {data: 'nama', name: 'nama'},
+            {data: 'alamat', name: 'alamat'},
+            {data: 'tanggal_lahir', name: 'tanggal_lahir'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -257,7 +254,26 @@ $(document).ready(function () {
         $.get("{{ url('pasien/data-pasien/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
+            $('[name=no_rekam_medis]').val(data.kode_pasien);
+            $('[name=tahun_rekam_medis]').val(data.tahun_rm);
+            $('[name=no_identitas]').val(data.no_identitas);
             $('[name=nama]').val(data.nama);
+            $('[name=tgl_lahir]').val(formattanggal(data.tgl_lahir));
+            $('[name=usia]').val(data.usia);
+            $('[name=agama]').val(data.agama).trigger('change');
+            $('[name=jenis_kelamin]').val(data.jenis_kelamin).trigger('change');
+            $('[name=gol_darah]').val(data.gol_darah).trigger('change');
+            $('[name=status_menikah]').val(data.status_menikah).trigger('change');
+            $('[name=pekerjaan]').val(data.pekerjaan);
+            $('[name=alamat]').val(data.alamat);
+            $('[name=kecamatan]').val(data.kecamatan).trigger('change');
+            $('[name=desa]').val(data.desa);
+            $('[name=alergi]').val(data.alergi);
+            $('[name=no_askes]').val(data.no_askes);
+            $('[name=nama_keluarga]').val(data.nama_keluarga);
+            $('[name=kel_pasien]').val(data.kelompok).trigger('change');
+            $('[name=status_pasien]').val(data.status_pasien).trigger('change');
+
         })
     });
 
@@ -270,30 +286,54 @@ $(document).ready(function () {
             headers : {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-        });
-    })
-
+            success: function(respon){
+				if(respon.status == 1 || respon.status == "1"){
+					$("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data berhasil diperbarui.',
+                        type: "success"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+                }else{
+                    $("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Data gagal diperbarui.',
+                        type: "error"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+				}
+			}
         });
     });
-
+    //BUTTON HAPUS
+    $('body').on('click', '#btn_hapus', function () {
+        Swal.fire({
+        title: 'Data akan dihapus !',
+        text: "Data yang telah dihapus tidak dapat dikembalikan",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Hapus'
         }).then((result) => {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
                 $.get("{{ url('pasien/data-pasien/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Data telah dihapus.',
+                    type: "success"
+                }).then((result) => {
+                    tb.ajax.reload();
+                })
             }
         })
     });
-
 });
-
 </script>
 
 @endsection
