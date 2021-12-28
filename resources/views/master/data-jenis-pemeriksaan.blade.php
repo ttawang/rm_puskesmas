@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('master/data-unit/simpan')}}" method="POST"-->
+                <!--form class="form-horizontal" action="{{url('master/data-unit-pemeriksaan/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
