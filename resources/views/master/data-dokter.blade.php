@@ -20,8 +20,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode</th>
                                     <th>Nama</th>
+                                    <th>No. HP</th>
+                                    <th>Spesialis</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -53,66 +54,49 @@
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Kode</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Nama Dokter</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="kode_dokter" placeholder="Kode">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Nama</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama">
+                                <input type="text" class="form-control" name="nama" placeholder="Nama Dokter">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
-                                    <option selected>Pilih Jenis Kelamin</option>
-                                    <option value="poli">Laki-laki</option>
-                                    <option value="poli">perempuan</option>
+                                <select class="form-control select-cari-modal" name="jenis_kelamin">
+                                    <option selected>Pilih</option>
+                                    <option value="laki">Laki-laki</option>
+                                    <option value="perempuan">Perempuan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Spesialis</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Spesialisasi</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
-                                    <option selected>Pilih Spesialis</option>
-                                    <option value="poli">UMUM</option>
-                                    <option value="poli">GIGI</option>
-                                    <option value="poli">KIA</option>
-                                    <option value="poli">KB</option>
+                                <select class="form-control select-cari-modal" name="spesialis">
+                                    <option selected>Pilih</option>
+                                    <option value="umum">UMUM</option>
+                                    <option value="gigi">GIGI</option>
+                                    <option value="kia">KIA</option>
+                                    <option value="kb">KB</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Tempat Lahir</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Alamat</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
+                                <textarea type="text" class="form-control" name="alamat" placeholder="Alamat"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Tanggal Lahir</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">No HP</label>
                             <div class="col-sm-8">
-                                <div class="input-group date">
-                                    <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                </div>
+                                <input type="text" class="form-control" name="no_hp" placeholder="No HP">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Kode Poli</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Email</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="kode_poli" placeholder="Kode">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Nama Poli</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama_poli" placeholder="Nama Poli">
+                                <input type="text" class="form-control" name="email" placeholder="Email">
                             </div>
                         </div>
                     </div>
@@ -121,18 +105,16 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
+                <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
             </form>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.11.2/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/fc-3.3.3/fh-3.1.9/kt-2.6.4/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/sb-1.2.1/sp-1.4.0/sl-1.3.3/datatables.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
-$(document).ready(function () { 
+$(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_dokter').DataTable({
         processing: true,
@@ -141,7 +123,8 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'nama', name: 'nama'},
-            {data: 'nama', name: 'nama'},
+            {data: 'telephone', name: 'telephone'},
+            {data: 'spesialis', name: 'spesialis'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -159,6 +142,11 @@ $(document).ready(function () {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
             $('[name=nama]').val(data.nama);
+            $('[name=jenis_kelamin]').val(data.jenis_kelamin).trigger('change');
+            $('[name=spesialis]').val(data.spesialis).trigger('change');
+            $('[name=no_hp]').val(data.telephone);
+            $('[name=alamat]').val(data.alamat);
+            $('[name=email]').val(data.email);
         })
     });
 
@@ -171,9 +159,30 @@ $(document).ready(function () {
             headers : {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            success: function(respon){
+				if(respon.status == 1 || respon.status == "1"){
+					$("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data berhasil diperbarui.',
+                        type: "success"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+                }else{
+                    $("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Data gagal diperbarui.',
+                        type: "error"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+				}
+            }
         });
-    })
-
+    });
+    //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
         title: 'Data akan dihapus !',
@@ -187,17 +196,16 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
                 $.get("{{ url('master/data-dokter/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Data telah dihapus.',
+                    type: "success"
+                }).then((result) => {
+                    tb.ajax.reload();
+                })
             }
         })
     });
-    
 });
-  
 </script>
 @endsection

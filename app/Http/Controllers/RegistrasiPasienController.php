@@ -16,7 +16,7 @@ class RegistrasiPasienController extends Controller
         $data['judul'] = 'Registrasi Pasien';
         //tambahan
         $data['poli'] = DB::table('unit')->get();
-        $data['nama'] = DB::table('data_pasien')->get();
+        $data['pasien'] = DB::table('data_pasien')->get();
 
         return view('pasien.registrasi-pasien',$data);
     }
@@ -24,7 +24,20 @@ class RegistrasiPasienController extends Controller
     public function get_data(Request $request)
     {
 
-            $data = DB::table('registrasi_pasien')->orderBy('id','desc')->get();
+            $data = DB::table('registrasi_pasien as rp')
+            ->join('unit as u','rp.id_unit','u.id')
+            ->join('data_pasien as dp','rp.id_pasien','dp.id')
+            ->select(DB::raw('
+                rp.id as id,
+                rp.tgl_kunjungan as tgl_kunjungan,
+                rp.keluhan as keluhan,
+                rp.id_unit as id_unit,
+                rp.id_pasien as id_pasien,
+                u.nama as nama_poli,
+                dp.nama as nama_pasien,
+                dp.kode_pasien as no_rekammedis
+            '))
+            ->orderBy('rp.id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tgl_registrasi', function($row){
@@ -35,8 +48,7 @@ class RegistrasiPasienController extends Controller
 
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
-                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>'.
-                        '<input type="hidden" id="nama'.$row->id.'" value="'.$row->nama.'">';
+                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action','tgl_registrasi'])
@@ -48,7 +60,7 @@ class RegistrasiPasienController extends Controller
         $id = $request->get('id');
         $data['tgl_kunjungan'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_registrasi'))->format('Y-m-d');
         $data['keluhan'] = $request->get('keluhan');
-        $data['id_pasien'] = $request->get('nama');
+        // $data['id_pasien'] = $request->get('nama');
         $data['id_unit'] = $request->get('poli');
 
         DB::beginTransaction();
@@ -72,7 +84,13 @@ class RegistrasiPasienController extends Controller
         return response()->json($arr);
     }
     public function edit($id){
-        $data = DB::table('registrasi_pasien')->where('id','=',$id)->first();
+        $data = DB::table('registrasi_pasien as rp')
+            ->join('data_pasien as dp','rp.id_pasien','dp.id')
+            ->select(DB::raw('
+                rp.*,
+                dp.nama as nama_pasien
+            '))
+        ->where('rp.id','=',$id)->first();
 
         return response()->json($data);
     }
@@ -81,5 +99,10 @@ class RegistrasiPasienController extends Controller
         DB::commit();
         return response()->json($data);
 
+    }
+    public function get_norekammedis($id)
+    {
+        $data = DB::table('data_pasien')->where('kode_pasien',$id)->first();
+        return response()->json($data);
     }
 }

@@ -23,6 +23,7 @@
                                     <th>No</th>
                                     <th>Tanggal Registrasi</th>
                                     <th>Nama Pasien</th>
+                                    <th>No. Rekam Medis</th>
                                     <th>Keluhan</th>
                                     <th>Poli</th>
                                     <th>Action</th>
@@ -50,17 +51,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('pendaftaranpasien/simpan')}}" method="POST"-->
+                <!--form class="form-horizontal" action="{{url('pasien/registras-pasien/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
                     <div class="card-body">
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_registrasi" placeholder="No Registrasi">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Tanggal</label>
                             <div class="col-sm-8">
@@ -73,21 +74,21 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="no_rekam_medis" placeholder="No Rekam Medis">
+                                <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
+                                <option value="">Cari No. Rekam Medis</option>
+                                @foreach ($pasien as $i)
+                                    <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>
+                                @endforeach
+                                </select>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="nama">
-                                    <option selected>Cari Nama</option>
-                                    @foreach ($nama as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" name="nama" disabled placeholder="Nama Pasien">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -134,9 +135,10 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'tgl_registrasi', name: 'tgl_registrasi'},
-            {data: 'nama', name: 'nama'},
+            {data: 'nama_pasien', name: 'nama_pasien'},
+            {data: 'no_rekammedis', name: 'no_rekammedis'},
             {data: 'keluhan', name: 'keluhan'},
-            {data: 'poli', name: 'poli'},
+            {data: 'nama_poli', name: 'nama_poli'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -155,8 +157,8 @@ $(document).ready(function () {
             $('[name=id]').val(data.id);
             $('[name=tgl_registrasi]').val(formattanggal(data.tgl_kunjungan));
             $('[name=keluhan]').val(data.keluhan);
-            $('[name=nama]').val(data.id_pasien);
-            $('[name=poli]').val(data.id_unit);
+            $('[name=nama]').val(data.nama_pasien);
+            $('[name=poli]').val(data.id_unit).trigger('change');
         })
     });
 
@@ -217,6 +219,12 @@ $(document).ready(function () {
             }
         })
     });
+    $('select[name="no_rekammedis"]').on('change',function(){
+		var no_rekammedis = $(this).val();
+		$.get("{{ url('pasien/registrasi-pasien/get_norekammedis') }}"+'/'+no_rekammedis, function (data) {
+            $('[name=nama]').val(data.nama);
+        })
+	});
 });
 </script>
 
