@@ -24,6 +24,7 @@
                                     <th>Kode Unit</th>
                                     <th>Nama</th>
                                     <th>Keterangan</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,33 +63,30 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Unit</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Unit">
+                                <input type="text" class="form-control" name="nama_unit" placeholder="Nama Unit">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="keterangan" placeholder="Keterangan">
+                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"><textarea>
                             </div>
                         </div>
-                    </div>             
+                    </div>
                 <!--/form-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
+                <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
             </form>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.11.2/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/fc-3.3.3/fh-3.1.9/kt-2.6.4/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/sb-1.2.1/sp-1.4.0/sl-1.3.3/datatables.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script type="text/javascript">
-$(document).ready(function () { 
+$(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_unit').DataTable({
         processing: true,
@@ -96,8 +94,9 @@ $(document).ready(function () {
         ajax: "{{ url('master/data-unit/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'nama', name: 'nama'},
-            {data: 'nama', name: 'nama'},
+            {data: 'kode_unit', name: 'kode_unit'},
+            // {data: 'nama', name: 'nama_unit'},
+            {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -114,12 +113,14 @@ $(document).ready(function () {
         $.get("{{ url('master/data-unit/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
-            $('[name=nama]').val(data.nama);
+            $('[name=kode_unit]').val(data.kode_unit);
+            $('[name=nama_unit]').val(data.nama);
+            $('[name=keterangan]').val(data.keterangan);
         })
     });
 
-    //MELAKUKAN CONTROLLER SIMPAN
-    $("#btn_simpan").click(function(){
+     //MELAKUKAN CONTROLLER SIMPAN
+     $("#btn_simpan").click(function(){
         $.ajax({
             url: "{{ url('master/data-unit/simpan')}} ",
             type:'POST',
@@ -127,9 +128,30 @@ $(document).ready(function () {
             headers : {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            success: function(respon){
+				if(respon.status == 1 || respon.status == "1"){
+					$("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data berhasil diperbarui.',
+                        type: "success"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+                }else{
+                    $("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Data gagal diperbarui.',
+                        type: "error"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+				}
+			}
         });
-    })
-
+    });
+    //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
         title: 'Data akan dihapus !',
@@ -143,18 +165,17 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
                 $.get("{{ url('master/data-unit/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Data telah dihapus.',
+                    type: "success"
+                }).then((result) => {
+                    tb.ajax.reload();
+                })
             }
         })
     });
-    
 });
-  
 </script>
 
 @endsection

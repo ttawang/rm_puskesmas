@@ -21,8 +21,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Jenis Pemeriksaan</th>
-                                    <th>Nama Jenis Pemeriksaan</th>
+                                    <th>Kode</th>
+                                    <th>Jenis Pemeriksaan</th>
                                     <th>Keterangan</th>
                                 </tr>
                             </thead>
@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('master/data-unit-pemeriksaan/simpan')}}" method="POST"-->
+                <!--form class="form-horizontal" action="{{url('master/data-jenis-pemeriksaan/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
@@ -61,13 +61,13 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Jenis Pemeriksaan</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Jenis Pemeriksaan">
+                                <input type="text" class="form-control" name="jenis_pemeriksaan" placeholder="Nama Jenis Pemeriksaan">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="keterangan" placeholder="Keterangan">
+                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"><textarea>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
+                <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
             </form>
         </div>
@@ -86,8 +86,9 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.11.2/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/fc-3.3.3/fh-3.1.9/kt-2.6.4/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/sb-1.2.1/sp-1.4.0/sl-1.3.3/datatables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 <script type="text/javascript">
-$(document).ready(function () { 
+$(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_jenis_pemeriksaan').DataTable({
         processing: true,
@@ -95,8 +96,9 @@ $(document).ready(function () {
         ajax: "{{ url('master/data-jenis-pemeriksaan/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'nama', name: 'nama'},
-            {data: 'nama', name: 'nama'},
+            {data: 'kode_jp', name: 'kode_jenis_pemeriksaan'},
+            {data: 'nama', name: 'jenis_pemeriksaan'},
+            {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -113,7 +115,9 @@ $(document).ready(function () {
         $.get("{{ url('master/data-jenis-pemeriksaan/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
-            $('[name=nama]').val(data.nama);
+            $('[name=kode_jenis_pemeriksaan]').val(data.kode_jp);
+            $('[name=jenis_pemeriksaan]').val(data.nama);
+            $('[name=keterangan]').val(data.keterangan);
         })
     });
 
@@ -126,9 +130,31 @@ $(document).ready(function () {
             headers : {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            success: function(respon){
+				if(respon.status == 1 || respon.status == "1"){
+					$("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data berhasil diperbarui.',
+                        type: "success"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+                }else{
+                    $("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Data gagal diperbarui.',
+                        type: "error"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+				}
+			}
         });
     })
 
+    //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
         title: 'Data akan dihapus !',
@@ -142,18 +168,19 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
                 $.get("{{ url('master/data-jenis-pemeriksaan/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Data telah dihapus.',
+                    type: "success"
+                }).then((result) => {
+                    tb.ajax.reload();
+                })
             }
         })
     });
-    
+
 });
-  
+
 </script>
 
 @endsection

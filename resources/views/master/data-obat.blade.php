@@ -21,8 +21,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Obat</th>
-                                    <th>Nama Obat</th>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Jenis</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -60,34 +61,36 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Obat</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Obat">
+                                <input type="text" class="form-control" name="nama_obat" placeholder="Nama Obat">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Satuan</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
-                                    <option selected>Pilih Satuan</option>
-                                    <option value="poli">Poli</option>
+                                <select class="form-control select-cari-modal" name="satuan_obat">
+                                    <option selected>Pilih</option>
+                                    <option value="A">AAA</option>
+                                    <option value="B">BBB</option>
+                                    <option value="C">CCC</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Jenis</label>
                             <div class="col-sm-8">
-                                <select class="custom-select rounded-0  text-secondary">
-                                    <option selected>Pilih Jenis</option>
-                                    <option value="poli">Poli</option>
+                                <select class="form-control select-cari-modal" name="jenis_obat">
+                                    <option selected>Pilih</option>
+                                    <option value="D">DDD</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="keterangan" placeholder="Keterangan">
+                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"><textarea>
                             </div>
-                        </div>
-                        <div class="form-group row">
+                        </div> --}}
+                        {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Expired Date</label>
                             <div class="col-sm-8">
                                 <div class="input-group date">
@@ -97,25 +100,22 @@
                                         </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> 
+                        </div> --}}
+                    </div>
                 <!--/form-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
+                <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
             </form>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.11.2/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/fc-3.3.3/fh-3.1.9/kt-2.6.4/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/sb-1.2.1/sp-1.4.0/sl-1.3.3/datatables.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script type="text/javascript">
-$(document).ready(function () { 
+$(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_obat').DataTable({
         processing: true,
@@ -123,8 +123,9 @@ $(document).ready(function () {
         ajax: "{{ url('master/data-obat/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'nama', name: 'nama'},
-            {data: 'nama', name: 'nama'},
+            {data: 'kode_obat', name: 'kode_obat'},
+            {data: 'nama', name: 'nama_obat'},
+            {data: 'jenis', name: 'jenis_obat'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -141,7 +142,10 @@ $(document).ready(function () {
         $.get("{{ url('master/data-obat/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
-            $('[name=nama]').val(data.nama);
+            $('[name=kode_obat]').val(data.kode_obat);
+            $('[name=nama_obat]').val(data.nama);
+            $('[name=satuan_obat]').val(data.satuan).trigger('change');
+            $('[name=jenis_obat]').val(data.jenis).trigger('change');
         })
     });
 
@@ -154,6 +158,27 @@ $(document).ready(function () {
             headers : {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+            success: function(respon){
+				if(respon.status == 1 || respon.status == "1"){
+					$("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data berhasil diperbarui.',
+                        type: "success"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+                }else{
+                    $("#modal_tambah_data").modal('hide');
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Data gagal diperbarui.',
+                        type: "error"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+				}
+			}
         });
     })
 
@@ -170,18 +195,19 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
                 $.get("{{ url('master/data-obat/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Data telah dihapus.',
+                    type: "success"
+                }).then((result) => {
+                    tb.ajax.reload();
+                })
             }
         })
     });
-    
+
 });
-  
+
 </script>
 
 @endsection
