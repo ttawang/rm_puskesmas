@@ -48,7 +48,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('data-obat/simpan')}}" method="POST"-->
+                <!--form class="form-horizontal" action="{{url('master/data-obat/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <div class="card-body">
@@ -81,6 +81,8 @@
                                 <select class="form-control select-cari-modal" name="jenis_obat">
                                     <option selected>Pilih</option>
                                     <option value="D">DDD</option>
+                                    <option value="E">EEE</option>
+                                    <option value="F">FFF</option>
                                 </select>
                             </div>
                         </div>
@@ -145,12 +147,12 @@ $(document).ready(function () {
             $('[name=kode_obat]').val(data.kode_obat);
             $('[name=nama_obat]').val(data.nama);
             $('[name=satuan_obat]').val(data.satuan).trigger('change');
-            $('[name=jenis_obat]').val(data.jenis).trigger('change');
+            $('[name=jenis_obat]').val(data.jenis).trigger('change');;
         })
     });
 
-    //MELAKUKAN CONTROLLER SIMPAN
-    $("#btn_simpan").click(function(){
+     //MELAKUKAN CONTROLLER SIMPAN
+     $("#btn_simpan").click(function(){
         $.ajax({
             url: "{{ url('master/data-obat/simpan')}} ",
             type:'POST',
@@ -180,8 +182,8 @@ $(document).ready(function () {
 				}
 			}
         });
-    })
-
+    });
+    //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
         title: 'Data akan dihapus !',
@@ -205,9 +207,6 @@ $(document).ready(function () {
             }
         })
     });
-
 });
-
 </script>
-
 @endsection

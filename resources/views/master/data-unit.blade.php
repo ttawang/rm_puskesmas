@@ -69,7 +69,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
                             <div class="col-sm-8">
-                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"><textarea>
+                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'kode_unit', name: 'kode_unit'},
-            // {data: 'nama', name: 'nama_unit'},
+            {data: 'nama', name: 'nama_unit'},
             {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
