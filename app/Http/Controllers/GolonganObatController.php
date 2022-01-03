@@ -8,35 +8,18 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
 
-class PemeriksaanController extends Controller
+class GolonganObatController extends Controller
 {
     //
     public function index()
     {
-        $data['judul'] = 'Data Pemeriksaan';
-        $data['jenis_tindakan'] = DB::table('jenis_pemeriksaan')->get();
-        $data['poli'] = DB::table('unit')->get();
-
-        return view('master.data-pemeriksaan',$data);
+        $data['judul'] = 'Golongan Obat';
+        return view('master.golongan-obat',$data);
     }
 
     public function get_data(Request $request)
     {
-
-            $data = DB::table('pemeriksaan as p')
-            ->join('jenis_pemeriksaan as jp','p.id_jenis_pemeriksaan','jp.id')
-            ->join('unit as u','p.id_unit','u.id')
-            ->select(DB::raw('
-                p.id as id,
-                p.kode_pemeriksaan as kode_pemeriksaan,
-                p.nama as nama,
-                p.keterangan as keterangan,
-                p.id_jenis_pemeriksaan as id_jenis_pemeriksaan,
-                p.id_unit as id_unit,
-                jp.nama as nama_jenis_tindakan,
-                u.nama as nama_poli
-            '))
-            ->orderBy('p.id','desc')->get();
+            $data = DB::table('golongan_obat')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
 
@@ -49,24 +32,22 @@ class PemeriksaanController extends Controller
                 ->make(true);
 
     }
+
     public function simpan(Request $request)
     {
         $id = $request->get('id');
-        $data['kode_pemeriksaan'] = $request->get('kode_pemeriksaan');
-        $data['nama'] = $request->get('nama');
-        $data['keterangan'] = $request->get('keterangan');
-        $data['id_jenis_pemeriksaan'] = $request->get('jenis_tindakan');
-        $data['id_unit'] = $request->get('poli');
+        $data['nama'] = $request->get('nama_golongan');
+
 
         DB::beginTransaction();
         try{
             if($id == ''){
                 $data['created_at'] = Carbon::now();
-                DB::table('pemeriksaan')->insert($data);
+                DB::table('golongan_obat')->insert($data);
                 $arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now();
-                DB::table('pemeriksaan')->where(array('id' => $id))->update($data);
+                DB::table('golongan_obat')->where(array('id' => $id))->update($data);
                 $arr = ['status' => '1'];
             }
             DB::commit();
@@ -75,22 +56,18 @@ class PemeriksaanController extends Controller
 			DB::rollback();
 			$arr = ['status' => '0'];
 		}
-        //return redirect()->to('kunjungan_pasien');
+        //return redirect()->to('master/golongan-obat');
         return response()->json($arr);
     }
+
     public function edit($id){
-        $data = DB::table('pemeriksaan as p')
-            ->join('jenis_pemeriksaan as jp','p.id_jenis_pemeriksaan','jp.id')
-            ->select(DB::raw('
-                p.*,
-                jp.nama as nama_jenis_pemeriksaan
-            '))
-        ->where('p.id','=',$id)->first();
+        $data = DB::table('golongan_obat')->where('id','=',$id)->first();
 
         return response()->json($data);
     }
+
     public function hapus($id){
-        $data = DB::table('pemeriksaan')->delete($id);
+        $data = DB::table('golongan_obat')->delete($id);
         DB::commit();
         return response()->json($data);
 

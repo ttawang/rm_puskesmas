@@ -36,7 +36,6 @@ class JenisPemeriksaanController extends Controller
     public function simpan(Request $request)
     {
         $id = $request->get('id');
-        $data['kode_jp'] = $request->get('kode_jenis_pemeriksaan');
         $data['nama'] = $request->get('jenis_pemeriksaan');
         $data['keterangan'] = $request->get('keterangan');
 

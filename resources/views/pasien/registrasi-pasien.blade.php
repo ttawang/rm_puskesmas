@@ -78,7 +78,7 @@
                             <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
-                                <option value="">Cari No. Rekam Medis</option>
+                                <option selected>Cari No. Rekam Medis</option>
                                 @foreach ($pasien as $i)
                                     <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>
                                 @endforeach

@@ -23,7 +23,6 @@
                                     <th>No</th>
                                     <th>Kode Unit</th>
                                     <th>Nama</th>
-                                    <th>Keterangan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -96,7 +95,6 @@ $(document).ready(function () {
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'kode_unit', name: 'kode_unit'},
             {data: 'nama', name: 'nama_unit'},
-            {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]

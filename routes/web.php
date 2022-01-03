@@ -13,6 +13,8 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\DataPasienController;
 use App\Http\Controllers\TindakanPasienController;
 use App\Http\Controllers\MedicalRecordController;
+use App\Http\Controllers\GolonganObatController;
+use App\Http\Controllers\SatuanObatController;
 
 
 /*
@@ -65,9 +67,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('master/data-pemeriksaan/hapus/{id}', [PemeriksaanController::class, 'hapus']);
         Route::get('master/data-diagnosa', [DiagnosaController::class, 'index']);
         Route::get('master/data-diagnosa/get_data', [DiagnosaController::class, 'get_data']);
-        Route::post('master/data-daignosa/simpan', [DiagnosaController::class, 'simpan']);
+        Route::post('master/data-diagnosa/simpan', [DiagnosaController::class, 'simpan']);
         Route::get('master/data-diagnosa/edit/{id}', [DiagnosaController::class, 'edit']);
         Route::get('master/data-diagnosa/hapus/{id}', [DiagnosaController::class, 'hapus']);
+        Route::get('master/golongan-obat', [GolonganObatController::class, 'index']);
+        Route::get('master/golongan-obat/get_data', [GolonganObatController::class, 'get_data']);
+        Route::post('master/golongan-obat/simpan', [GolonganObatController::class, 'simpan']);
+        Route::get('master/golongan-obat/edit/{id}', [GolonganObatController::class, 'edit']);
+        Route::get('master/golongan-obat/hapus{id}', [GolonganObatController::class, 'hapus']);
+        Route::get('master/satuan-obat', [SatuanObatController::class, 'index']);
+        Route::get('master/satuan-obat/get_data', [SatuanObatController::class, 'get_data']);
+        Route::post('master/satuan-obat/simpan', [SatuanObatController::class, 'simpan']);
+        Route::get('master/satuan-obat/edit/{id}', [SatuanObatController::class, 'edit']);
+        Route::get('master/satuan-obat/hapus{id}', [SatuanObatController::class, 'hapus']);
         Route::get('master/data-obat', [ObatController::class, 'index']);
         Route::get('master/data-obat/get_data', [ObatController::class, 'get_data']);
         Route::post('master/data-obat/simpan', [ObatController::class, 'simpan']);

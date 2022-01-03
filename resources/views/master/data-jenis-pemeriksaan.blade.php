@@ -21,8 +21,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode</th>
-                                    <th>Jenis Pemeriksaan</th>
+                                    <th>Jenis Tindakan</th>
                                     <th>Keterangan</th>
                                     <th>Action</th>
                                 </tr>
@@ -53,12 +52,6 @@
                 @csrf
                     <input type="hidden" name="id">
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Kode Jenis Pemeriksaan</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="kode_jenis_pemeriksaan" placeholder="Kode">
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Nama Jenis Pemeriksaan</label>
                             <div class="col-sm-8">
@@ -94,7 +87,6 @@ $(document).ready(function () {
         ajax: "{{ url('master/data-jenis-pemeriksaan/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'kode_jp', name: 'kode_jenis_pemeriksaan'},
             {data: 'nama', name: 'jenis_pemeriksaan'},
             {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
@@ -113,7 +105,6 @@ $(document).ready(function () {
         $.get("{{ url('master/data-jenis-pemeriksaan/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
-            $('[name=kode_jenis_pemeriksaan]').val(data.kode_jp);
             $('[name=jenis_pemeriksaan]').val(data.nama);
             $('[name=keterangan]').val(data.keterangan);
         })

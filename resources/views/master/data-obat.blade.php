@@ -22,8 +22,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode</th>
-                                    <th>Nama</th>
-                                    <th>Jenis</th>
+                                    <th>Nama Obat</th>
+                                    <th>Stock</th>
+                                    <th>Golongan</th>
+                                    <th>Satuan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,39 +61,45 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Golongan Obat</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select-cari-modal" name="golongan">
+                                    <option selected>Pilih</option>
+                                    @foreach ($golongan as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Obat</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="nama_obat" placeholder="Nama Obat">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Satuan</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Satuan Obat</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="satuan_obat">
+                                <select class="form-control select-cari-modal" name="satuan">
                                     <option selected>Pilih</option>
-                                    <option value="A">AAA</option>
-                                    <option value="B">BBB</option>
-                                    <option value="C">CCC</option>
+                                    @foreach ($satuan as $i)
+                                    <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Jenis</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Stock Obat</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="jenis_obat">
-                                    <option selected>Pilih</option>
-                                    <option value="D">DDD</option>
-                                    <option value="E">EEE</option>
-                                    <option value="F">FFF</option>
-                                </select>
+                                <input type="text" class="form-control" name="stock_obat" placeholder="Stock Obat">
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
                             <div class="col-sm-8">
-                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"><textarea>
+                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
                             </div>
-                        </div> --}}
+                        </div>
                         {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Expired Date</label>
                             <div class="col-sm-8">
@@ -126,8 +134,10 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'kode_obat', name: 'kode_obat'},
-            {data: 'nama', name: 'nama_obat'},
-            {data: 'jenis', name: 'jenis_obat'},
+            {data: 'nama', name: 'nama'},
+            {data: 'stock', name: 'stock'},
+            {data: 'nama_golongan', name: 'nama_golongan'},
+            {data: 'nama_satuan', name: 'nama_satuan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -146,8 +156,10 @@ $(document).ready(function () {
             $('[name=id]').val(data.id);
             $('[name=kode_obat]').val(data.kode_obat);
             $('[name=nama_obat]').val(data.nama);
-            $('[name=satuan_obat]').val(data.satuan).trigger('change');
-            $('[name=jenis_obat]').val(data.jenis).trigger('change');;
+            $('[name=stock_obat]').val(data.stock);
+            $('[name=keterangan]').val(data.keterangan);
+            $('[name=satuan]').val(data.id_satuan_obat).trigger('change');
+            $('[name=golongan]').val(data.id_golongan_obat).trigger('change');
         })
     });
 

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Data Pemeriksaan
+                            <i class="mr-1"></i>Golongan Obat
                         </div>
                     </div>
                     <div class="card-body">
@@ -17,14 +17,11 @@
                         <!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button-->
                         <button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button>
                         <p>
-                        <table id="tabel_pemeriksaan" class="table table-striped table-bordered">
+                        <table id="tabel_golongan_obat" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Pemeriksaan</th>
-                                    <th>Nama Pemeriksaan</th>
-                                    <th>Jenis Pemeriksaan</th>
-                                    <th>Poli</th>
+                                    <th>Golongan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -43,55 +40,20 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pemeriksaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Golongan Obat</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('master/data-pemeriksaan/simpan')}}" method="POST"-->
-                <form class="form-horizontal"  id="form_tambah">
+                <!--form class="form-horizontal" action="{{url('master/golongan-obat/simpan')}}" method="POST"-->
+                <form class="form-horizontal" id="form_tambah">
                 @csrf
-                    <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Kode Pemeriksaan</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Golongan Obat</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="kode_pemeriksaan" placeholder="Kode Pemeriksaan">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Nama Pemeriksaan</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Pemeriksaan">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Tindakan</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="jenistindakan">
-                                    <option selected>Pilih Jenis Tindakan</option>
-                                    @foreach ($jenis_tindakan as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Nama Unit</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="poli">
-                                    <option selected>Pilih Poli</option>
-                                    @foreach ($poli as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="keterangan" placeholder="Keterangan">
+                                <input type="text" class="form-control" name="nama_golongan" placeholder="Golongan Obat">
                             </div>
                         </div>
                     </div>
@@ -110,16 +72,13 @@
 <script type="text/javascript">
 $(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
-    var tb = $('#tabel_pemeriksaan').DataTable({
+    var tb = $('#tabel_golongan_obat').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('master/data-pemeriksaan/get_data') }}",
+        ajax: "{{ url('master/golongan-obat/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'kode_pemeriksaan', name: 'kode_pemeriksaan'},
-            {data: 'nama', name: 'nama'},
-            {data: 'nama_jenis_tindakan', name: 'nama_jenis_tindakan'},
-            {data: 'nama_poli', name: 'nama_poli'},
+            {data: 'nama', name: 'nama_golongan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -133,20 +92,17 @@ $(document).ready(function () {
     //ShOW MODAL/FORM DENGAN GETTING DATA BERDASARKAN ID
     $('body').on('click', '#btn_edit', function () {
         var id = $(this).data('id');
-        $.get("{{ url('master/data-pemeriksaan/edit') }}"+'/'+id, function (data) {
+        $.get("{{ url('master/golongan-obat/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
-            $('[name=kode_pemeriksaan]').val(data.kode_pemeriksaan);
-            $('[name=nama]').val(data.nama);
-            $('[name=keterangan]').val(data.keterangan);
-            $('[name=jenistindakan]').val(data.id_jenis_pemeriksaan).trigger('change');
-            $('[name=poli]').val(data.id_unit).trigger('change');
+            $('[name=nama_golongan]').val(data.nama);
         })
     });
 
-    $("#btn_simpan").click(function(){
+     //MELAKUKAN CONTROLLER SIMPAN
+     $("#btn_simpan").click(function(){
         $.ajax({
-            url: "{{ url('master/data-pemeriksaan/simpan')}} ",
+            url: "{{ url('master/golongan-obat/simpan')}} ",
             type:'POST',
             data: $("#form_tambah").serialize(),
             headers : {
@@ -175,7 +131,6 @@ $(document).ready(function () {
 			}
         });
     });
-
     //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
@@ -189,7 +144,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
-                $.get("{{ url('master/data-pemeriksaan/hapus') }}"+'/'+id);
+                $.get("{{ url('master/golongan-obat/hapus') }}"+'/'+id);
                 Swal.fire({
                     title: 'Deleted!',
                     text: 'Data telah dihapus.',
@@ -202,5 +157,4 @@ $(document).ready(function () {
     });
 });
 </script>
-
 @endsection

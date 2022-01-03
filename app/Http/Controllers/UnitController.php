@@ -22,16 +22,12 @@ class UnitController extends Controller
         $data = DB::table('unit')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('keterangan', function($row){
-                    $ket = ($row->keterangan);
-                    return $ket;
-                })
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
                     $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action','keterangan'])
+                ->rawColumns(['action'])
                 ->make(true);
     }
 

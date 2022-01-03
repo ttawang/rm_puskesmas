@@ -127,6 +127,28 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/golongan-obat')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Golongan Obat</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/satuan-obat')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Satuan Obat</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('master/data-obat')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Data Obat</p>
