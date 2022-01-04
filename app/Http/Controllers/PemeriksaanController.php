@@ -55,7 +55,7 @@ class PemeriksaanController extends Controller
         $data['kode_pemeriksaan'] = $request->get('kode_pemeriksaan');
         $data['nama'] = $request->get('nama');
         $data['keterangan'] = $request->get('keterangan');
-        $data['id_jenis_pemeriksaan'] = $request->get('jenis_tindakan');
+        $data['id_jenis_pemeriksaan'] = $request->get('jenistindakan');
         $data['id_unit'] = $request->get('poli');
 
         DB::beginTransaction();
@@ -66,7 +66,7 @@ class PemeriksaanController extends Controller
                 $arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now();
-                DB::table('pemeriksaan')->where(array('id' => $id))->update($data);
+                DB::table('pemeriksaan')->where('id', $id)->update($data);
                 $arr = ['status' => '1'];
             }
             DB::commit();

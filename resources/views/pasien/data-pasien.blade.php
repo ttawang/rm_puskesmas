@@ -23,8 +23,10 @@
                                     <th>No</th>
                                     <th>No. Rekam Medis</th>
                                     <th>Nama Pasien</th>
+                                    <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
                                     <th>tanggal lahir</th>
+                                    <th>Kelompok Pasien</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -236,8 +238,10 @@ $(document).ready(function () {
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'kode_pasien', name: 'kode_pasien'},
             {data: 'nama', name: 'nama'},
+            {data: 'jenis_kelamin', name: 'jenis_kelamin'},
             {data: 'alamat', name: 'alamat'},
             {data: 'tanggal_lahir', name: 'tanggal_lahir'},
+            {data: 'kelompok', name: 'kelompok'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]

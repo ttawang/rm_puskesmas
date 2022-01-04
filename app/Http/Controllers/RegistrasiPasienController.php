@@ -60,7 +60,7 @@ class RegistrasiPasienController extends Controller
         $id = $request->get('id');
         $data['tgl_kunjungan'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_registrasi'))->format('Y-m-d');
         $data['keluhan'] = $request->get('keluhan');
-        // $data['id_pasien'] = $request->get('nama');
+        $data['id_pasien'] = $request->get('id_pasien');
         $data['id_unit'] = $request->get('poli');
 
         DB::beginTransaction();

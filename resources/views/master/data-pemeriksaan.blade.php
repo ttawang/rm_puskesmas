@@ -109,6 +109,10 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+    $("#modal_tambah_data").on("hidden.bs.modal", function(){
+        $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
+        $(".select-cari-modal").val().trigger('change') ;
+    });
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_pemeriksaan').DataTable({
         processing: true,
@@ -158,7 +162,7 @@ $(document).ready(function () {
                     Swal.fire({
                         title: 'Berhasil',
                         text: 'Data berhasil diperbarui.',
-                        type: "success"
+                        icon: 'success',
                     }).then((result) => {
                         tb.ajax.reload();
                     })
@@ -167,7 +171,7 @@ $(document).ready(function () {
                     Swal.fire({
                         title: 'Gagal',
                         text: 'Data gagal diperbarui.',
-                        type: "error"
+                        icon: 'error',
                     }).then((result) => {
                         tb.ajax.reload();
                     })

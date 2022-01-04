@@ -34,12 +34,11 @@ class ObatController extends Controller
                 ob.id_golongan_obat as id_golongan_obat,
                 ob.id_satuan_obat as satuan_obat,
                 gb.nama as nama_golongan,
-                sb.nama as nama_satuan,
+                sb.nama as nama_satuan
             '))
             ->orderBy('ob.id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
                     $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>';

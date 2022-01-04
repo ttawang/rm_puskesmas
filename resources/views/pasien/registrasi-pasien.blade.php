@@ -89,6 +89,7 @@
                             <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="nama" disabled placeholder="Nama Pasien">
+                                <input type="hidden" class="form-" name="id_pasien">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -127,6 +128,11 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+    // HAPUS FIELD SETELAH DIGUNAKAN
+    $("#modal_tambah_data").on("hidden.bs.modal", function(){
+        $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
+        $(".select-cari-modal").val().trigger('change') ;
+    });
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_registrasi').DataTable({
         processing: true,
@@ -158,6 +164,7 @@ $(document).ready(function () {
             $('[name=tgl_registrasi]').val(formattanggal(data.tgl_kunjungan));
             $('[name=keluhan]').val(data.keluhan);
             $('[name=nama]').val(data.nama_pasien);
+            $('[name=id_pasien]').val(data.id);
             $('[name=poli]').val(data.id_unit).trigger('change');
         })
     });
@@ -223,6 +230,7 @@ $(document).ready(function () {
 		var no_rekammedis = $(this).val();
 		$.get("{{ url('pasien/registrasi-pasien/get_norekammedis') }}"+'/'+no_rekammedis, function (data) {
             $('[name=nama]').val(data.nama);
+            $('[name=id_pasien]').val(data.id);
         })
 	});
 });

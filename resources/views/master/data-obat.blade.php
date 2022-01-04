@@ -84,7 +84,7 @@
                                     <option selected>Pilih</option>
                                     @foreach ($satuan as $i)
                                     <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                @endforeach
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
