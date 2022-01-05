@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Data Jenis Pemeriksaan
+                            <i class="mr-1"></i>Data Jenis Tindakan
                         </div>
                     </div>
                     <div class="card-body">
@@ -41,7 +41,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal_tambah_dataLabel">Tambah Data Jenis Pemeriksaan</h5>
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Tambah Data Jenis Tindakan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -53,7 +53,7 @@
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Nama Jenis Pemeriksaan</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Nama Jenis Tindakan</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="jenis_pemeriksaan" placeholder="Nama Jenis Pemeriksaan">
                             </div>

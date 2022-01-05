@@ -96,7 +96,7 @@
                 <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('master/data-jenis-pemeriksaan')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Jenis Pemeriksaan</p>
+                  <p>Data Jenis Tindakan</p>
                 </a>
               </li>
             </ul>
@@ -107,7 +107,7 @@
                 <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('master/data-pemeriksaan')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Pemeriksaan</p>
+                  <p>Data Tindakan</p>
                 </a>
               </li>
             </ul>

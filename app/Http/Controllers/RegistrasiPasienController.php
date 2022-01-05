@@ -86,9 +86,11 @@ class RegistrasiPasienController extends Controller
     public function edit($id){
         $data = DB::table('registrasi_pasien as rp')
             ->join('data_pasien as dp','rp.id_pasien','dp.id')
+            ->join('unit as u', 'rp.id_unit', 'u.id')
             ->select(DB::raw('
                 rp.*,
-                dp.nama as nama_pasien
+                dp.nama as nama_pasien,
+                u.nama as nama_unit
             '))
         ->where('rp.id','=',$id)->first();
 

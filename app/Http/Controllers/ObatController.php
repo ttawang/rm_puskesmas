@@ -82,11 +82,11 @@ class ObatController extends Controller
 
     public function edit($id){
         $data = DB::table('obat as ob')
-            ->join('golongan_obat as gb','ob.id_golongan_obat','gp.id')
-            ->join('satuan_obat as sb', 'ob._id_satuan_obat', 'sb.id')
+            ->join('golongan_obat as gb','ob.id_golongan_obat','gb.id')
+            ->join('satuan_obat as sb', 'ob.id_satuan_obat', 'sb.id')
             ->select(DB::raw('
                 ob.*,
-                gb.nama as nama_golongan
+                gb.nama as nama_golongan,
                 sb.nama as nama_satuan
             '))
         ->where('ob.id','=',$id)->first();

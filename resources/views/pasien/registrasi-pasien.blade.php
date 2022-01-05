@@ -131,7 +131,7 @@ $(document).ready(function () {
     // HAPUS FIELD SETELAH DIGUNAKAN
     $("#modal_tambah_data").on("hidden.bs.modal", function(){
         $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
-        $(".select-cari-modal").val().trigger('change') ;
+        $(".select-cari-modal").val();
     });
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_registrasi').DataTable({

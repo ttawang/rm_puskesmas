@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Data Pemeriksaan
+                            <i class="mr-1"></i>Data Tindakan
                         </div>
                     </div>
                     <div class="card-body">
@@ -21,9 +21,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Pemeriksaan</th>
-                                    <th>Nama Pemeriksaan</th>
-                                    <th>Jenis Pemeriksaan</th>
+                                    <th>Kode</th>
+                                    <th>Nama Tindakan</th>
+                                    <th>Jenis</th>
                                     <th>Poli</th>
                                     <th>Action</th>
                                 </tr>
@@ -43,7 +43,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pemeriksaan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Tindakan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -55,13 +55,13 @@
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Kode Pemeriksaan</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Kode Tindakan</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="kode_pemeriksaan" placeholder="Kode Pemeriksaan">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Nama Pemeriksaan</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Nama Tindakan</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="nama" placeholder="Nama Pemeriksaan">
                             </div>
@@ -111,7 +111,7 @@
 $(document).ready(function () {
     $("#modal_tambah_data").on("hidden.bs.modal", function(){
         $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
-        $(".select-cari-modal").val().trigger('change') ;
+        $(".select-cari-modal").val() ;
     });
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_pemeriksaan').DataTable({

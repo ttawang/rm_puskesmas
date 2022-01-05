@@ -13,7 +13,7 @@ class JenisPemeriksaanController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Jenis Pemeriksaan';
+        $data['judul'] = 'Data Jenis Tindakan';
         return view('master.data-jenis-pemeriksaan',$data);
     }
 

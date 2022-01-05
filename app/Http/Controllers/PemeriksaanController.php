@@ -13,7 +13,7 @@ class PemeriksaanController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Pemeriksaan';
+        $data['judul'] = 'Data Tindakan';
         $data['jenis_tindakan'] = DB::table('jenis_pemeriksaan')->get();
         $data['poli'] = DB::table('unit')->get();
 
