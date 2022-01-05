@@ -98,6 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('pasien/registrasi-pasien/hapus/{id}', [RegistrasiPasienController::class, 'hapus']);
         Route::get('tindakan/tindakan-pasien', [TindakanPasienController::class, 'index']);
         Route::get('tindakan/tindakan-pasien/get_data', [TindakanPasienController::class, 'get_data']);
+        Route::get('tindakan/tindakan-pasien/get_data_pasien/{id}', [TindakanPasienController::class, 'get_data_pasien']);
         Route::post('tindakan/tindakan-pasien/simpan', [TindakanPasienController::class, 'simpan']);
         Route::get('tindakan/tindakan-pasien/edit/{id}', [TindakanPasienController::class, 'edit']);
         Route::get('tindakan/tindakan-pasien/hapus/{id}', [TindakanPasienController::class, 'hapus']);

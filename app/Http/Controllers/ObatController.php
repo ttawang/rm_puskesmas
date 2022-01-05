@@ -67,7 +67,7 @@ class ObatController extends Controller
                 $arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now();
-                DB::table('obat')->where(array('id' => $id))->update($data);
+                DB::table('obat')->where('id',$id)->update($data);
                 $arr = ['status' => '1'];
             }
             DB::commit();
@@ -89,7 +89,7 @@ class ObatController extends Controller
                 gb.nama as nama_golongan,
                 sb.nama as nama_satuan
             '))
-        ->where('ob.id','=',$id)->first();
+        ->where('ob.id',$id)->first();
 
         return response()->json($data);
     }

@@ -53,6 +53,7 @@
                 <!--form class="form-horizontal" action="{{url('master/data-obat/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
+                <input type="hidden" name='id'>
                     <div class="card-body">
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Kode Obat</label>

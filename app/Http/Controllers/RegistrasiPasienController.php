@@ -18,6 +18,7 @@ class RegistrasiPasienController extends Controller
         $data['poli'] = DB::table('unit')->get();
         $data['pasien'] = DB::table('data_pasien')->get();
 
+
         return view('pasien.registrasi-pasien',$data);
     }
 
@@ -29,6 +30,7 @@ class RegistrasiPasienController extends Controller
             ->join('data_pasien as dp','rp.id_pasien','dp.id')
             ->select(DB::raw('
                 rp.id as id,
+                rp.no_registrasi no_registrasi,
                 rp.tgl_kunjungan as tgl_kunjungan,
                 rp.keluhan as keluhan,
                 rp.id_unit as id_unit,
@@ -58,6 +60,7 @@ class RegistrasiPasienController extends Controller
     public function simpan(Request $request)
     {
         $id = $request->get('id');
+        $data['no_registrasi'] = $request->get('no_registrasi');
         $data['tgl_kunjungan'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_registrasi'))->format('Y-m-d');
         $data['keluhan'] = $request->get('keluhan');
         $data['id_pasien'] = $request->get('id_pasien');
@@ -89,7 +92,9 @@ class RegistrasiPasienController extends Controller
             ->join('unit as u', 'rp.id_unit', 'u.id')
             ->select(DB::raw('
                 rp.*,
+                dp.id as id_pasien,
                 dp.nama as nama_pasien,
+                dp.kode_pasien as kode_pasien,
                 u.nama as nama_unit
             '))
         ->where('rp.id','=',$id)->first();

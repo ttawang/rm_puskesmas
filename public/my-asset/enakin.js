@@ -25,3 +25,15 @@ function formattanggal(oldDate)
 {
    return oldDate.toString().split("-").reverse().join("/");
 };
+function no_regis(){
+    var dt = new Date();
+    var time = "REG-"+dt.getHours() + dt.getMinutes() + dt.getSeconds();
+
+    return time;
+};
+function now_date(){
+    var dt = new Date();
+    var date =("0" + dt.getDate()).slice(-2) +"/"+ ("0" + (dt.getMonth() + 1)).slice(-2) +"/"+ dt.getFullYear();
+
+    return date;
+};

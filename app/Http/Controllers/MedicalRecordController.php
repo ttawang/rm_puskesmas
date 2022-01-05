@@ -18,7 +18,7 @@ class MedicalRecordController extends Controller
 
     public function get_data(Request $request)
     {
-    
+
             $data = DB::table('medical_record')->orderBy('id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -30,13 +30,13 @@ class MedicalRecordController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-    
+
     }
     public function simpan(Request $request)
     {
         $id = $request->get('id');
         $data['nama'] = $request->get('nama');
-        
+
         DB::beginTransaction();
         try{
             if($id == ''){
@@ -49,7 +49,7 @@ class MedicalRecordController extends Controller
                 //$arr = ['status' => '1'];
             }
             DB::commit();
-		
+
 		}catch (Exception $e){
 			DB::rollback();
 			//$arr = ['status' => '0'];
@@ -66,6 +66,6 @@ class MedicalRecordController extends Controller
         $data = DB::table('medical_record')->delete($id);
         DB::commit();
         return response()->json($data);
-        
+
     }
 }

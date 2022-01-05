@@ -22,6 +22,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal Registrasi</th>
+                                    <th>No. Registrasi</th>
                                     <th>Nama Pasien</th>
                                     <th>No. Rekam Medis</th>
                                     <th>Keluhan</th>
@@ -56,18 +57,18 @@
                 @csrf
                     <input type="hidden" name="id">
                     <div class="card-body">
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="no_registrasi" placeholder="No Registrasi">
+                                <input type="text" class="form-control" name="no_registrasi" readonly>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Tanggal</label>
                             <div class="col-sm-8">
                                 <div class="input-group date">
                                     {{-- <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}" readonly> --}}
-                                    <input type="text" class="form-control" name="tgl_registrasi">
+                                    <input type="text" class="form-control" name="tgl_registrasi" readonly>
                                         {{-- <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div> --}}
@@ -128,10 +129,11 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+    console.log(now_date());
     // HAPUS FIELD SETELAH DIGUNAKAN
     $("#modal_tambah_data").on("hidden.bs.modal", function(){
         $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
-        $(".select-cari-modal").val();
+        $(".select-cari-modal").val(0).trigger('change') ;
     });
     //MENAMPILKAN DATA DENGAN DATATABLES
     var tb = $('#tabel_registrasi').DataTable({
@@ -141,6 +143,7 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'tgl_registrasi', name: 'tgl_registrasi'},
+            {data: 'no_registrasi', name: 'no_registrasi'},
             {data: 'nama_pasien', name: 'nama_pasien'},
             {data: 'no_rekammedis', name: 'no_rekammedis'},
             {data: 'keluhan', name: 'keluhan'},
@@ -153,6 +156,8 @@ $(document).ready(function () {
     //SHOW MODAL/FORM
     $("#btn_tambah").click(function(){
         $("#modal_tambah_data").modal("show");
+        $('[name=no_registrasi]').val(no_regis());
+        $('[name=tgl_registrasi]').val(now_date());
     })
 
     //ShOW MODAL/FORM DENGAN GETTING DATA BERDASARKAN ID
@@ -161,10 +166,11 @@ $(document).ready(function () {
         $.get("{{ url('pasien/registrasi-pasien/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
+            $('[name=no_rekammedis]').val(data.kode_pasien).trigger('change');
             $('[name=tgl_registrasi]').val(formattanggal(data.tgl_kunjungan));
             $('[name=keluhan]').val(data.keluhan);
             $('[name=nama]').val(data.nama_pasien);
-            $('[name=id_pasien]').val(data.id);
+            $('[name=id_pasien]').val(data.id_pasien);
             $('[name=poli]').val(data.id_unit).trigger('change');
         })
     });
