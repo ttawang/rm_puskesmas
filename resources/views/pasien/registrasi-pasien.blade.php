@@ -129,7 +129,7 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-    console.log(now_date());
+
     // HAPUS FIELD SETELAH DIGUNAKAN
     $("#modal_tambah_data").on("hidden.bs.modal", function(){
         $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();

@@ -15,6 +15,7 @@ use App\Http\Controllers\TindakanPasienController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\GolonganObatController;
 use App\Http\Controllers\SatuanObatController;
+use App\Http\Controllers\LaporanController;
 
 
 /*
@@ -107,6 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('tindakan/medical-record/simpan', [MedicalRecordController::class, 'simpan']);
         Route::get('tindakan/medical-record/edit/{id}', [MedicalRecordController::class, 'edit']);
         Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
+        Route::get('laporan/laporan', [LaporanController::class, 'index']);
     });
     Route::middleware(['admin_registrasi'])->group(function () {
 
