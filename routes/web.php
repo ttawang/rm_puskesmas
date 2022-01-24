@@ -17,7 +17,6 @@ use App\Http\Controllers\GolonganObatController;
 use App\Http\Controllers\SatuanObatController;
 use App\Http\Controllers\LaporanController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,6 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/medical-record/edit/{id}', [MedicalRecordController::class, 'edit']);
         Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
         Route::get('laporan/laporan', [LaporanController::class, 'index']);
+
     });
     Route::middleware(['admin_registrasi'])->group(function () {
 

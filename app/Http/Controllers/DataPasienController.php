@@ -45,9 +45,9 @@ class DataPasienController extends Controller
         $data['tahun_rm'] = $request->get('tahun_rekam_medis');
         $data['no_identitas'] = $request->get('no_identitas');
         $data['nama'] = $request->get('nama');
+        $data['no_telp'] = $request->get('no_tlp');
         $data['tgl_lahir'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_lahir'))->format('Y-m-d');
         $data['usia'] = $request->get('usia');
-        $data['agama'] = $request->get('agama');
         $data['jenis_kelamin'] = $request->get('jenis_kelamin');
         $data['gol_darah'] = $request->get('gol_darah');
         $data['status_menikah'] = $request->get('status_menikah');

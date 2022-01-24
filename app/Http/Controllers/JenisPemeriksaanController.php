@@ -37,7 +37,6 @@ class JenisPemeriksaanController extends Controller
     {
         $id = $request->get('id');
         $data['nama'] = $request->get('jenis_pemeriksaan');
-        $data['keterangan'] = $request->get('keterangan');
 
         DB::beginTransaction();
         try{

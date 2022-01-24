@@ -22,7 +22,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Jenis Tindakan</th>
-                                    <th>Keterangan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -58,12 +57,6 @@
                                 <input type="text" class="form-control" name="jenis_pemeriksaan" placeholder="Nama Jenis Pemeriksaan">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
-                            <div class="col-sm-8">
-                                <textarea type="text" class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
-                            </div>
-                        </div>
                     </div>
                 <!--/form-->
             </div>
@@ -88,7 +81,6 @@ $(document).ready(function () {
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'nama', name: 'jenis_pemeriksaan'},
-            {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -106,7 +98,6 @@ $(document).ready(function () {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
             $('[name=jenis_pemeriksaan]').val(data.nama);
-            $('[name=keterangan]').val(data.keterangan);
         })
     });
 
