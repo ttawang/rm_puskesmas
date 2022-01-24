@@ -39,6 +39,17 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-user')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Data User</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('pasien/data-pasien')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Data Pasien</p>
