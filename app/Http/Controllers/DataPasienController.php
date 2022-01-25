@@ -13,14 +13,30 @@ class DataPasienController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Pasien';
+        $data['judul'] = 'Data Pasien Puskesmas';
+        $data['gol_darah'] = DB::table('golongan_darah')->get();
+        $data['pekerjaan'] = DB::table('pekerjaan')->get();
+        $data['kelurahan'] = DB::table('kelurahan')->get();
+        $data['kelompok_pasien'] = DB::table ('kelompok_pasien')->get();
+
         return view('pasien.data-pasien',$data);
     }
 
     public function get_data(Request $request)
     {
-
-            $data = DB::table('data_pasien')->orderBy('id','desc')->get();
+            $data = DB::table('data_pasien as dp')
+            ->join('golongan_darah as gd','dp.id_golongan_darah','gd.id')
+            ->join('pekerjaan as pj','dp.id_pekerjaan','pj.id')
+            ->join('kelurahan as kl','dp.id_kelurahan','kl.id')
+            ->join('kelompok_pasien as kp','dp.id_kelompok_pasien','kp.id')
+            ->select(DB::raw('
+                dp.*,
+                gd.nama as gol_darah,
+                pj.nama as nama_pekerjaan,
+                kl.nama as nama_kelurahan,
+                kp.nama as nama_kelompok_pasien
+            '))
+            ->orderBy('dp.id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tanggal_lahir', function($row){
@@ -49,18 +65,16 @@ class DataPasienController extends Controller
         $data['tgl_lahir'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_lahir'))->format('Y-m-d');
         $data['usia'] = $request->get('usia');
         $data['jenis_kelamin'] = $request->get('jenis_kelamin');
-        $data['gol_darah'] = $request->get('gol_darah');
         $data['status_menikah'] = $request->get('status_menikah');
-        $data['pekerjaan'] = $request->get('pekerjaan');
         $data['alamat'] = $request->get('alamat');
-        $data['kecamatan'] = $request->get('kecamatan');
-        $data['desa'] = $request->get('desa');
-        $data['alergi'] = $request->get('alergi');
         $data['no_askes'] = $request->get('no_askes');
         $data['nama_keluarga'] = $request->get('nama_keluarga');
-        $data['kelompok'] = $request->get('kel_pasien');
         $data['status_pasien'] = $request->get('status_pasien');
-
+        $data['id_golongan_darah'] = $request->get('gol_darah');
+        $data['id_pekerjaan'] = $request->get('pekerjaan');
+        $data['id_kelurahan'] = $request->get('kelurahan');
+        $data['id_kelompok_pasien'] = $request->get('kelompok_pasien');
+        // dd($data);
         DB::beginTransaction();
         try{
             if($id == ''){
@@ -69,7 +83,7 @@ class DataPasienController extends Controller
                 $arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now();
-                DB::table('data_pasien')->where(array('id' => $id))->update($data);
+                DB::table('data_pasien')->where('id',$id)->update($data);
                 $arr = ['status' => '1'];
             }
             DB::commit();
@@ -82,7 +96,19 @@ class DataPasienController extends Controller
         return response()->json($arr);
     }
     public function edit($id){
-        $data = DB::table('data_pasien')->where('id','=',$id)->first();
+        $data = DB::table('data_pasien as dp')
+            ->join('golongan_darah as gd','dp.id_golongan_darah','gd.id')
+            ->join('pekerjaan as pj','dp.id_pekerjaan','pj.id')
+            ->join('kelurahan as kl','dp.id_kelurahan','kl.id')
+            ->join('kelompok_pasien as kp','dp.id_kelompok_pasien','kp.id')
+            ->select(DB::raw('
+                dp.*,
+                gd.nama as gol_darah,
+                pj.nama as nama_pekerjaan,
+                kl.nama as nama_kelurahan,
+                kp.nama as nama_kelompok_pasien
+            '))
+        ->where('dp.id',$id)->first();
 
         return response()->json($data);
     }

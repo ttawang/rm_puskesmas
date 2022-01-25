@@ -26,6 +26,7 @@
                                     <th>Nama Pasien</th>
                                     <th>Poli</th>
                                     <th>Dokter</th>
+                                    <th>Anamnesis</th>
                                     <th>Diagnosa</th>
                                     <th>Obat</th>
                                     <th>Action</th>
@@ -108,6 +109,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Anamnesis</label>
+                            <div class="col-sm-8">
+                                <textarea type="text" class="form-control" name="anamnesis" placeholder="Anamnesis"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Tindakan</label>
                             <div class="col-sm-8">
                                 <select value="0" class="form-control select-cari-modal" name="tindakan" id="tindakan">
@@ -119,7 +126,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Diagnosa</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Diagnosis</label>
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="diagnosa" id="diagnosa">
                                     <option value="0" selected>Pilih Diagnosa</option>
@@ -176,6 +183,7 @@ $(document).ready(function () {
             {data: 'nama_pasien', name: 'nama_pasien'},
             {data: 'nama_poli', name: 'nama_poli'},
             {data: 'nama_dokter', name: 'nama_dokter'},
+            {data: 'anamnesis', name: 'anamnesis'},
             {data: 'nama_diagnosa', name: 'nama_diagnosa'},
             {data: 'nama_obat', name: 'nama_obat'},
             {data: 'action', name: 'action', orderable: true, searchable: true
@@ -224,6 +232,7 @@ $(document).ready(function () {
             $('[name=id]').val(data.id);
             $('[name=no_registrasi_edit]').val(data.id_registrasi);
             $('[name=dokter]').val(data.id_dokter).trigger('change');
+            $('[name=anamnesis]').val(data.anamnesis);
             $('[name=tindakan]').val(data.id_pemeriksaan).trigger('change');
             $('[name=diagnosa]').val(data.id_diagnosa).trigger('change');
             $('[name=obat]').val(data.id_obat).trigger('change');

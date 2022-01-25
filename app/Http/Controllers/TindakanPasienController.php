@@ -40,6 +40,7 @@ class TindakanPasienController extends Controller
         ->join('diagnosa as di','tp.id_diagnosa','di.id')
         ->select(DB::raw('
             tp.id as id,
+            tp.anamnesis as anamnesis,
             rp.no_registrasi as no_registrasi,
             rp.tgl_kunjungan as tgl_registrasi,
             u.nama as nama_poli,
@@ -67,7 +68,7 @@ class TindakanPasienController extends Controller
     public function simpan(Request $request)
     {
         $id = $request->get('id');
-
+        $data['anamnesis'] = $request->get('anamnesis');
         $data['id_pemeriksaan'] = $request->get('tindakan');
         $data['id_diagnosa'] = $request->get('diagnosa');
         $data['id_obat'] = $request->get('obat');

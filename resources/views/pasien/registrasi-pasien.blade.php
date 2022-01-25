@@ -166,6 +166,7 @@ $(document).ready(function () {
         $.get("{{ url('pasien/registrasi-pasien/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
+
             $('[name=no_rekammedis]').val(data.kode_pasien).trigger('change');
             $('[name=tgl_registrasi]').val(formattanggal(data.tgl_kunjungan));
             $('[name=keluhan]').val(data.keluhan);

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Data Pasien
+                            <i class="mr-1"></i>Daftar Pasien
                         </div>
                     </div>
                     <div class="card-body">
@@ -25,7 +25,7 @@
                                     <th>Nama Pasien</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
-                                    <th>tanggal lahir</th>
+                                    <th>Tanggal lahir</th>
                                     <th>Kelompok Pasien</th>
                                     <th>Action</th>
                                 </tr>
@@ -110,8 +110,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="jenis_kelamin">
                                     <option selected>Pilih</option>
-                                    <option value="laki">Laki-laki</option>
-                                    <option value="perempuan">Perempuan</option>
+                                    <option value="L">LAKI-LAKI</option>
+                                    <option value="P">PEREMPUAN</option>
                                 </select>
                             </div>
                         </div>
@@ -120,10 +120,9 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="gol_darah">
                                     <option selected>Pilih</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="AB">AB</option>
-                                    <option value="O">O</option>
+                                    @foreach ($gol_darah as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -132,15 +131,21 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="status_menikah">
                                     <option selected>Pilih</option>
-                                    <option value="sudah">Sudah Menikah</option>
-                                    <option value="belum">Belum Menikah</option>
+                                    <option value="SUDAH MENIKAH">SUDAH MENIKAH</option>
+                                    <option value="BELUM MENIKAH">BELUM MENIKAH</option>
+                                    <option value="JANDA/DUDA">JANDA/DUDA</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Pekerjaan</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="pekerjaan" placeholder="Pekerjaan">
+                                <select class="form-control select-cari-modal" name="pekerjaan">
+                                    <option selected>Pilih</option>
+                                        @foreach ($pekerjaan as $i)
+                                            <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                        @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -160,15 +165,14 @@
                             </div>
                         </div> --}}
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Desa</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Kelurahan/Desa</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="desa" placeholder="Desa">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Alergi</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="alergi" placeholder="Alergi">
+                                <select class="form-control select-cari-modal" name="kelurahan">
+                                    <option selected>Pilih</option>
+                                    @foreach ($kelurahan as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -182,8 +186,9 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="kel_pasien">
                                     <option selected>Pilih</option>
-                                    <option value="UMUM">UMUM</option>
-                                    <option value="BPJS">BPJS</option>
+                                    @foreach ($kelompok_pasien as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -198,8 +203,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="status_pasien">
                                     <option selected>Pilih</option>
-                                    <option value="AKTIF">Aktif</option>
-                                    <option value="NONAKITF">Non-aktif</option>
+                                    <option value="AKTIF">AKTIF</option>
+                                    <option value="NONAKITF">NON-AKTIF</option>
                                 </select>
                             </div>
                         </div>
@@ -232,7 +237,7 @@ $(document).ready(function () {
             {data: 'jenis_kelamin', name: 'jenis_kelamin'},
             {data: 'alamat', name: 'alamat'},
             {data: 'tanggal_lahir', name: 'tanggal_lahir'},
-            {data: 'kelompok', name: 'kelompok'},
+            {data: 'nama_kelompok_pasien', name: 'nama_kelompok_pasien'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -257,18 +262,15 @@ $(document).ready(function () {
             $('[name=tgl_lahir]').val(formattanggal(data.tgl_lahir));
             $('[name=usia]').val(data.usia);
             $('[name=jenis_kelamin]').val(data.jenis_kelamin).trigger('change');
-            $('[name=gol_darah]').val(data.gol_darah).trigger('change');
+            $('[name=gol_darah]').val(data.id_golongan_darah).trigger('change');
             $('[name=status_menikah]').val(data.status_menikah).trigger('change');
-            $('[name=pekerjaan]').val(data.pekerjaan);
+            $('[name=pekerjaan]').val(data.id_pekerjaan).trigger('change');
             $('[name=alamat]').val(data.alamat);
-            $('[name=kecamatan]').val(data.kecamatan).trigger('change');
-            $('[name=desa]').val(data.desa);
-            $('[name=alergi]').val(data.alergi);
+            $('[name=kelurahan]').val(data.id_kelurahan).trigger('change');
             $('[name=no_askes]').val(data.no_askes);
             $('[name=nama_keluarga]').val(data.nama_keluarga);
-            $('[name=kel_pasien]').val(data.kelompok).trigger('change');
+            $('[name=kel_pasien]').val(data.id_kelompok_pasien).trigger('change');
             $('[name=status_pasien]').val(data.status_pasien).trigger('change');
-
         })
     });
 
