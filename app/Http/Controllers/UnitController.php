@@ -13,7 +13,7 @@ class UnitController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Unit';
+        $data['judul'] = 'Data Ruang Puskesmas';
         return view('master.data-unit',$data);
     }
 

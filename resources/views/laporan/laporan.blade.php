@@ -51,7 +51,7 @@
 
                     <div class="card bg-light">
                         <div class="card-header">
-                            <h3 class="card-title font-weight-bold">PENGGUNAAN OBAT</h3>
+                            <h3 class="card-title font-weight-bold">PEMAKAIAN OBAT</h3>
                         </div>
                         <form>
                             <div class="card-body">
@@ -137,7 +137,7 @@
 
                     <div class="card bg-light">
                         <div class="card-header">
-                            <h3 class="card-title font-weight-bold">PEMERIKSAAN PENUNJANG</h3>
+                            <h3 class="card-title font-weight-bold">PEMERIKSAAN LABORATORIUM</h3>
                         </div>
                         <form>
                             <div class="card-body">

@@ -13,15 +13,22 @@ class DokterController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Dokter';
+        $data['judul'] = 'Data Dokter Puskesmas';
+        $data['spesialis'] = DB::table('spesialis')->get();
+
         return view('master.data-dokter',$data);
     }
 
     public function get_data(Request $request)
     {
 
-            $data = DB::table('dokter')
-            ->orderBy('id','desc')->get();
+            $data = DB::table('dokter as d')
+            ->join('spesialis as sp','d.id_spesialis','sp.id')
+            ->select(DB::raw('
+                d.*,
+                sp.nama as spesialis
+            '))
+            ->orderBy('d.id','desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
 
@@ -40,10 +47,10 @@ class DokterController extends Controller
         $id = $request->get('id');
         $data['nama'] = $request->get('nama');
         $data['jenis_kelamin'] = $request->get('jenis_kelamin');
-        $data['spesialis'] = $request->get('spesialis');
         $data['telephone'] = $request->get('no_hp');
         $data['alamat'] = $request->get('alamat');
         $data['email'] = $request->get('email');
+        $data['id_spesialis'] = $request->get('spesialis');
 
         DB::beginTransaction();
         try{
@@ -66,7 +73,13 @@ class DokterController extends Controller
         return response()->json($arr);
     }
     public function edit($id){
-        $data = DB::table('dokter')->where('id','=',$id)->first();
+        $data = DB::table('dokter as d')
+        ->join('spesialis as sp','d.id_spesialis','sp.id')
+        ->select(DB::raw('
+            d.*,
+            sp.nama as spesialis
+        '))
+        ->where('d.id',$id)->first();
 
         return response()->json($data);
     }

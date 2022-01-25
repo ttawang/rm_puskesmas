@@ -23,7 +23,79 @@
               </li>
             </ul>
           </li>
-
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                  <p>MASTER DATA</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-unit')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Ruangan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-dokter')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Dokter</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-diagnosa')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Diagnosa Penyakit</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-pemeriksaan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Tindakan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-obat')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Obat</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                  <p>LOKET</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -39,20 +111,9 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('master/data-user')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Data User</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('pasien/data-pasien')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Pasien</p>
+                  <p>Pasien</p>
                 </a>
               </li>
             </ul>
@@ -61,9 +122,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('tindakan/medical-record')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Medical Record</p>
+                  <p>RUANG BEROBAT</p>
                 </a>
               </li>
             </ul>
@@ -83,9 +142,9 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('master/data-dokter')}}" class="nav-link">
+                <a href=" " class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Dokter</p>
+                  <p>Permintaan Cek Laboratorium</p>
                 </a>
               </li>
             </ul>
@@ -94,9 +153,205 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('master/data-unit')}}" class="nav-link">
+                  <p>LABORATORIUM</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Unit</p>
+                  <p>Pemeriksaan Lab</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                  <p>LAPORAN</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Laporan Kunjungan Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Laporan Pemeriksaan Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Laporan Sepuluh Besar Penyakit</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Laporan Pemakaian Obat</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Laporan Pemeriksaan Laboratorium</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                  <p>PENGATURAN</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-user')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Pengguna</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('master/data-user')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Level Pengguna</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                  <p>REFERENSI</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Spesialis</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Desa/Kelurahan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Kecamatan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Kabupaten/Kota</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Jenis Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Golongan Darah</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Pekerjaan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href=" " class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Status Keluarga</p>
                 </a>
               </li>
             </ul>
@@ -107,29 +362,7 @@
                 <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('master/data-jenis-pemeriksaan')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Jenis Tindakan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('master/data-pemeriksaan')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Data Tindakan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('master/data-diagnosa')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Data Diagnosa</p>
+                  <p>Jenis Tindakan</p>
                 </a>
               </li>
             </ul>
@@ -160,24 +393,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('master/data-obat')}}" class="nav-link">
+                <a href="{{url('tindakan/medical-record')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Data Obat</p>
+                  <p>Medical Record</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('laporan/laporan')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Laporan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

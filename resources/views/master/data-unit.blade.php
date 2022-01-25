@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Data Unit
+                            <i class="mr-1"></i>Ruang Puskesmas
                         </div>
                     </div>
                     <div class="card-body">
@@ -21,8 +21,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Unit</th>
+                                    <th>Kode Ruang</th>
                                     <th>Nama</th>
+                                    <th>Keterangan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -42,7 +43,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Unit</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Ruang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -54,15 +55,15 @@
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Kode Unit</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Kode</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="kode_unit" placeholder="Kode Unit">
+                                <input type="text" class="form-control" name="kode_unit" placeholder="Kode Ruang">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Nama Unit</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Nama</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama_unit" placeholder="Nama Unit">
+                                <input type="text" class="form-control" name="nama_unit" placeholder="Nama Ruang">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -95,6 +96,7 @@ $(document).ready(function () {
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'kode_unit', name: 'kode_unit'},
             {data: 'nama', name: 'nama_unit'},
+            {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]

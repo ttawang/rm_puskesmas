@@ -149,16 +149,16 @@
                                 <textarea type="text" class="form-control" name="alamat" placeholder="Alamat"></textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Kecamatan</label>
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="kecamatan">
                                     <option selected>Pilih</option>
-                                    <option value="a">kecamatan A</option>
-                                    <option value="b">kecamatan B</option>
+                                    <option value="A">kecamatan A</option>
+                                    <option value="B">kecamatan B</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Desa</label>
                             <div class="col-sm-8">
@@ -182,8 +182,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="kel_pasien">
                                     <option selected>Pilih</option>
-                                    <option value="umum">UMUM</option>
-                                    <option value="bpjs">BPJS</option>
+                                    <option value="UMUM">UMUM</option>
+                                    <option value="BPJS">BPJS</option>
                                 </select>
                             </div>
                         </div>
@@ -198,8 +198,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="status_pasien">
                                     <option selected>Pilih</option>
-                                    <option value="aktif">Aktif</option>
-                                    <option value="nonaktif">Non-aktif</option>
+                                    <option value="AKTIF">Aktif</option>
+                                    <option value="NONAKITF">Non-aktif</option>
                                 </select>
                             </div>
                         </div>

@@ -9,20 +9,17 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Daftar Dokter
+                            <i class="mr-1"></i>Spesialis
                         </div>
                     </div>
                     <div class="card-body">
                         <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button>
                         <p>
-                        <table id="tabel_dokter" class="table table-striped table-bordered">
+                        <table id="tabel_spesialis" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>P/L</th>
-                                    <th>No. HP</th>
                                     <th>Spesialis</th>
                                     <th>Action</th>
                                 </tr>
@@ -43,60 +40,21 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Dokter</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Spesialis</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('master/data-dokter/simpan')}}" method="POST"-->
+                <!--form class="form-horizontal" action="{{url('referensi/spesialis/simpan')}}" method="POST"-->
                 <form class="form-horizontal"  id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Nama Dokter</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Spesialis</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Dokter">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="jenis_kelamin">
-                                    <option selected>Pilih</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Spesialisasi</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="spesialis">
-                                    <option selected>Pilih</option>
-                                    @foreach ($spesialis as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Alamat</label>
-                            <div class="col-sm-8">
-                                <textarea type="text" class="form-control" name="alamat" placeholder="Alamat"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">No HP</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="no_hp" placeholder="No HP">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Email</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="email" placeholder="Email">
+                                <input type="text" class="form-control" name="nama" placeholder="Spesialis">
                             </div>
                         </div>
                     </div>
@@ -116,16 +74,13 @@
 <script type="text/javascript">
 $(document).ready(function () {
     //MENAMPILKAN DATA DENGAN DATATABLES
-    var tb = $('#tabel_dokter').DataTable({
+    var tb = $('#tabel_spesialis').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('master/data-dokter/get_data') }}",
+        ajax: "{{ url('referensi/spesialis/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'nama', name: 'nama'},
-            {data: 'jenis_kelamin', name: 'jenis_kelamin'},
-            {data: 'telephone', name: 'telephone'},
-            {data: 'spesialis', name: 'spesialis'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -139,22 +94,17 @@ $(document).ready(function () {
     //ShOW MODAL/FORM DENGAN GETTING DATA BERDASARKAN ID
     $('body').on('click', '#btn_edit', function () {
         var id = $(this).data('id');
-        $.get("{{ url('master/data-dokter/edit') }}"+'/'+id, function (data) {
+        $.get("{{ url('referensi/spesialis/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
             $('[name=nama]').val(data.nama);
-            $('[name=jenis_kelamin]').val(data.jenis_kelamin).trigger('change');
-            $('[name=spesialis]').val(data.spesialis).trigger('change');
-            $('[name=no_hp]').val(data.telephone);
-            $('[name=alamat]').val(data.alamat);
-            $('[name=email]').val(data.email);
         })
     });
 
     //MELAKUKAN CONTROLLER SIMPAN
     $("#btn_simpan").click(function(){
         $.ajax({
-            url: "{{ url('master/data-dokter/simpan')}} ",
+            url: "{{ url('referensi/spesialis/simpan')}} ",
             type:'POST',
             data: $("#form_tambah").serialize(),
             headers : {
@@ -196,7 +146,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
-                $.get("{{ url('master/data-dokter/hapus') }}"+'/'+id);
+                $.get("{{ url('referensi/spesialis/hapus') }}"+'/'+id);
                 Swal.fire({
                     title: 'Deleted!',
                     text: 'Data telah dihapus.',

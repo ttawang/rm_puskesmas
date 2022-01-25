@@ -14,8 +14,8 @@
                     </div>
                     <div class="card-body">
                         <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button>
-                        <p>
+                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button>
+                        <p> --}}
                         <table id="tabel_user" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
