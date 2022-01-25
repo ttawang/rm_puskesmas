@@ -13,7 +13,7 @@ class ObatController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Obat';
+        $data['judul'] = 'Data Obat Puskesmas';
         $data['golongan'] = DB::table('golongan_obat')->get();
         $data['satuan'] = DB::table('satuan_obat')->get();
 
@@ -29,7 +29,6 @@ class ObatController extends Controller
                 ob.id as id,
                 ob.kode_obat as kode_obat,
                 ob.nama as nama,
-                ob.stock as stock,
                 ob.keterangan as keterangan,
                 ob.id_golongan_obat as id_golongan_obat,
                 ob.id_satuan_obat as satuan_obat,
@@ -54,7 +53,6 @@ class ObatController extends Controller
         $id = $request->get('id');
         $data['kode_obat'] = $request->get('kode_obat');
         $data['nama'] = $request->get('nama_obat');
-        $data['stock'] = $request->get('stock_obat');
         $data['keterangan'] = $request->get('keterangan');
         $data['id_golongan_obat'] = $request->get('golongan');
         $data['id_satuan_obat'] = $request->get('satuan');

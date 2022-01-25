@@ -20,14 +20,14 @@
                         <table id="tabel_registrasi" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Tanggal Registrasi</th>
-                                    <th>No. Registrasi</th>
-                                    <th>Nama Pasien</th>
-                                    <th>No. Rekam Medis</th>
-                                    <th>Keluhan</th>
-                                    <th>Poli</th>
-                                    <th>Action</th>
+                                    <th>NO</th>
+                                    <th>TGL-REG</th>
+                                    <th>NO-REG</th>
+                                    <th>NAMA PASIEN</th>
+                                    <th>NO. REKAM MEDIS</th>
+                                    <th>KELUHAN</th>
+                                    <th>POLI</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -20,11 +20,11 @@
                         <table id="tabel_diagnosa" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode</th>
-                                    <th>Nama</th>
-                                    <th>Deskripsi</th>
-                                    <th>Action</th>
+                                    <th>NO</th>
+                                    <th>KODE ICD</th>
+                                    <th>NAMA</th>
+                                    <th>DESKRIPSI</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,7 +62,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Diagnosa</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="DUB">
+                                <input type="text" class="form-control" name="nama" placeholder="Diagnosa">
                             </div>
                         </div>
                         <div class="form-group row">

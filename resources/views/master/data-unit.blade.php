@@ -20,11 +20,11 @@
                         <table id="tabel_unit" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode Ruang</th>
-                                    <th>Nama</th>
-                                    <th>Keterangan</th>
-                                    <th>Action</th>
+                                    <th>NO</th>
+                                    <th>KODE RUANG</th>
+                                    <th>NAMA</th>
+                                    <th>KETERANGAN</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>

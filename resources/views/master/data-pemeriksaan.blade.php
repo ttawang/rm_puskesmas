@@ -20,12 +20,12 @@
                         <table id="tabel_pemeriksaan" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode</th>
-                                    <th>Nama Tindakan</th>
-                                    <th>Jenis</th>
-                                    <th>Poli</th>
-                                    <th>Action</th>
+                                    <th>NO</th>
+                                    <th>KODE</th>
+                                    <th>NAMA TINDAKAN</th>
+                                    <th>JENIS</th>
+                                    <th>POLI</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>

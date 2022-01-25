@@ -142,7 +142,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href=" " class="nav-link">
+                <a href="{{url('tindakan/request-ceklab')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Permintaan Cek Laboratorium</p>
                 </a>
@@ -162,7 +162,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
-                <a href=" " class="nav-link">
+                <a href="{{url('laboratorium/pemeriksaan-lab')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Pemeriksaan Lab</p>
                 </a>

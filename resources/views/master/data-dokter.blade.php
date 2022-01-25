@@ -19,12 +19,12 @@
                         <table id="tabel_dokter" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
+                                    <th>NO</th>
+                                    <th>NAMA</th>
                                     <th>P/L</th>
-                                    <th>No. HP</th>
-                                    <th>Spesialis</th>
-                                    <th>Action</th>
+                                    <th>NO. HP</th>
+                                    <th>SPESIALIS</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,8 +65,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="jenis_kelamin">
                                     <option selected>Pilih</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option value="L">LAKI-LAKI</option>
+                                    <option value="P">PEREMPUAN</option>
                                 </select>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ class TindakanPasienController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Tindakan Pasien';
+        $data['judul'] = 'Tindakan Pasien Puskesmas';
         $data['dokter'] = DB::table('dokter')->get();
         $data['tindakan'] = DB::table('pemeriksaan')->get();
         $data['diagnosa'] = DB::table('diagnosa')->get();
@@ -38,6 +38,7 @@ class TindakanPasienController extends Controller
         ->join('obat as o','tp.id_obat','o.id')
         ->join('dokter as d','tp.id_dokter','d.id')
         ->join('diagnosa as di','tp.id_diagnosa','di.id')
+        ->join('pemeriksaan as pr','tp.id_pemeriksaan','pr.id')
         ->select(DB::raw('
             tp.id as id,
             tp.anamnesis as anamnesis,
@@ -47,7 +48,8 @@ class TindakanPasienController extends Controller
             dp.nama as nama_pasien,
             o.nama as nama_obat,
             d.nama as nama_dokter,
-            di.nama as nama_diagnosa
+            di.nama as nama_diagnosa,
+            pr.nama as nama_pemeriksaan
         '))
         ->orderBy('tp.id','desc')->get();
         return Datatables::of($data)
@@ -119,12 +121,14 @@ class TindakanPasienController extends Controller
         ->join('obat as o','tp.id_obat','o.id')
         ->join('dokter as d','tp.id_dokter','d.id')
         ->join('diagnosa as di','tp.id_diagnosa','di.id')
+        ->join('pemeriksaan as pr','tp.id_pemeriksaan','pr.id')
         ->select(DB::raw('
             tp.*,
             rp.tgl_kunjungan as tgl_kunjungan,
             dp.nama as nama_pasien,
             dp.kode_pasien as no_redis,
-            u.nama as nama_unit
+            u.nama as nama_unit,
+            pr.nama as nama_pemeriksaan
         '))
         ->where('tp.id',$id)->first();
 

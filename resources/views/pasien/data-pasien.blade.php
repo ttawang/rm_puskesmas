@@ -20,14 +20,14 @@
                         <table id="tabel_data_pasien" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>No. Rekam Medis</th>
-                                    <th>Nama Pasien</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
-                                    <th>Tanggal lahir</th>
-                                    <th>Kelompok Pasien</th>
-                                    <th>Action</th>
+                                    <th>NO</th>
+                                    <th>NO. REKAM MEDIS</th>
+                                    <th>NAMA PASIEN</th>
+                                    <th>P/L</th>
+                                    <th>ALAMAT</th>
+                                    <th>TANGGAL LAHIR</th>
+                                    <th>KELOMPOK PASIEN</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,16 +154,6 @@
                                 <textarea type="text" class="form-control" name="alamat" placeholder="Alamat"></textarea>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Kecamatan</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="kecamatan">
-                                    <option selected>Pilih</option>
-                                    <option value="A">kecamatan A</option>
-                                    <option value="B">kecamatan B</option>
-                                </select>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Kelurahan/Desa</label>
                             <div class="col-sm-8">

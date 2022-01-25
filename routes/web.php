@@ -17,6 +17,7 @@ use App\Http\Controllers\GolonganObatController;
 use App\Http\Controllers\SatuanObatController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RequestCeklabController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +115,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('master/data-user/simpan', [UserController::class, 'simpan']);
         Route::get('master/data-user/edit/{id}', [UserController::class, 'edit']);
         Route::get('master/data-user/hapus/{id}', [UserController::class, 'hapus']);
+        Route::get('tindakan/request-ceklab', [RequestCeklabController::class, 'index']);
+        Route::get('tindakan/request-ceklab/get_data', [RequestCeklabController::class, 'get_data']);
+        Route::post('tindakan/request-ceklab/simpan', [RequestCeklabController::class, 'simpan']);
+        Route::get('tindakan/request-ceklab/edit/{id}', [RequestCeklabController::class, 'edit']);
+        Route::get('tindakan/request-ceklab/hapus/{id}', [RequestCeklabController::class, 'hapus']);
+        Route::get('tindakan/request-ceklab/get_norekammedis/{id}', [RequestCeklabController::class, 'get_norekammedis']);
 
     });
     Route::middleware(['admin_registrasi'])->group(function () {

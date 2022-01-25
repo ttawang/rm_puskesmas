@@ -13,7 +13,7 @@ class DiagnosaController extends Controller
     //
     public function index()
     {
-        $data['judul'] = 'Data Diagnosa';
+        $data['judul'] = 'Data Diagnosa Puskesmas';
         return view('master.data-diagnosa',$data);
     }
 
