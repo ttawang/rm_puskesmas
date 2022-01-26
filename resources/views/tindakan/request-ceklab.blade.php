@@ -141,7 +141,7 @@
     //SHOW MODAL/FORM
     $("#btn_tambah").click(function(){
         $("#modal_tambah_data").modal("show");
-        $('[name=no_registrasi]').val(no_regis());
+        $('[name=no_registrasi]').val(no_regislab());
         $('[name=tgl_registrasi]').val(now_date());
     })
 

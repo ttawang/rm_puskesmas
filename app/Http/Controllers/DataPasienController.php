@@ -46,7 +46,9 @@ class DataPasienController extends Controller
                 })
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
-                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button> <button type="button" class="btn btn-info btn-sm" id=" " data-id="'.$row->id.'">Lihat</button>'.
+                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button>
+                                <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>
+                                <button type="button" class="btn btn-info btn-sm" id="btn_lihat" data-id="'.$row->id.'">Lihat</button>'.
                         '<input type="hidden" id="nama'.$row->id.'" value="'.$row->nama.'">';
                     return $actionBtn;
                 })
@@ -117,5 +119,25 @@ class DataPasienController extends Controller
         DB::commit();
         return response()->json($data);
 
+    }
+    public function lihatriwayat($id)
+    {
+        $data['data'] = DB::table('data_pasien')->where('id',$id)->first();
+        $data['judul'] = "Riwayat Rekam Medis";
+
+        return view('pasien.riwayat-pasien',$data);
+    }
+    public function get_data_riwayat($id)
+    {
+        $data = DB::table('riwayat_rekam_medis')->where('id_pasien',$id)->get();
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('tgl_kunjungan', function($row){
+                $tanggal = Carbon::createFromFormat('Y-m-d', $row->tgl_kunjungan)->format('d/m/Y');
+
+                return $tanggal;
+            })
+            ->rawColumns(['action','tgl_kunjungan'])
+            ->make(true);
     }
 }

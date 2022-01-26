@@ -37,3 +37,15 @@ function now_date(){
 
     return date;
 };
+function no_regislab(){
+    var dt = new Date();
+    var time = "REGUTJ-"+dt.getHours() + dt.getMinutes() + dt.getSeconds();
+
+    return time;
+};
+function no_regisrujuk(){
+    var dt = new Date();
+    var time = "0" + dt.getHours() + dt.getMinutes() + "B" + dt.getSeconds() + dt.getMinutes() + "0" + "0" + "0" + dt.getSeconds();
+
+    return time;
+};

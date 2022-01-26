@@ -320,6 +320,11 @@ $(document).ready(function () {
             }
         })
     });
+    $('body').on('click', '#btn_lihat', function () {
+        var id = $(this).data('id');
+        window.location = "{{ url('pasien/data-pasien/lihatriwayat') }}"+'/'+id;
+        // $.get("{{ url('pasien/data-pasien/lihatriwayat') }}"+'/'+id);
+    });
 });
 </script>
 

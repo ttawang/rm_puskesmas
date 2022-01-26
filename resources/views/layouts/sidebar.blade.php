@@ -142,6 +142,17 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('tindakan/medical-record')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Tindakan Medical Cek</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('tindakan/request-ceklab')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Permintaan Cek Laboratorium</p>
@@ -375,17 +386,6 @@
                 <a href="{{url('master/satuan-obat')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Satuan Obat</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('tindakan/medical-record')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Medical Record</p>
                 </a>
               </li>
             </ul>

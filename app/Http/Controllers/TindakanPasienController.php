@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DataTables;
-use Carbon\Carbon;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Exception;
 
 class TindakanPasienController extends Controller
 {

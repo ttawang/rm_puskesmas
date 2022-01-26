@@ -9,22 +9,25 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Medical Record
+                            <i class="mr-1"></i>Tindakan Medical
                         </div>
                     </div>
                     <div class="card-body">
                         <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
                         <!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button-->
-                        {{-- <button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button> --}}
+                        <button type="button" class="btn btn-primary" id="btn_tambah">Buat Rujukan</button>
                         <p>
                         <table id="tabel_medical_record" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Tgl Kunjungan</th>
-                                    <th>Diagnosa</th>
-                                    <th>Terapi Obat</th>
-                                    <th>Poli</th>
-                                    <th>Dokter</th>
+                                    <th>NO</th>
+                                    <th>TGL-REG</th>
+                                    <th>NO-REG</th>
+                                    <th>NAMA PASIEN</th>
+                                    <th>NO. REKAM MEDIS</th>
+                                    <th>KELUHAN</th>
+                                    <th>POLI</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,60 +45,101 @@
 <div class="modal fade" id="modal_tambah_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            {{-- <div class="modal-header">
-                <h5 class="modal-title" id="modal_tambah_dataLabel">Tambah Data Pasien</h5>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Rujukan Pasien</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div> --}}
-            {{-- <div class="modal-body">
+            </div>
+            <div class="modal-body">
                 <!--form class="form-horizontal" action="{{url('tindakan/medical-record/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No Daftar</label>
+                            <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="no_daftar" placeholder="No Daftar">
+                                <input type="text" class="form-control" name="no_registrasi" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Kepada Yth. Poli</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="no_rekam_medis" placeholder="No Rekam Medis">
+                                <input type="text" class="form-control" name="tujuan" placeholder="Tujuan">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Nama Pasien</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Rumah sakit</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" placeholder="Nama Pasien">
+                                <input type="text" class="form-control" name="rumah_sakit" placeholder="Rumah Sakit">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Tanggal</label>
+                            <label class="col-sm-4 col-form-label text-secondary">No. Rekam Medis</label>
                             <div class="col-sm-8">
-                                <div class="input-group date">
-                                    <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}" readonly>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                </div>
+                                <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
+                                    <option selected>Cari No. Rekam Medis</option>
+                                    {{-- @foreach ($pasien as $i)
+                                        <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>
+                                    @endforeach --}}
+                                    </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Poli</label>
+                            <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nama" disabled placeholder="Nama Pasien">
+                                <input type="hidden" class="form-" name="id_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Usia</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="usia" disabled placeholder="Usia">
+                                <input type="hidden" class="form-" name="usia_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="jenis_kelamin" disabled placeholder="Jenis Kelamin">
+                                <input type="hidden" class="form-" name="jk_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Status Pasien</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="status_pasien" disabled placeholder="Status Pasien">
+                                <input type="hidden" class="form-" name="status_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Anamnesa</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="anamnesa" placeholder="Anamnesa"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Diagnosa Sementara</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="diagnosa" placeholder="Diagnosa Sementara">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Telah diberikan</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="obat" placeholder="Tindakan/ Obat"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Kriteria</label>
                             <div class="col-sm-8">
                                 <select class="custom-select rounded-0  text-secondary">
-                                    <option selected>Pilih Poli</option>
-                                    <option value="poli">Poli</option>
+                                    <option selected>Pilih</option>
+                                    <option value="EMERGENCY">EMERGENCY</option>
+                                    <option value="LANJUTAN">PEMERIKSAAN LANJUTAN</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Keluhan</label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="keluhan" placeholder="Keluhan"></textarea>
                             </div>
                         </div>
                     </div>
@@ -106,7 +150,7 @@
                 <!--button type="submit" class="btn btn-primary">Save</button-->
                 <button type="submit" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
-            </form> --}}
+            </form>
         </div>
     </div>
 </div>
@@ -123,6 +167,9 @@ $(document).ready(function () {
             {data: 'nama', name: 'nama'},
             {data: 'nama', name: 'nama'},
             {data: 'nama', name: 'nama'},
+            {data: 'nama', name: 'nama'},
+            {data: 'nama', name: 'nama'},
+            {data: 'nama', name: 'nama'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -131,6 +178,7 @@ $(document).ready(function () {
     //SHOW MODAL/FORM
     $("#btn_tambah").click(function(){
         $("#modal_tambah_data").modal("show");
+        $('[name=no_registrasi]').val(no_regisrujuk());
     })
 
     //ShOW MODAL/FORM DENGAN GETTING DATA BERDASARKAN ID

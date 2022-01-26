@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DataTables;
-use DB;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Exception;
 
 class MedicalRecordController extends Controller
 {
     //
     public function index()
     {
-        $data['judul'] = 'Medical Record';
+        $data['judul'] = 'Tindakan Medical Cek';
         return view('tindakan.medical-record',$data);
     }
 
@@ -24,8 +25,7 @@ class MedicalRecordController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
-                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>'.
-                        '<input type="hidden" id="nama'.$row->id.'" value="'.$row->nama.'">';
+                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Proses</button>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
