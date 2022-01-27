@@ -47,7 +47,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!--form class="form-horizontal" action="{{url('tindakan/req-ceklab/simpan')}}" method="POST"-->
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
                     <input type="hidden" name="id">
@@ -73,31 +72,65 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
-                                <option selected>Cari No. Rekam Medis</option>
-                                @foreach ($pasien as $i)
-                                    <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>
-                                @endforeach
-                                </select>
+                                <input type="text" class="form-control" id="lab_no_rekam_medis" disabled placeholder="No. Rekam Medis">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="nama" disabled placeholder="Nama Pasien">
+                                <input type="text" class="form-control" id="lab_nama_pasien" disabled placeholder="Nama Pasien">
                                 <input type="hidden" class="form-" name="id_pasien">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Permintaan</label>
+                            <label class="col-sm-4 col-form-label  text-secondary">Usia</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" name="permintaan" placeholder="Permintaan"></textarea>
+                                <input type="text" class="form-control" id="lab_usia" disabled placeholder="Usia">
+                                <input type="hidden" class="form-" name="usia_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_jenis_kelamin" disabled placeholder="Jenis Kelamin">
+                                <input type="hidden" class="form-" name="jk_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Unit</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_unit" disabled placeholder="Unit">
+                                <input type="hidden" class="form-" name="unit">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Dokter Pengirim</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_dokter" disabled placeholder="Dokter Pengirim">
+                                <input type="hidden" class="form-" name="dokter">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Pemeriksaan yang diinginkan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select-cari-modal" name="lab_pemeriksaan" id="pemeriksaan">
+                                    <option value="0" selected>Pilih</option>
+                                    {{-- @foreach ($jenis as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach --}}
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
+                                <textarea class="form-control" name="lab_keterangan" placeholder="Keterangan"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Petugas</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lab_petugas" placeholder="Petugas">
                             </div>
                         </div>
                     </div>

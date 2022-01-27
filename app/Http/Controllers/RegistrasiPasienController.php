@@ -50,7 +50,7 @@ class RegistrasiPasienController extends Controller
 
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
-                    $actionBtn = '<button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>';
+                    $actionBtn = '<button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Batalkan</button>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action','tgl_registrasi'])

@@ -200,13 +200,13 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="rujuk_no_registrasi" disabled placeholder="Nama Pasien">
+                                <input type="text" class="form-control" id="rujuk_no_registrasi" disabled placeholder="No. Registrasi">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="rujuk_no_rekam_medis" disabled placeholder="Nama Pasien">
+                                <input type="text" class="form-control" id="rujuk_no_rekam_medis" disabled placeholder="No. Rekam Medis">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -284,6 +284,116 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal_tambah_labo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Permintaan Cek Laboratorium</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form_lab">
+                @csrf
+                    <input type="hidden" name="lab_id_tindakan">
+                    <input type="hidden" name="lab_id_permintaan">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_no_registrasi" disabled placeholder="No. Registrasi">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Tanggal</label>
+                            <div class="col-sm-8">
+                                <div class="input-group date">
+                                    {{-- <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}" readonly> --}}
+                                    <input type="text" class="form-control" id="lab_tgl_kunjungan" disabled placeholder="Tgl Kunjungan">
+                                        {{-- <div class="input-group-append">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_no_rekam_medis" disabled placeholder="No. Rekam Medis">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_nama_pasien" disabled placeholder="Nama Pasien">
+                                <input type="hidden" class="form-" name="id_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Usia</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_usia" disabled placeholder="Usia">
+                                <input type="hidden" class="form-" name="usia_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_jenis_kelamin" disabled placeholder="Jenis Kelamin">
+                                <input type="hidden" class="form-" name="jk_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Unit</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_unit" disabled placeholder="Unit">
+                                <input type="hidden" class="form-" name="unit">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Dokter Pengirim</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="lab_dokter" disabled placeholder="Dokter Pengirim">
+                                <input type="hidden" class="form-" name="dokter">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Pemeriksaan yang diinginkan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select-cari-modal" name="lab_pemeriksaan" id="pemeriksaan">
+                                    <option value="0" selected>Pilih</option>
+                                    {{-- @foreach ($jenis as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach --}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="lab_keterangan" placeholder="Keterangan"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Petugas</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lab_petugas" placeholder="Petugas">
+                            </div>
+                        </div>
+                    </div>
+                <!--/form-->
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!--button type="submit" class="btn btn-primary">Save</button-->
+                <button type="button" id="btn_simpan_lab" class="btn btn-primary">Save LAB</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
 $(document).ready(function () {
@@ -316,7 +426,7 @@ $(document).ready(function () {
         columnDefs: [
             { className: 'text-right', targets: [] },
             { className: 'text-center', targets: [7] },
-            { width:80, targets:[7]},
+            { width:100, targets:[7]},
 	    ],
 
     });
@@ -362,6 +472,24 @@ $(document).ready(function () {
             $('#rujuk_nama_pasien').val(data.nama_pasien);
             $('#rujuk_jenis_kelamin').val(data.jenis_kelamin);
             $('#rujuk_kasta').val(data.kasta);
+        });
+    })
+
+    $('body').on('click', '#btn_lab', function () {
+        $("#modal_tambah_labo").modal("show");
+        var id = $(this).data('id');
+        $.get("{{ url('tindakan/tindakan-pasien/lab') }}"+'/'+id, function (data) {
+            $("#modal_tambah_lab").modal("show");
+            $('[name=lab_id_tindakan]').val(data.id_tindakan);
+            $('[name=lab_id_permintaan]').val(data.id_permintaan);
+            $('#lab_no_registrasi').val(data.no_registrasi);
+            $('#lab_tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
+            $('#lab_no_rekam_medis').val(data.no_rekam_medis);
+            $('#lab_nama_pasien').val(data.nama_pasien);
+            $('#lab_usia').val(umur(data.tgl_lahir));
+            $('#lab_jenis_kelamin').val(data.jenis_kelamin);
+            $('#lab_unit').val(data.nama_unit);
+            $('#lab_dokter').val(data.nama_dokter);
         });
     })
 
@@ -422,6 +550,31 @@ $(document).ready(function () {
         });
         // location.reload();
     })
+
+    $('body').on('click', '#btn_edit_rujuk', function () {
+        var id = $(this).data('id');
+
+        $.get("{{ url('tindakan/tindakan-pasien/editrujuk') }}"+'/'+id, function (data) {
+            $("#modal_tambah_rujukan").modal("show");
+            $('[name=rujuk_id_tindakan]').val(data.id_tindakan);
+            $('[name=rujuk_id_rujukan]').val(data.id_rujukan);
+            $('[name=rujuk_no_rujukan]').val(data.no_rujuk);
+            $('[name=rujuk_poli]').val(data.poli_tujuan);
+            $('[name=rujuk_rumah_sakit]').val(data.rs_tujuan);
+            $('[name=rujuk_alasan]').val(data.alasan);
+            $('[name=rujuk_kriteria]').val(data.kriteria).trigger('change');
+            $('#rujuk_no_rekam_medis').val(data.no_rekam_medis);
+            $('#rujuk_no_registrasi').val(data.no_registrasi);
+            $('#rujuk_anamnesis').val(data.anamnesis);
+            $('#rujuk_usia').val(umur(data.tgl_lahir));
+            $('#rujuk_diagnosa').val(data.nama_diagnosa);
+            $('#rujuk_obat').val(data.nama_obat);
+            $('#rujuk_nama_pasien').val(data.nama_pasien);
+            $('#rujuk_jenis_kelamin').val(data.jenis_kelamin);
+            $('#rujuk_kasta').val(data.kasta);
+        });
+    })
+
     $("#btn_simpan_rujuk").click(function(){
         $.ajax({
             url: "{{ url('tindakan/tindakan-pasien/simpanrujuk')}} ",
@@ -454,27 +607,58 @@ $(document).ready(function () {
 
         });
     })
-    $('body').on('click', '#btn_edit_rujuk', function () {
+
+    $('body').on('click', '#btn_edit_lab', function () {
         var id = $(this).data('id');
 
-        $.get("{{ url('tindakan/tindakan-pasien/editrujuk') }}"+'/'+id, function (data) {
-            $("#modal_tambah_rujukan").modal("show");
-            $('[name=rujuk_id_tindakan]').val(data.id_tindakan);
-            $('[name=rujuk_id_rujukan]').val(data.id_rujukan);
-            $('[name=rujuk_no_rujukan]').val(data.no_rujuk);
-            $('[name=rujuk_poli]').val(data.poli_tujuan);
-            $('[name=rujuk_rumah_sakit]').val(data.rs_tujuan);
-            $('[name=rujuk_alasan]').val(data.alasan);
-            $('[name=rujuk_kriteria]').val(data.kriteria).trigger('change');
-            $('#rujuk_no_rekam_medis').val(data.no_rekam_medis);
-            $('#rujuk_no_registrasi').val(data.no_registrasi);
-            $('#rujuk_anamnesis').val(data.anamnesis);
-            $('#rujuk_usia').val(umur(data.tgl_lahir));
-            $('#rujuk_diagnosa').val(data.nama_diagnosa);
-            $('#rujuk_obat').val(data.nama_obat);
-            $('#rujuk_nama_pasien').val(data.nama_pasien);
-            $('#rujuk_jenis_kelamin').val(data.jenis_kelamin);
-            $('#rujuk_kasta').val(data.kasta);
+        $.get("{{ url('tindakan/tindakan-pasien/editlab') }}"+'/'+id, function (data) {
+            $("#modal_tambah_labo").modal("show");
+            $('[name=lab_id_tindakan]').val(data.id_tindakan);
+            $('[name=lab_id_permintaan]').val(data.id_permintaan);
+            $('[name=lab_pemeriksaan]').val(data.nama_pemeriksaan);
+            $('[name=lab_keterangan]').val(data.keterangan);
+            $('[name=lab_petugas]').val(data.nama_petugas);
+            $('#lab_no_registrasi').val(data.no_registrasi);
+            $('#lab_tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
+            $('#lab_no_rekam_medis').val(data.no_rekam_medis);
+            $('#lab_nama_pasien').val(data.nama_pasien);
+            $('#lab_usia').val(umur(data.tgl_lahir));
+            $('#lab_jenis_kelamin').val(data.jenis_kelamin);
+            $('#lab_unit').val(data.nama_unit);
+            $('#lab_dokter').val(data.nama_dokter);
+        });
+    })
+
+    $("#btn_simpan_lab").click(function(){
+        $.ajax({
+            url: "{{ url('tindakan/tindakan-pasien/simpanlab')}} ",
+            type:'POST',
+            data: $("#form_lab").serialize(),
+            headers : {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(respon){
+				if(respon.status == 1 || respon.status == "1"){
+					$("#modal_tambah_labo").modal('hide');
+                    Swal.fire({
+                        title: 'Berhasil',
+                        text: 'Data berhasil diperbarui.',
+                        type: "success"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+                }else{
+                    $("#modal_tambah_labo").modal('hide');
+                    Swal.fire({
+                        title: 'Gagal',
+                        text: 'Data gagal diperbarui.',
+                        type: "error"
+                    }).then((result) => {
+                        tb.ajax.reload();
+                    })
+				}
+			}
+
         });
     })
 

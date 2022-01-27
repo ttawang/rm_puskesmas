@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Daftar Pasien
+                            <i class="mr-1"></i>Riwayat Rekam Medis
                         </div>
                     </div>
                     <div class="card-body">

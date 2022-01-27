@@ -44,7 +44,7 @@ function now_date2(){
 };
 function no_regislab(){
     var dt = new Date();
-    var time = "REGUTJ-"+dt.getHours() + dt.getMinutes() + dt.getSeconds();
+    var time = "UP-"+dt.getHours() + dt.getMinutes() + dt.getSeconds();
 
     return time;
 };

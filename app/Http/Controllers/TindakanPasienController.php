@@ -66,10 +66,12 @@ class TindakanPasienController extends Controller
                 $cek = DB::table('rujukan_pasien')->where('id_tindakan',$row->id)->count();
                 if($cek < 1){
                     $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>
-                    <button type="button" class="edit btn btn-success btn-sm" id="btn_rujuk" data-id="'.$row->id.'">Rujuk</button>';
+                    <button type="button" class="edit btn btn-success btn-sm" id="btn_rujuk" data-id="'.$row->id.'">Rujuk</button>
+                    <button type="button" class="edit btn btn-success btn-sm" id="btn_lab" data-id="'.$row->id.'">LAB</button>';
                 }else{
                     $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>
-                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'">Edit Rujukan</button>';
+                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'">Edit Rujukan</button>
+                    <button type="button" class="edit btn btn-success btn-sm" id="btn_lab" data-id="'.$row->id.'">Edit LAB</button>';
                 }
 
                 return $actionBtn;
@@ -231,6 +233,91 @@ class TindakanPasienController extends Controller
             }else{
                 $data['updated_at'] = Carbon::now();
                 DB::table('rujukan_pasien')->where(array('id' => $id))->update($data);
+                $arr = ['status' => '1'];
+            }
+            DB::commit();
+
+		}catch (Exception $e){
+			DB::rollback();
+			$arr = ['status' => '0'];
+		}
+
+        return response()->json($arr);
+
+    }
+    public function lab($id)
+    {
+        $data = DB::table('tindakan_pasien as tp')
+        ->join('registrasi_pasien as rp','tp.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->join('dokter as d','tp.id_dokter','d.id')
+        ->join('unit as u','rp.id_unit','u.id')
+        ->leftJoin('req_ceklab as rc','tp.id','rc.id_tindakan')
+        ->select(DB::raw('
+            tp.id id_tindakan,
+            rp.no_registrasi,
+            rp.tgl_kunjungan,
+            dp.kode_pasien as no_rekam_medis,
+            dp.nama as nama_pasien,
+            dp.tgl_lahir,
+            dp.jenis_kelamin,
+            u.nama as nama_unit,
+            d.nama as nama_dokter,
+            rc.id as id_permintaan
+        '))
+        ->where('tp.id',$id)
+        ->first();
+
+
+        return response()->json($data);
+    }
+
+    public function editlab($id)
+    {
+        $data = DB::table('tindakan_pasien as tp')
+        ->join('registrasi_pasien as rp','tp.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->join('dokter as d','tp.id_dokter','d.id')
+        ->join('unit as u','rp.id_unit','u.id')
+        ->leftJoin('req_ceklab as rc','tp.id','rc.id_tindakan')
+        ->select(DB::raw('
+            tp.id id_tindakan,
+            rp.no_registrasi,
+            rp.tgl_kunjungan,
+            dp.kode_pasien as no_rekam_medis,
+            dp.nama as nama_pasien,
+            dp.tgl_lahir,
+            dp.jenis_kelamin,
+            u.nama as nama_unit,
+            d.nama as nama_dokter,
+            rc.id as id_permintaan,
+            rc.keterangan
+        '))
+        ->where('tp.id',$id)
+        ->first();
+
+
+        return response()->json($data);
+    }
+
+    public function simpanlab(Request $request)
+    {
+        $id = $request->get('lab_id_permintaan');
+        $data['id_tindakan'] = $request->get('lab_id_tindakan');
+        $data['keterangan'] = $request->get('lab_keterangan');
+        $data['pemeriksaan'] = $request->get('lab_pemeriksaan');
+        $data['petugas'] = $request->get('petugas');
+
+        DB::beginTransaction();
+        try{
+            if($id == '' || $id == null){
+                $data['created_at'] = Carbon::now();
+                $data['updated_at'] = Carbon::now();
+                DB::table('req_ceklab')->insert($data);
+                $arr = ['status' => '1'];
+            }else{
+                $data['updated_at'] = Carbon::now();
+                DB::table('req_ceklab')->where(array('id' => $id))->update($data);
                 $arr = ['status' => '1'];
             }
             DB::commit();

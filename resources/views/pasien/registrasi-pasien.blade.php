@@ -150,7 +150,12 @@ $(document).ready(function () {
             {data: 'nama_poli', name: 'nama_poli'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
-        ]
+        ],
+        columnDefs: [
+            { className: 'text-right', targets: [] },
+            { className: 'text-center', targets: [7] },
+            { width:80, targets:[]},
+	    ],
     });
 
     //SHOW MODAL/FORM
@@ -212,20 +217,20 @@ $(document).ready(function () {
     //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
-        title: 'Data akan dihapus !',
-        text: "Data yang telah dihapus tidak dapat dikembalikan",
+        title: 'Data akan dibatalkan !',
+        text: "Data yang dibatalkan tidak dapat dikembalikan",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus'
+        confirmButtonText: 'Batalkan'
         }).then((result) => {
             if (result.isConfirmed) {
                 var id = $(this).data('id');
                 $.get("{{ url('pasien/registrasi-pasien/hapus') }}"+'/'+id);
                 Swal.fire({
-                    title: 'Deleted!',
-                    text: 'Data telah dihapus.',
+                    title: 'Batalkan!',
+                    text: 'Data telah dibatalkan.',
                     type: "success"
                 }).then((result) => {
                     tb.ajax.reload();
