@@ -58,7 +58,7 @@
                     <input type="hidden" name="id">
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
+                            <label class="col-sm-4 col-form-label text-secondary">No Rujukan</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_registrasi" readonly>
                             </div>
@@ -76,9 +76,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No. Rekam Medis</label>
+                            <label class="col-sm-4 col-form-label text-secondary">No. Registrasi</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
+                                <select class="form-control select-cari-modal" name="no_registrasi" id="no_registrasi">
                                     <option selected>Cari No. Rekam Medis</option>
                                     {{-- @foreach ($pasien as $i)
                                         <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>

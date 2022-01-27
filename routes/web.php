@@ -106,10 +106,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('tindakan/tindakan-pasien/simpan', [TindakanPasienController::class, 'simpan']);
         Route::get('tindakan/tindakan-pasien/edit/{id}', [TindakanPasienController::class, 'edit']);
         Route::get('tindakan/tindakan-pasien/hapus/{id}', [TindakanPasienController::class, 'hapus']);
+        Route::get('tindakan/tindakan-pasien/rujuk/{id}', [TindakanPasienController::class, 'rujuk']);
+        Route::get('tindakan/tindakan-pasien/editrujuk/{id}', [TindakanPasienController::class, 'editrujuk']);
+        Route::post('tindakan/tindakan-pasien/simpanrujuk', [TindakanPasienController::class, 'simpanrujuk']);
         Route::get('tindakan/medical-record', [MedicalRecordController::class, 'index']);
         Route::get('tindakan/medical-record/get_data', [MedicalRecordController::class, 'get_data']);
         Route::post('tindakan/medical-record/simpan', [MedicalRecordController::class, 'simpan']);
         Route::get('tindakan/medical-record/edit/{id}', [MedicalRecordController::class, 'edit']);
+        Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
         Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
         Route::get('laporan/laporan', [LaporanController::class, 'index']);
         Route::get('master/data-user', [UserController::class, 'index']);

@@ -45,8 +45,10 @@ class TindakanPasienController extends Controller
             tp.anamnesis as anamnesis,
             rp.no_registrasi as no_registrasi,
             rp.tgl_kunjungan as tgl_registrasi,
+            rp.keluhan as keluhan,
             u.nama as nama_poli,
             dp.nama as nama_pasien,
+            dp.kode_pasien as no_redis,
             o.nama as nama_obat,
             d.nama as nama_dokter,
             di.nama as nama_diagnosa,
@@ -61,8 +63,15 @@ class TindakanPasienController extends Controller
                 return $tanggal;
             })
             ->addColumn('action', function($row){
-                //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
-                $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button>';
+                $cek = DB::table('rujukan_pasien')->where('id_tindakan',$row->id)->count();
+                if($cek < 1){
+                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>
+                    <button type="button" class="edit btn btn-success btn-sm" id="btn_rujuk" data-id="'.$row->id.'">Rujuk</button>';
+                }else{
+                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>
+                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'">Edit Rujukan</button>';
+                }
+
                 return $actionBtn;
             })
             ->rawColumns(['action','tgl_registrasi'])
@@ -139,6 +148,99 @@ class TindakanPasienController extends Controller
         $data = DB::table('tindakan_pasien')->delete($id);
         DB::commit();
         return response()->json($data);
+
+    }
+    public function rujuk($id)
+    {
+        $data = DB::table('tindakan_pasien as tp')
+        ->join('registrasi_pasien as rp','tp.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->join('diagnosa as d','tp.id_diagnosa','d.id')
+        ->join('obat as o','tp.id_obat','o.id')
+        ->join('kelompok_pasien as kp','dp.id_kelompok_pasien','kp.id')
+        ->leftJoin('rujukan_pasien as rup','tp.id','rup.id_tindakan')
+        ->select(DB::raw('
+            tp.id id_tindakan,
+            rp.id id_registrasi,
+            dp.kode_pasien no_rekam_medis,
+            rp.no_registrasi,
+            dp.nama nama_pasien,
+            dp.tgl_lahir,
+            dp.jenis_kelamin,
+            tp.anamnesis,
+            d.nama nama_diagnosa,
+            o.nama nama_obat,
+            kp.nama kasta,
+            rup.id id_rujukan
+        '))
+        ->where('tp.id',$id)
+        ->first();
+
+        return response()->json($data);
+    }
+    public function editrujuk($id)
+    {
+        $data = DB::table('tindakan_pasien as tp')
+        ->join('registrasi_pasien as rp','tp.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->join('diagnosa as d','tp.id_diagnosa','d.id')
+        ->join('obat as o','tp.id_obat','o.id')
+        ->join('kelompok_pasien as kp','dp.id_kelompok_pasien','kp.id')
+        ->leftJoin('rujukan_pasien as rup','tp.id','rup.id_tindakan')
+        ->select(DB::raw('
+            tp.id id_tindakan,
+            rp.id id_registrasi,
+            dp.kode_pasien no_rekam_medis,
+            rp.no_registrasi,
+            dp.nama nama_pasien,
+            dp.tgl_lahir,
+            dp.jenis_kelamin,
+            tp.anamnesis,
+            d.nama nama_diagnosa,
+            o.nama nama_obat,
+            kp.nama kasta,
+            rup.id id_rujukan,
+            rup.no_rujuk,
+            rup.poli_tujuan,
+            rup.rs_tujuan,
+            rup.kriteria,
+            rup.alasan
+        '))
+        ->where('tp.id',$id)
+        ->first();
+
+        return response()->json($data);
+    }
+    public function simpanrujuk(Request $request)
+    {
+        $id = $request->get('rujuk_id_rujukan');
+        $data['id_tindakan'] = $request->get('rujuk_id_tindakan');
+        $data['poli_tujuan'] = $request->get('rujuk_poli');
+        $data['rs_tujuan'] = $request->get('rujuk_rumah_sakit');
+        $data['kriteria'] = $request->get('rujuk_kriteria');
+        $data['no_rujuk'] = $request->get('rujuk_no_rujukan');
+        $data['alasan'] = $request->get('rujuk_alasan');
+
+        DB::beginTransaction();
+        try{
+            if($id == '' || $id == null){
+                $data['created_at'] = Carbon::now();
+                $data['updated_at'] = Carbon::now();
+                DB::table('rujukan_pasien')->insert($data);
+                $arr = ['status' => '1'];
+            }else{
+                $data['updated_at'] = Carbon::now();
+                DB::table('rujukan_pasien')->where(array('id' => $id))->update($data);
+                $arr = ['status' => '1'];
+            }
+            DB::commit();
+
+		}catch (Exception $e){
+			DB::rollback();
+			$arr = ['status' => '0'];
+		}
+
+        return response()->json($arr);
 
     }
 }
