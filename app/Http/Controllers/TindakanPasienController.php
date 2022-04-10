@@ -64,14 +64,14 @@ class TindakanPasienController extends Controller
             })
             ->addColumn('action', function($row){
                 $cek = DB::table('rujukan_pasien')->where('id_tindakan',$row->id)->count();
+                // $cek2 = DB::table('tindakan')->where('id_tindakan',$row->id)->count();
                 if($cek < 1){
-                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>
-                    <button type="button" class="edit btn btn-success btn-sm" id="btn_rujuk" data-id="'.$row->id.'">Rujuk</button>
-                    <button type="button" class="edit btn btn-success btn-sm" id="btn_lab" data-id="'.$row->id.'">LAB</button>';
+                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Status Tindakan"><i class="fas fa-info-circle "></i></button>
+                    <button type="button" class="edit btn btn-success btn-sm" id="btn_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Rujuk Pasien"><i class="fas fa-ambulance"></i></button>';
                 }else{
-                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>
-                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'">Edit Rujukan</button>
-                    <button type="button" class="edit btn btn-success btn-sm" id="btn_lab" data-id="'.$row->id.'">Edit LAB</button>';
+                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Status TIndakan"><i class="fas fa-info-circle"></i></button>
+                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Rujukan"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Batal Rujukan"><i class="fa fa-trash"></i></button>';
                 }
 
                 return $actionBtn;
@@ -245,6 +245,21 @@ class TindakanPasienController extends Controller
         return response()->json($arr);
 
     }
+
+    // public function get_data_lab(Request $request)
+    // {
+    //     $data = DB::table('req_ceklab')->orderBy('id','desc')->get();
+    //         return Datatables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function($row){
+    //                 //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
+    //                 $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit_lab" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus_lab" data-id="'.$row->id.'">Hapus</button>';
+    //                 return $actionBtn;
+    //             })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    // }
+
     public function lab($id)
     {
         $data = DB::table('tindakan_pasien as tp')

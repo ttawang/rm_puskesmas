@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
                         <!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button-->
-                        <button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button>
+                        <button type="button" class="btn btn-primary" id="btn_tambah">Tambah Tindakan</button>
                         <p>
                         <table id="tabel_registrasi_pasien" class="table table-striped table-bordered">
                             <thead>
@@ -27,11 +27,45 @@
                                     <th>NAMA PASIEN</th>
                                     <th>KELUHAN</th>
                                     <th>POLI</th>
-                                    {{-- <th>DOKTER</th> --}}
-                                    {{-- <th>ANAMNESIS</th>
-                                    <th>TINDAKAN</th>
-                                    <th>DIAGNOSIS</th>
-                                    <th>OBAT</th> --}}
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="mr-1"></i>Daftar Permintaan Cek Laboratorium
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
+                        <!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button-->
+                        {{-- <button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button> --}}
+                        <p>
+                        <table id="tabel_permintaan_lab" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>TGL-REG</th>
+                                    <th>NO-REG</th>
+                                    <th>NO. REKAM MEDIS</th>
+                                    <th>NAMA PASIEN</th>
+                                    <th>P/L</th>
+                                    <th>DOKTER PENGIRIM</th>
+                                    <th>REQUEST PEMERIKSAAN</th>
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
@@ -277,6 +311,7 @@
             <div class="modal-footer">
                 <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
+                <button type="button" id="" class="btn btn-success">Simpan & Cetak</button>
                 <button type="button" id="btn_simpan_rujuk" class="btn btn-primary">Simpan Rujuk</button>
             </div>
             {{-- </form> --}}
@@ -430,6 +465,24 @@ $(document).ready(function () {
 	    ],
 
     });
+
+    // var tb2 = $('#tabel_permintaan_lab').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: "{{ url('tindakan/tindakan-pasien/get_data_lab') }}",
+    //     columns: [
+    //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+    //         {data: 'nama_pasien', name: 'nama_pasien'},
+    //         {data: 'action', name: 'action', orderable: true, searchable: true
+    //         },
+    //     ],
+    //     // columnDefs: [
+    //     //     { className: 'text-right', targets: [] },
+    //     //     { className: 'text-center', targets: [7] },
+    //     //     { width:100, targets:[7]},
+	//     // ],
+
+    // });
     $('#id_no_registrasi').on('change', function() {
         if ( this.value > 0){
             var id = $('[name=no_registrasi_tambah]').val();
