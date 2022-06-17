@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+
+</style>
+
 
 <div class="content-header">
     <div class="container-fluid">
@@ -9,7 +13,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="mr-1"></i>Tindakan Pasien
+                            <i class="mr-1"></i>Daftar Tindakan Pasien
                         </div>
                     </div>
                     <div class="card-body">
@@ -53,19 +57,17 @@
                     <div class="card-body">
                         <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
                         <!--button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button-->
-                        {{-- <button type="button" class="btn btn-primary" id="btn_tambah">Tambah</button> --}}
+                        <button type="button" class="btn btn-primary" id="btn_tambah_labo">Tambah Permintaan</button>
                         <p>
                         <table id="tabel_permintaan_lab" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>NO</th>
                                     <th>TGL-REG</th>
-                                    <th>NO-REG</th>
                                     <th>NO. REKAM MEDIS</th>
                                     <th>NAMA PASIEN</th>
-                                    <th>P/L</th>
-                                    <th>DOKTER PENGIRIM</th>
-                                    <th>REQUEST PEMERIKSAAN</th>
+                                    <th>PEMERIKSAAN</th>
+                                    <th>KETERANGAN</th>
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
@@ -80,8 +82,8 @@
     </div>
 </div>
 
-<!--div class="modal fade" id="modal_tambah_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"-->
 <div class="modal fade" id="modal_tambah_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="modal_tambah_data"> --}}
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -100,7 +102,7 @@
                         <div class="form-group row"  id="div_no_regis">
                             <label class="col-sm-4 col-form-label text-secondary">No. Registrasi</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="no_registrasi_tambah" id="id_no_registrasi">
+                                <select class="form-control no_registrasi" name="no_registrasi_tambah" id="id_no_registrasi">
                                     <option value="0" selected>Pilih No. Registrasi</option>
                                     @foreach ($no_registrasi as $i)
                                         <option value="{{ $i->id }}">{{ $i->no_registrasi }}</option>
@@ -135,26 +137,18 @@
                         <hr>
                         <br>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Dokter</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="dokter" id="dokter">
+                            <label class="col-sm-2 col-form-label text-secondary">Dokter</label>
+                            <div class="col">
+                                <select class="form-control dokter select2-container" name="dokter" id="dokter">
                                     <option value="0" selected>Pilih Dokter</option>
                                     @foreach ($dokter as $i)
                                         <option value="{{ $i->id }}">{{ $i->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Anamnesis</label>
-                            <div class="col-sm-8">
-                                <textarea type="text" class="form-control" name="anamnesis" placeholder="Anamnesis"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Tindakan</label>
-                            <div class="col-sm-8">
-                                <select value="0" class="form-control select-cari-modal" name="tindakan" id="tindakan">
+                            <label class="col-sm-2 col-form-label text-secondary">Tindakan</label>
+                            <div class="col">
+                                <select value="0" class="form-control tindakan" name="tindakan" id="tindakan">
                                     <option value="0" selected>Pilih Tindakan</option>
                                     @foreach ($tindakan as $i)
                                         <option value="{{ $i->id }}">{{ $i->nama }}</option>
@@ -163,9 +157,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Diagnosis</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="diagnosa" id="diagnosa">
+                            <label class="col-sm-2 col-form-label  text-secondary">Anamnesis</label>
+                            <div class="col">
+                                <textarea type="text" class="form-control" name="anamnesis" placeholder="Anamnesis"></textarea>
+                            </div>
+                            <label class="col-sm-2 col-form-label text-secondary">Diagnosis</label>
+                            <div class="col">
+                                <select class="form-control diagnosa" name="diagnosa" id="diagnosa">
                                     <option value="0" selected>Pilih Diagnosa</option>
                                     @foreach ($diagnosa as $i)
                                         <option value="{{ $i->id }}">{{ $i->nama }}</option>
@@ -173,16 +171,43 @@
                                 </select>
                             </div>
                         </div>
+
+
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Terapi Obat</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="obat" id="obat">
+                            <label class="col col-form-label  text-secondary">Terapi Obat</label>
+                            <label class="col col-form-label text-secondary">Jumlah Obat</label>
+                            <label class="col col-form-label  text-secondary">Aturan Pakai</label>
+                            <label class="col col-form-label  text-secondary">Keterangan</label>
+                        </div>
+                        <div id="inilo">
+                        <div class="form-group row" id="row_obat[]">
+                            <div class="col">
+                                <select class="form-control obat" name="obat[]" id="obat">
                                     <option value="0" selected>Pilih Obat</option>
                                     @foreach ($obat as $i)
                                         <option value="{{ $i->id }}">{{ $i->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col">
+                                <input type="number" class="form-control" name="jumlah_obat[]" placeholder="Jumlah Obat">
+                            </div>
+                            <div class="col">
+                                <select class="form-control" name="aturan_pakai[]" id="aturan_pakai">
+                                    <option value="0" selected>Pilih</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="ket_obat[]" placeholder="Keterangan">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col">
+                                <button type="button"  class="btn btn-success btn-sm" id="tambah_obat">+</button>
+                                <button type="button"  class="btn btn-warning btn-sm" id="kurang_obat">-</button>
+                            </div>
+
                         </div>
                     </div>
                     {{-- api bumi air udara, avatar menghilang --}}
@@ -202,7 +227,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Rujukan Pasien</h5>
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Rujukan Eksternal Pasien</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -298,7 +323,7 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label  text-secondary">Kriteria</label>
                             <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="rujuk_kriteria">
+                                <select class="form-control" name="rujuk_kriteria">
                                     <option selected>Pilih</option>
                                     <option value="EMERGENCY">EMERGENCY</option>
                                     <option value="LANJUTAN">PEMERIKSAAN LANJUTAN</option>
@@ -318,7 +343,97 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="modal_tambah_rujukan_internal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Rujukan Internal Pasien</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form_rujuk_internal">
+                @csrf
+                    <input type="hidden" name="rujuk_internal_id_rujukan">
+                    <input type="hidden" name="rujuk_internal_id_tindakan">
+                    <input type="hidden" name="rujuk_internal_tipe" value="internal">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Poli Pengirim</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="rujuk_internal_poli_pengirim" disabled placeholder="Poli Pengirim">
+                                <input type="hidden" class="form-" name="in_rujuk_internal_poli_pengirim">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Poli yang dituju</label>
+                            <div class="col-sm-8">
+                                <select class="form-control rujuk_internal_poli_tujuan" name="rujuk_internal_poli_tujuan">
+                                    <option value="0" selected>Pilih Poli Tujuan</option>
+                                    @foreach ($rujuk_internal_poli_tujuan as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="rujuk_internal_nama_pasien" disabled placeholder="Nama Pasien">
+                                <input type="hidden" class="form-" name="in_rujuk_internal_id_pasien">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Usia</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="rujuk_internal_usia" disabled placeholder="Usia">
+                                <input type="hidden" class="form-" name="in_rujuk_internal_usia_usia">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="rujuk_internal_jenis_kelamin" disabled placeholder="Jenis Kelamin">
+                                <input type="hidden" class="form-" name="in_rujuk_internal_jenis_kelamin">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Alamat</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="rujuk_internal_alamat" disabled placeholder="Alamat">
+                                <input type="hidden" class="form-" name="in_rujuk_internal_alamat">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-secondary">Lakukan Pemeriksaan</label>
+                            <div class="col-sm-8">
+                                <textarea type="text" class="form-control" name="rujuk_internal_pemeriksaan" placeholder="Lakukan Pemeriksaan"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Petugas</label>
+                            <div class="col-sm-8">
+                                <select class="form-control rujuk_internal_petugas" name="rujuk_internal_petugas">
+                                    @foreach ($rujuk_internal_petugas as $i)
+                                        <option value="{{ $i->id }}">{{ $i->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!--button type="submit" class="btn btn-primary">Save</button-->
+                <button type="button" id="" class="btn btn-success">Simpan & Cetak</button>
+                <button type="button" id="btn_simpan_rujuk_internal" class="btn btn-primary">Simpan Rujuk</button>
+            </div>
+            {{-- </form> --}}
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="modal_tambah_labo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -334,18 +449,18 @@
                     <input type="hidden" name="lab_id_tindakan">
                     <input type="hidden" name="lab_id_permintaan">
                     <div class="card-body">
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="lab_no_registrasi" disabled placeholder="No. Registrasi">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Tanggal</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 col-form-label  text-secondary">Tanggal</label>
+                            <div class="col-sm-10">
                                 <div class="input-group date">
                                     {{-- <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}" readonly> --}}
-                                    <input type="text" class="form-control" id="lab_tgl_kunjungan" disabled placeholder="Tgl Kunjungan">
+                                    <input type="text" class="form-control" name="tgl_registrasi" readonly>
                                         {{-- <div class="input-group-append">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div> --}}
@@ -353,49 +468,38 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No Rekam Medis</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="lab_no_rekam_medis" disabled placeholder="No. Rekam Medis">
+                            <label class="col-sm-2 col-form-label text-secondary">No Rekam Medis</label>
+                            <div class="col">
+                                <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
+                                    <option value="0" selected>Cari No. Rekam Medis</option>
+                                {{-- @foreach ($pasien as $i)
+                                    <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>
+                                @endforeach --}}
+                                </select>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Nama Pasien</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 col-form-label text-secondary">Tindakan</label>
+                            <div class="col">
                                 <input type="text" class="form-control" id="lab_nama_pasien" disabled placeholder="Nama Pasien">
                                 <input type="hidden" class="form-" name="id_pasien">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Usia</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="lab_usia" disabled placeholder="Usia">
-                                <input type="hidden" class="form-" name="usia_pasien">
+                            <label class="col-sm-2 col-form-label  text-secondary">Dokter</label>
+                            <div class="col">
+                                <select class="form-control labo_dokter_pengirim" name="labo_dokter_pengirim">
+                                    <option value="0" selected>Cari Dokter</option>
+                                </select>
+                            </div>
+                            <label class="col-sm-2 col-form-label  text-secondary">Petugas</label>
+                            <div class="col">
+                                <select class="form-control labo_permintaan_petugas" name="labo_permintaan_petugas">
+                                    <option value="0" selected>Cari Petugas</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Jenis Kelamin</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="lab_jenis_kelamin" disabled placeholder="Jenis Kelamin">
-                                <input type="hidden" class="form-" name="jk_pasien">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Unit</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="lab_unit" disabled placeholder="Unit">
-                                <input type="hidden" class="form-" name="unit">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Dokter Pengirim</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="lab_dokter" disabled placeholder="Dokter Pengirim">
-                                <input type="hidden" class="form-" name="dokter">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Pemeriksaan yang diinginkan</label>
-                            <div class="col-sm-8">
+                            <label class="col-sm-2 col-form-label  text-secondary">Pemeriksaan</label>
+                            <div class="col-sm-10">
                                 <select class="form-control select-cari-modal" name="lab_pemeriksaan" id="pemeriksaan">
                                     <option value="0" selected>Pilih</option>
                                     {{-- @foreach ($jenis as $i)
@@ -405,15 +509,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Keterangan</label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="lab_keterangan" placeholder="Keterangan"></textarea>
+                            <div class="col">
+                                <button type="button"  class="btn btn-success btn-sm" id="tambah_pemeriksaan">+</button>
+                                <button type="button"  class="btn btn-warning btn-sm" id="kurang_pemeriksaan">-</button>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Petugas</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="lab_petugas" placeholder="Petugas">
+                            <label class="col-sm-2 col-form-label  text-secondary">Keterangan</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
                             </div>
                         </div>
                     </div>
@@ -422,7 +526,42 @@
             <div class="modal-footer">
                 <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="button" id="btn_simpan_lab" class="btn btn-primary">Save LAB</button>
+                <button type="button" id="btn_simpan_lab" class="btn btn-primary">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_pilih_rujukan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Rujukan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="form_pilih_rujukan">
+                @csrf
+                    <input type="hidden" id="id_pilih_rujukan">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-secondary">Pilih Rujukan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select_pilih_rujukan" name="pilih_rujukan" id="pilih_rujukan">
+                                    <option value="internal" selected>Rujukan Internal</option>
+                                    <option value="eksternal">Rujukan Eksternal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!--button type="submit" class="btn btn-primary">Save</button-->
+                <button type="button" id="btn_pilih_rujukan" class="btn btn-primary">Pilih</button>
             </div>
             </form>
         </div>
@@ -430,316 +569,6 @@
 </div>
 
 
-<script type="text/javascript">
-$(document).ready(function () {
-    $("#toket").hide();
-    $("#modal_tambah_data").on("hidden.bs.modal", function(){
-        $(this).find("input,textarea").val('').end().find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
-        $(".select-cari-modal").val(0).trigger('change') ;
-    });
-    //MENAMPILKAN DATA DENGAN DATATABLES
-    var tb = $('#tabel_registrasi_pasien').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ url('tindakan/tindakan-pasien/get_data') }}",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'tgl_registrasi', name: 'tgl_registrasi'},
-            {data: 'no_registrasi', name: 'no_registrasi'},
-            {data: 'no_redis', name: 'no_redis'},
-            {data: 'nama_pasien', name: 'nama_pasien'},
-            {data: 'keluhan', name: 'keluhan'},
-            {data: 'nama_poli', name: 'nama_poli'},
-            // {data: 'nama_dokter', name: 'nama_dokter'},
-            // {data: 'anamnesis', name: 'anamnesis'},
-            // {data: 'nama_pemeriksaan', name: 'nama_pemeriksaan'},
-            // {data: 'nama_diagnosa', name: 'nama_diagnosa'},
-            // {data: 'nama_obat', name: 'nama_obat'},
-            {data: 'action', name: 'action', orderable: true, searchable: true
-            },
-        ],
-        columnDefs: [
-            { className: 'text-right', targets: [] },
-            { className: 'text-center', targets: [7] },
-            { width:100, targets:[7]},
-	    ],
-
-    });
-
-    // var tb2 = $('#tabel_permintaan_lab').DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     ajax: "{{ url('tindakan/tindakan-pasien/get_data_lab') }}",
-    //     columns: [
-    //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-    //         {data: 'nama_pasien', name: 'nama_pasien'},
-    //         {data: 'action', name: 'action', orderable: true, searchable: true
-    //         },
-    //     ],
-    //     // columnDefs: [
-    //     //     { className: 'text-right', targets: [] },
-    //     //     { className: 'text-center', targets: [7] },
-    //     //     { width:100, targets:[7]},
-	//     // ],
-
-    // });
-    $('#id_no_registrasi').on('change', function() {
-        if ( this.value > 0){
-            var id = $('[name=no_registrasi_tambah]').val();
-            $("#formalitasajalah").show();
-            $("#toket").show();
-
-            $.get("{{ url('tindakan/tindakan-pasien/get_data_pasien') }}"+'/'+id, function (data) {
-                $("#modal_tambah_data").modal("show");
-                $('#tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
-                $('#nama_pasien').html(data.nama_pasien);
-                $('#no_redis').html(data.no_redis);
-                $('#nama_unit').html(data.nama_unit);
-            })
-        }
-        else{
-            $("#formalitasajalah").hide();
-            $("#toket").hide();
-        }
-    });
-    //SHOW MODAL/FORM
-    $("#btn_tambah").click(function(){
-        $("#modal_tambah_data").modal("show");
-        $("#div_no_regis").show();
-        $("#formalitasajalah").hide();
-    })
-    $('body').on('click', '#btn_rujuk', function () {
-        $("#modal_tambah_rujukan").modal("show");
-        var id = $(this).data('id');
-        $.get("{{ url('tindakan/tindakan-pasien/rujuk') }}"+'/'+id, function (data) {
-            $("#modal_tambah_rujuk").modal("show");
-            $('[name=rujuk_id_tindakan]').val(data.id_tindakan);
-            $('[name=rujuk_id_rujukan]').val(data.id_rujukan);
-            $('[name=rujuk_no_rujukan]').val(no_regisrujuk(data.no_registrasi));
-            $('#rujuk_no_rekam_medis').val(data.no_rekam_medis);
-            $('#rujuk_no_registrasi').val(data.no_registrasi);
-            $('#rujuk_anamnesis').val(data.anamnesis);
-            $('#rujuk_usia').val(umur(data.tgl_lahir));
-            $('#rujuk_diagnosa').val(data.nama_diagnosa);
-            $('#rujuk_obat').val(data.nama_obat);
-            $('#rujuk_nama_pasien').val(data.nama_pasien);
-            $('#rujuk_jenis_kelamin').val(data.jenis_kelamin);
-            $('#rujuk_kasta').val(data.kasta);
-        });
-    })
-
-    $('body').on('click', '#btn_lab', function () {
-        $("#modal_tambah_labo").modal("show");
-        var id = $(this).data('id');
-        $.get("{{ url('tindakan/tindakan-pasien/lab') }}"+'/'+id, function (data) {
-            $("#modal_tambah_lab").modal("show");
-            $('[name=lab_id_tindakan]').val(data.id_tindakan);
-            $('[name=lab_id_permintaan]').val(data.id_permintaan);
-            $('#lab_no_registrasi').val(data.no_registrasi);
-            $('#lab_tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
-            $('#lab_no_rekam_medis').val(data.no_rekam_medis);
-            $('#lab_nama_pasien').val(data.nama_pasien);
-            $('#lab_usia').val(umur(data.tgl_lahir));
-            $('#lab_jenis_kelamin').val(data.jenis_kelamin);
-            $('#lab_unit').val(data.nama_unit);
-            $('#lab_dokter').val(data.nama_dokter);
-        });
-    })
-
-    //ShOW MODAL/FORM DENGAN GETTING DATA BERDASARKAN ID
-    $('body').on('click', '#btn_edit', function () {
-        var id = $(this).data('id');
-        $("#toket").show();
-        $("#div_no_regis").hide();
-        $("#formalitasajalah").hide();
-
-        $.get("{{ url('tindakan/tindakan-pasien/edit') }}"+'/'+id, function (data) {
-            $("#modal_tambah_data").modal("show");
-            $('#tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
-            $('#nama_pasien').html(data.nama_pasien);
-            $('#no_redis').html(data.no_redis);
-            $('#nama_unit').html(data.nama_unit);
-            $('[name=id]').val(data.id);
-            $('[name=no_registrasi_edit]').val(data.id_registrasi);
-            $('[name=dokter]').val(data.id_dokter).trigger('change');
-            $('[name=anamnesis]').val(data.anamnesis);
-            $('[name=tindakan]').val(data.id_pemeriksaan).trigger('change');
-            $('[name=diagnosa]').val(data.id_diagnosa).trigger('change');
-            $('[name=obat]').val(data.id_obat).trigger('change');
-        });
-    });
-
-    //MELAKUKAN CONTROLLER SIMPAN
-    $("#btn_simpan").click(function(){
-        $.ajax({
-            url: "{{ url('tindakan/tindakan-pasien/simpan')}} ",
-            type:'POST',
-            data: $("#form_tambah").serialize(),
-            headers : {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(respon){
-				if(respon.status == 1 || respon.status == "1"){
-					$("#modal_tambah_data").modal('hide');
-                    Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Data berhasil diperbarui.',
-                        type: "success"
-                    }).then((result) => {
-                        tb.ajax.reload();
-                    })
-                }else{
-                    $("#modal_tambah_data").modal('hide');
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: 'Data gagal diperbarui.',
-                        type: "error"
-                    }).then((result) => {
-                        tb.ajax.reload();
-                    })
-				}
-			}
-
-        });
-        // location.reload();
-    })
-
-    $('body').on('click', '#btn_edit_rujuk', function () {
-        var id = $(this).data('id');
-
-        $.get("{{ url('tindakan/tindakan-pasien/editrujuk') }}"+'/'+id, function (data) {
-            $("#modal_tambah_rujukan").modal("show");
-            $('[name=rujuk_id_tindakan]').val(data.id_tindakan);
-            $('[name=rujuk_id_rujukan]').val(data.id_rujukan);
-            $('[name=rujuk_no_rujukan]').val(data.no_rujuk);
-            $('[name=rujuk_poli]').val(data.poli_tujuan);
-            $('[name=rujuk_rumah_sakit]').val(data.rs_tujuan);
-            $('[name=rujuk_alasan]').val(data.alasan);
-            $('[name=rujuk_kriteria]').val(data.kriteria).trigger('change');
-            $('#rujuk_no_rekam_medis').val(data.no_rekam_medis);
-            $('#rujuk_no_registrasi').val(data.no_registrasi);
-            $('#rujuk_anamnesis').val(data.anamnesis);
-            $('#rujuk_usia').val(umur(data.tgl_lahir));
-            $('#rujuk_diagnosa').val(data.nama_diagnosa);
-            $('#rujuk_obat').val(data.nama_obat);
-            $('#rujuk_nama_pasien').val(data.nama_pasien);
-            $('#rujuk_jenis_kelamin').val(data.jenis_kelamin);
-            $('#rujuk_kasta').val(data.kasta);
-        });
-    })
-
-    $("#btn_simpan_rujuk").click(function(){
-        $.ajax({
-            url: "{{ url('tindakan/tindakan-pasien/simpanrujuk')}} ",
-            type:'POST',
-            data: $("#form_rujuk").serialize(),
-            headers : {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(respon){
-				if(respon.status == 1 || respon.status == "1"){
-					$("#modal_tambah_rujukan").modal('hide');
-                    Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Data berhasil diperbarui.',
-                        type: "success"
-                    }).then((result) => {
-                        tb.ajax.reload();
-                    })
-                }else{
-                    $("#modal_tambah_rujukan").modal('hide');
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: 'Data gagal diperbarui.',
-                        type: "error"
-                    }).then((result) => {
-                        tb.ajax.reload();
-                    })
-				}
-			}
-
-        });
-    })
-
-    $('body').on('click', '#btn_edit_lab', function () {
-        var id = $(this).data('id');
-
-        $.get("{{ url('tindakan/tindakan-pasien/editlab') }}"+'/'+id, function (data) {
-            $("#modal_tambah_labo").modal("show");
-            $('[name=lab_id_tindakan]').val(data.id_tindakan);
-            $('[name=lab_id_permintaan]').val(data.id_permintaan);
-            $('[name=lab_pemeriksaan]').val(data.nama_pemeriksaan);
-            $('[name=lab_keterangan]').val(data.keterangan);
-            $('[name=lab_petugas]').val(data.nama_petugas);
-            $('#lab_no_registrasi').val(data.no_registrasi);
-            $('#lab_tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
-            $('#lab_no_rekam_medis').val(data.no_rekam_medis);
-            $('#lab_nama_pasien').val(data.nama_pasien);
-            $('#lab_usia').val(umur(data.tgl_lahir));
-            $('#lab_jenis_kelamin').val(data.jenis_kelamin);
-            $('#lab_unit').val(data.nama_unit);
-            $('#lab_dokter').val(data.nama_dokter);
-        });
-    })
-
-    $("#btn_simpan_lab").click(function(){
-        $.ajax({
-            url: "{{ url('tindakan/tindakan-pasien/simpanlab')}} ",
-            type:'POST',
-            data: $("#form_lab").serialize(),
-            headers : {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(respon){
-				if(respon.status == 1 || respon.status == "1"){
-					$("#modal_tambah_labo").modal('hide');
-                    Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Data berhasil diperbarui.',
-                        type: "success"
-                    }).then((result) => {
-                        tb.ajax.reload();
-                    })
-                }else{
-                    $("#modal_tambah_labo").modal('hide');
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: 'Data gagal diperbarui.',
-                        type: "error"
-                    }).then((result) => {
-                        tb.ajax.reload();
-                    })
-				}
-			}
-
-        });
-    })
-
-    $('body').on('click', '#btn_hapus', function () {
-        Swal.fire({
-        title: 'Data akan dihapus !',
-        text: "Data yang telah dihapus tidak dapat dikembalikan",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var id = $(this).data('id');
-                $.get("{{ url('tindakan/tindakan-pasien/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
-            }
-        })
-    });
-
-});
-
-</script>
+@include('tindakan.tindakan-pasien-script')
 
 @endsection

@@ -12,6 +12,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+        @if (Auth::user()->role == "admin")
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -87,58 +88,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                  <p>LOKET</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('pasien/registrasi-pasien')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Registrasi Pasien</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('pasien/data-pasien')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Pasien</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                  <p>RUANG BEROBAT</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('tindakan/tindakan-pasien')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Tindakan Pasien</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
+
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
@@ -148,18 +99,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('tindakan/request-ceklab')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Permintaan Cek Laboratorium</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          </li> --}}
+
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -175,7 +116,7 @@
                 <!--a href="./index.html" class="nav-link active"-->
                 <a href="{{url('laboratorium/pemeriksaan-lab')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Pemeriksaan Lab</p>
+                  <p>Tindakan Cek Laboratorium</p>
                 </a>
               </li>
             </ul>
@@ -260,7 +201,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
@@ -268,8 +209,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item menu-open">
+          </li> --}}
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
@@ -389,7 +330,67 @@
                 </a>
               </li>
             </ul>
+          </li> --}}
+          @elseif (Auth::user()->role == "admin_bagian_poli")
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <p>RUANG BEROBAT POLI</p>
+                </a>
+              </li>
+            </ul>
           </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('tindakan/tindakan-pasien')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Tindakan Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {{-- <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('tindakan/request-ceklab')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Permintaan Cek Laboratorium</p>
+                </a>
+              </li>
+            </ul>
+          </li> --}}
+
+          @elseif (Auth::user()->role == "admin_registasi")
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <p>REGISTRASI</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('pasien/registrasi-pasien')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Registrasi Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('pasien/data-pasien')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

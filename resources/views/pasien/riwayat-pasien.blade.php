@@ -43,11 +43,11 @@
                                     <tr>
                                         <th>NO</th>
                                         <th>TGL-REG</th>
-                                        <th>NO-REG</th>
-                                        <th>NAMA PASIEN</th>
-                                        <th>POLI</th>
-                                        <th>DOKTER</th>
+                                        <th>DIAGNOSA</th>
+                                        <th>PEMERIKSAAN</th>
                                         <th>ANAMNESIS</th>
+                                        <th>TERAPI OBAT</th>
+                                        <th>DOKTER</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,9 +109,9 @@ $(document).ready(function () {
             {data: 'tgl_kunjungan', name: 'tgl_kunjungan'},
             {data: 'diagnosa', name: 'diagnosa'},
             {data: 'nama_pemeriksaan', name: 'nama_pemeriksaan'},
+            {data: 'anamnesis', name: 'anamnesis'},
             {data: 'nama_obat', name: 'nama_obat'},
             {data: 'nama_dokter', name: 'nama_dokter'},
-            {data: 'anamnesis', name: 'anamnesis'},
         ],
         // "buttons": ['pdf']
         buttons : [

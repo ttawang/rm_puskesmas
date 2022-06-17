@@ -99,12 +99,33 @@
                                 <input type="text" class="form-control" name="email" placeholder="Email">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Jabatan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select-cari-modal" name="jabatan">
+                                    <option selected>Pilih</option>
+                                    @foreach ($jabatan as $j)
+                                        <option value="{{ $j->id }}">{{ $j->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label  text-secondary">Status Kepegawaian</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select-cari-modal" name="statkepegawaian">
+                                    <option selected>Pilih</option>
+                                    @foreach ($statkepegawaian as $sk)
+                                        <option value="{{ $sk->id }}">{{ $sk->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 <!--/form-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!--button type="submit" class="btn btn-primary">Save</button-->
                 <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
             </div>
             </form>
@@ -148,6 +169,8 @@ $(document).ready(function () {
             $('[name=no_hp]').val(data.telephone);
             $('[name=alamat]').val(data.alamat);
             $('[name=email]').val(data.email);
+            $('[name=jabatan]').val(data.jabatan).trigger('change');
+            $('[name=statkepegawaian]').val(data.statkepegawaian).trigger('change');
         })
     });
 

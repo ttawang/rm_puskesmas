@@ -18,6 +18,7 @@ use App\Http\Controllers\SatuanObatController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RequestCeklabController;
+use App\Http\Controllers\LaboratoriumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,36 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('master/data-obat/simpan', [ObatController::class, 'simpan']);
         Route::get('master/data-obat/edit/{id}', [ObatController::class, 'edit']);
         Route::get('master/data-obat/hapus/{id}', [ObatController::class, 'hapus']);
+        Route::get('master/data-user', [UserController::class, 'index']);
+        Route::get('master/data-user/get_data', [UserController::class, 'get_data']);
+        Route::post('master/data-user/simpan', [UserController::class, 'simpan']);
+        Route::get('master/data-user/edit/{id}', [UserController::class, 'edit']);
+        Route::get('master/data-user/hapus/{id}', [UserController::class, 'hapus']);
+
+        Route::get('tindakan/medical-record', [MedicalRecordController::class, 'index']);
+        Route::get('tindakan/medical-record/get_data', [MedicalRecordController::class, 'get_data']);
+        Route::post('tindakan/medical-record/simpan', [MedicalRecordController::class, 'simpan']);
+        Route::get('tindakan/medical-record/edit/{id}', [MedicalRecordController::class, 'edit']);
+        Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
+        Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
+
+        Route::get('tindakan/request-ceklab', [RequestCeklabController::class, 'index']);
+        Route::get('tindakan/request-ceklab/get_data', [RequestCeklabController::class, 'get_data']);
+        Route::post('tindakan/request-ceklab/simpan', [RequestCeklabController::class, 'simpan']);
+        Route::get('tindakan/request-ceklab/edit/{id}', [RequestCeklabController::class, 'edit']);
+        Route::get('tindakan/request-ceklab/hapus/{id}', [RequestCeklabController::class, 'hapus']);
+        Route::get('tindakan/request-ceklab/get_norekammedis/{id}', [RequestCeklabController::class, 'get_norekammedis']);
+
+        Route::get('laboratorium/pemeriksaan-lab', [LaboratoriumController::class, 'index']);
+        Route::get('laboratorium/pemeriksaan-lab/get_data', [LaboratoriumController::class, 'get_data']);
+        Route::post('laboratorium/pemeriksaan-lab/simpan', [LaboratoriumController::class, 'simpan']);
+        Route::get('laboratorium/pemeriksaan-lab/edit/{id}', [LaboratoriumController::class, 'edit']);
+        Route::get('laboratorium/pemeriksaan-lab/hapus/{id}', [LaboratoriumController::class, 'hapus']);
+
+
+        Route::get('laporan/laporan', [LaporanController::class, 'index']);
+    });
+    Route::middleware(['admin_registrasi'])->group(function () {
         Route::get('pasien/data-pasien', [DataPasienController::class, 'index']);
         Route::get('pasien/data-pasien/get_data', [DataPasienController::class, 'get_data']);
         Route::post('pasien/data-pasien/simpan', [DataPasienController::class, 'simpan']);
@@ -100,6 +131,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('pasien/registrasi-pasien/edit/{id}', [RegistrasiPasienController::class, 'edit']);
         Route::get('pasien/registrasi-pasien/get_norekammedis/{id}', [RegistrasiPasienController::class, 'get_norekammedis']);
         Route::get('pasien/registrasi-pasien/hapus/{id}', [RegistrasiPasienController::class, 'hapus']);
+
+    });
+    Route::middleware(['admin_bagian_poli'])->group(function () {
         Route::get('tindakan/tindakan-pasien', [TindakanPasienController::class, 'index']);
         Route::get('tindakan/tindakan-pasien/get_data', [TindakanPasienController::class, 'get_data']);
         Route::get('tindakan/tindakan-pasien/get_data_pasien/{id}', [TindakanPasienController::class, 'get_data_pasien']);
@@ -107,47 +141,24 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/tindakan-pasien/edit/{id}', [TindakanPasienController::class, 'edit']);
         Route::get('tindakan/tindakan-pasien/hapus/{id}', [TindakanPasienController::class, 'hapus']);
         Route::get('tindakan/tindakan-pasien/rujuk/{id}', [TindakanPasienController::class, 'rujuk']);
-        Route::get('tindakan/tindakan-pasien/editrujuk/{id}', [TindakanPasienController::class, 'editrujuk']);
+        Route::get('tindakan/tindakan-pasien/editrujuk/{id}/{tipe}', [TindakanPasienController::class, 'editrujuk']);
         Route::post('tindakan/tindakan-pasien/simpanrujuk', [TindakanPasienController::class, 'simpanrujuk']);
         Route::get('tindakan/tindakan-pasien/get_data_lab/{id}', [TindakanPasienController::class, 'get_data_lab']);
         Route::get('tindakan/tindakan-pasien/lab/{id}', [TindakanPasienController::class, 'lab']);
         Route::get('tindakan/tindakan-pasien/editlab/{id}', [TindakanPasienController::class, 'editlab']);
         Route::post('tindakan/tindakan-pasien/simpanlab', [TindakanPasienController::class, 'simpanlab']);
-        Route::get('tindakan/medical-record', [MedicalRecordController::class, 'index']);
-        Route::get('tindakan/medical-record/get_data', [MedicalRecordController::class, 'get_data']);
-        Route::post('tindakan/medical-record/simpan', [MedicalRecordController::class, 'simpan']);
-        Route::get('tindakan/medical-record/edit/{id}', [MedicalRecordController::class, 'edit']);
-        Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
-        Route::get('tindakan/medical-record/hapus/{id}', [MedicalRecordController::class, 'hapus']);
-        Route::get('laporan/laporan', [LaporanController::class, 'index']);
-        Route::get('master/data-user', [UserController::class, 'index']);
-        Route::get('master/data-user/get_data', [UserController::class, 'get_data']);
-        Route::post('master/data-user/simpan', [UserController::class, 'simpan']);
-        Route::get('master/data-user/edit/{id}', [UserController::class, 'edit']);
-        Route::get('master/data-user/hapus/{id}', [UserController::class, 'hapus']);
-        Route::get('tindakan/request-ceklab', [RequestCeklabController::class, 'index']);
-        Route::get('tindakan/request-ceklab/get_data', [RequestCeklabController::class, 'get_data']);
-        Route::post('tindakan/request-ceklab/simpan', [RequestCeklabController::class, 'simpan']);
-        Route::get('tindakan/request-ceklab/edit/{id}', [RequestCeklabController::class, 'edit']);
-        Route::get('tindakan/request-ceklab/hapus/{id}', [RequestCeklabController::class, 'hapus']);
-        Route::get('tindakan/request-ceklab/get_norekammedis/{id}', [RequestCeklabController::class, 'get_norekammedis']);
+        Route::get('tindakan/tindakan-pasien/rujuk_internal/{id}', [TindakanPasienController::class, 'rujuk_internal']);
+        Route::post('tindakan/tindakan-pasien/simpanrujukinternal', [TindakanPasienController::class, 'simpanrujukinternal']);
+        Route::post('tindakan/tindakan-pasien/editrujukinternal', [TindakanPasienController::class, 'editrujukinternal']);
 
     });
-    Route::middleware(['admin_registrasi'])->group(function () {
-
-    });
-    Route::middleware(['admin_bagian_poli'])->group(function () {
-
-    });
-    Route::middleware(['admin_unit_penunjang'])->group(function () {
+    Route::middleware(['admin_laboratorium'])->group(function () {
 
     });
     Route::middleware(['admin_farmasi_obat'])->group(function () {
 
     });
-    Route::middleware(['admin_pembayaran'])->group(function () {
 
-    });
     Route::middleware(['kepala_puskesmas'])->group(function () {
 
     });
