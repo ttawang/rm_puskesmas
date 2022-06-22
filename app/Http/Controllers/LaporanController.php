@@ -7,6 +7,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Exception;
+use PDF;
 
 class LaporanController extends Controller
 {
@@ -15,39 +16,21 @@ class LaporanController extends Controller
     {
         $data['judul'] = 'Laporan';
         return view('laporan.laporan',$data);
-
-        // $data['judul'] = 'Laporan';
-        // return view('laporan.laporankunjungan', $data);
-
-        // $data['judul'] = 'Laporan';
-        // return view('laporan.laporan-hasilpemeriksaan', $data);
-
-        // $data['judul'] = 'Laporan';
-        // return view('laporan.laporan-obat', $data);
-
-        // $data['judul'] = 'Laporan';
-        // return view('laporan-sepuluhbesar', $data);
-
-        // $data['judul'] = 'Laporan';
-        // return view('laporan.laporan-pemeriksaanpenunjang', $data);
     }
-
-    public function get_data(Request $request)
+    public function cetak1($tgl1, $tgl2)
     {
 
+        $data = [
+            'nama' => 'titan',
+            'nama_perusahaan' => 'tawang',
+            'nilai' => 'ilal',
+            'tgl_mulai' => $tgl1,
+            'tgl_selesai' => $tgl2
+
+        ];
+        $pdf = PDF::loadView('laporan.cetak1',['data'=>$data]);
+
+        return $pdf->stream('Judul Cetak1 - cetak1'.'.pdf');
     }
 
-    public function simpan(Request $request)
-    {
-
-    }
-
-    public function edit($id){
-
-    }
-
-    public function hapus($id){
-
-
-    }
 }

@@ -12,7 +12,7 @@
                         <div class="card-header">
                         <h3 class="card-title font-weight-bold">SEPULUH BESAR PENYAKIT</h3>
                         </div>
-                        <form>
+                        <form id="form_cetak1">
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="form-group row">
@@ -20,7 +20,7 @@
                                     <div class="col-sm-8">
                                         <div class="input-group date">
                                             {{-- <input type="text" class="form-control datetimepicker-input" name="tgl_lahir" value="{{date('d/m/Y')}}"> --}}
-                                            <input type="text" class="form-control" name="tgl_awal">
+                                            <input type="date" class="form-control" name="tgl_awal">
                                                 {{-- <div class="input-group-append">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div> --}}
@@ -32,7 +32,7 @@
                                     <div class="col-sm-8">
                                         <div class="input-group date">
                                             {{-- <input type="text" class="form-control datetimepicker-input" name="tgl_lahir" value="{{date('d/m/Y')}}"> --}}
-                                            <input type="text" class="form-control" name="tgl_akhir">
+                                            <input type="date" class="form-control" name="tgl_akhir">
                                                 {{-- <div class="input-group-append">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div> --}}
@@ -43,8 +43,8 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="modal-footer">
-                            <a href="{{url('laporan/laporan-sepuluhbesar')}}" type="button" class="btn btn-info">Lihat</a>
-                            <button type="button" class="btn btn-warning"><i class="fa fa-print"></i>  Cetak</button>
+                            <button type="button" id="lihat1" class="btn btn-info"><i class="fa fa-print"></i>  Lihat</button>
+                            <button type="button" id="cetak1" class="btn btn-warning"><i class="fa fa-print"></i>  Cetak</button>
                         </div>
                         </form>
                     </div>
@@ -200,4 +200,5 @@
     </div>
 </div>
 </div>
+@include('laporan.laporan-script')
 @endsection

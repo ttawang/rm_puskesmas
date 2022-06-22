@@ -116,6 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::get('laporan/laporan', [LaporanController::class, 'index']);
+        Route::get('laporan/cetak1/{tgl1}/{tgl2}', [LaporanController::class, 'cetak1']);
     });
     Route::middleware(['admin_registrasi'])->group(function () {
         Route::get('pasien/data-pasien', [DataPasienController::class, 'index']);

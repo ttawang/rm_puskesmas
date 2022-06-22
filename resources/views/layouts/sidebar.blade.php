@@ -331,7 +331,7 @@
               </li>
             </ul>
           </li> --}}
-          @elseif (Auth::user()->role == "admin_bagian_poli")
+        @elseif (Auth::user()->role == "admin_bagian_poli")
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -360,8 +360,7 @@
               </li>
             </ul>
           </li> --}}
-
-          @elseif (Auth::user()->role == "admin_registasi")
+        @elseif (Auth::user()->role == "admin_registrasi")
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -390,7 +389,7 @@
               </li>
             </ul>
           </li>
-          @endif
+        @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
