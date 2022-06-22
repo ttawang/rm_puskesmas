@@ -14,34 +14,95 @@ class LaboratoriumController extends Controller
     public function index()
     {
         $data['judul'] = 'Laboratorium';
+        $data['petugas'] = DB::table('users')->where('role','admin_laboratorium')->get();
 
         return view('laboratorium.pemeriksaan-lab',$data);
     }
 
     public function get_data(Request $request)
     {
-        $data = DB::table('tindakan_lab as tl')
-
-            ->select(DB::raw('
-                tl.*
-
-            '))
-            ->orderBy('tl.id','desc')->get();
+        $data = DB::table('request_lab as rl')
+        ->join('users as u','rl.id_user_petugas','u.id')
+        ->join('registrasi_pasien as rp','rl.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->selectRaw('
+            rl.id,
+            dp.kode_pasien as no_rekammedis,
+            dp.nama nama_pasien,
+            rl.tgl_request,
+            rl.keterangan,
+            rl.id_pemeriksaan
+        ')
+        ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('tgl_request', function($row){
+                    $tanggal = Carbon::createFromFormat('Y-m-d', $row->tgl_request)->format('d/m/Y');
 
+                    return $tanggal;
+                })
+                ->addColumn('pemeriksaan', function($row){
+                    if($row){
+                        $_d = explode(",",$row->id_pemeriksaan);
+                        $temp = [];
+                        foreach($_d as $i){
+                            $txt = DB::table('pemeriksaan')->where('id',$i)->first();
+                            $temp[] = $txt->nama;
+                        }
+                        $hasil = join(', ', $temp);
+
+                        return $hasil;
+                    }else{
+                        $hasil = '';
+
+                        return $hasil;
+                    }
+
+                })
+                ->addColumn('nilai', function($row){
+                    if($row){
+                        $_d = explode(",",$row->id_pemeriksaan);
+                        $temp = [];
+                        foreach($_d as $i){
+                            $txt = DB::table('pemeriksaan')->where('id',$i)->first();
+                            $temp[] = $txt->keterangan;
+                        }
+                        $hasil = join(', ', $temp);
+
+                        return $hasil;
+                    }else{
+                        $hasil = '';
+
+                        return $hasil;
+                    }
+
+                })
+                ->addColumn('hasil', function($row){
+                    $hasil = 'hasil';
+
+                    return $hasil;
+                })
+                ->addColumn('status', function($row){
+                    $hasil = 'status';
+
+                    return $hasil;
+                })
                 ->addColumn('action', function($row){
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
-                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Edit</button> <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'">Hapus</button>';
+                    $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>';
+                    $actionBtn .= '<button type="button" class="edit btn btn-info  btn-sm" id="btn_cetak" data-id="'.$row->id.'">Cetak</button>';
                     return $actionBtn;
+
+
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','pemeriksaan','tgl_request','nilai','hasil','status'])
                 ->make(true);
 
     }
 
     public function simpan(Request $request)
     {
+        dd($request->all());
         $id = $request->get('id');
         $data['hasil'] = $request->get('hasil');
 
@@ -67,21 +128,29 @@ class LaboratoriumController extends Controller
     }
 
     public function edit($id){
-        $data = DB::table('tindakan_lab as tl')
-        ->select(DB::raw('
-            tl.*
-
-        '))
-        ->where('tl.id',$id)->first();
+        $data = DB::table('request_lab as rl')
+        ->join('users as u','rl.id_user_petugas','u.id')
+        ->join('registrasi_pasien as rp','rl.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->join('dokter as d','d.id','rl.id_dokter')
+        ->selectRaw('
+            rl.id,
+            rl.tgl_request,
+            d.nama nama_dokter,
+            dp.nama nama_pasien,
+            dp.tgl_lahir
+        ')
+        ->where('rl.id',$id)
+        ->first();
 
         return response()->json($data);
 
     }
 
-    public function hapus($id){
-        $data = DB::table('tindakan_lab')->delete($id);
-        DB::commit();
-        return response()->json($data);
+    // public function hapus($id){
+    //     $data = DB::table('tindakan_lab')->delete($id);
+    //     DB::commit();
+    //     return response()->json($data);
 
-    }
+    // }
 }

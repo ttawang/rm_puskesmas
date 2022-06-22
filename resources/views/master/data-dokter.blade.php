@@ -24,7 +24,7 @@
                                     <th>P/L</th>
                                     <th>NO. HP</th>
                                     <th>SPESIALIS</th>
-                                    <th>ACTION</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>

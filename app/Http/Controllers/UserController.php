@@ -37,6 +37,9 @@ class UserController extends Controller
         $data['name'] = $request->get('nama');
         $data['email'] = $request->get('email');
         $data['role'] = $request->get('role');
+        $data['alamat'] = $request->get('alamat');
+        $data['no_hp'] = $request->get('no_hp');
+        $data['sub_role'] = $request->get('sub_role');
 
         DB::beginTransaction();
         try{

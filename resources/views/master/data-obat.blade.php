@@ -25,7 +25,7 @@
                                     <th>NAMA OBAT</th>
                                     <th>GOLONGAN</th>
                                     <th>SATUAN</th>
-                                    <th>ACTION</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>

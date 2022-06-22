@@ -13,17 +13,16 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <!--button class="btn btn-primary" id="tambah_data">Tambah</button-->
-                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button>
-                        <p> --}}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_tambah_data">Tambah</button>
+                        <p>
                         <table id="tabel_user" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
+                                    <th>NO</th>
+                                    <th>NAMA</th>
+                                    <th>EMAIL</th>
+                                    <th>ROLE</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,11 +87,11 @@
                             <div class="col-sm-8">
                                 <select class="form-control select-cari-modal" name="role">
                                     <option selected>Pilih</option>
-                                    <option value="MASTER">Master</option>
-                                    <option value="REGISTRASI">Registrasi</option>
-                                    <option value="POLI">Poli</option>
-                                    <option value="UNIT PENUNJANG">Penunjang</option>
-                                    <option value="KEPALA">Kepala</option>
+                                    <option value="admin">Master</option>
+                                    <option value="admin_bagian_poli">Registrasi</option>
+                                    <option value="admin_registrasi">Poli</option>
+                                    <option value="admin_laboratorium">laboratorium</option>
+                                    <option value="kepala_RM">Kepala RM</option>
                                 </select>
                             </div>
                         </div>
@@ -122,6 +121,7 @@ $(document).ready(function () {
             {data: 'name', name: 'nama'},
             {data: 'email', name: 'email'},
             {data: 'role', name: 'role'},
+            {data: 'action', name: 'action', orderable: true, searchable: true},
         ]
     });
 
@@ -137,6 +137,11 @@ $(document).ready(function () {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
             $('[name=nama]').val(data.name);
+            $('[name=email]').val(data.email);
+            $('[name=alamat]').val(data.alamat);
+            $('[name=no_hp]').val(data.no_hp);
+            $('[name=password]').val(data.password);
+            $('[name=role]').val(data.role);
         })
     });
 

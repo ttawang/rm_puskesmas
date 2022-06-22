@@ -135,12 +135,12 @@
               <li class="nav-item">
                 <a href="{{url('laporan/laporan')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Laporan Kunjungan Pasien</p>
+                  <p>Sensus Harian</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{url('laporan/laporan')}}" class="nav-link">
@@ -149,18 +149,18 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{url('laporan/laporan')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
-                  <p>Laporan Sepuluh Besar Penyakit</p>
+                  <p>Laporan</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{url('laporan/laporan')}}" class="nav-link">
@@ -169,7 +169,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">

@@ -22,12 +22,15 @@ class TindakanPasienController extends Controller
 
         $data['rujuk_internal_poli_tujuan'] = DB::table('unit')->where('id','!=',Auth::user()->sub_role)->get();
         $data['rujuk_internal_petugas'] = DB::table('users')->where('sub_role',Auth::user()->sub_role)->get();
+        $data['pemeriksaan'] = DB::table('pemeriksaan')->get();
         // $data['aturanpakai'] = DB::table('aturan_pakai')->get();
 
         $cek = DB::table('tindakan_pasien')->pluck('id_registrasi');
         $hari = Carbon::now()->toDateString();
 
-        $data['no_registrasi'] = DB::table('registrasi_pasien')->whereNotIn('id',$cek)->where('tgl_kunjungan',$hari)->where('id_unit',Auth::user()->sub_role)->get();
+        $data['no_registrasi'] = DB::table('registrasi_pasien')->whereNotIn('id',$cek)->where('tgl_kunjungan',$hari)->where('id_unit',Auth::user()->sub_role)->orderBy('id','asc')->get();
+        # $data['reg_lab'] = DB::table('registrasi_pasien')->whereIn('id',$cek)->where('tgl_kunjungan',$hari)->where('id_unit',Auth::user()->sub_role)->get();
+        $data['reg_lab'] = DB::table('registrasi_pasien')->whereIn('id',$cek)->where('id_unit',Auth::user()->sub_role)->get();
 
         return view('tindakan.tindakan-pasien',$data);
     }
@@ -74,17 +77,18 @@ class TindakanPasienController extends Controller
                 }
 
                 if($cek < 1){
-                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Status Tindakan"><i class="fas fa-info-circle "></i></button>';
+                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Tindakan"><i class="fas fa-info-circle "></i></button>';
                     $actionBtn .= '<button type="button" class="edit btn btn-success btn-sm" id="btn_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Rujuk Pasien"><i class="fas fa-ambulance"></i></button>';
-                    $actionBtn .= '<button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Batal Rujukan"><i class="fa fa-trash"></i></button>';
+                    // $actionBtn .= '<button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Batal Rujukan"><i class="fa fa-trash"></i></button>';
                 }else{
-                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Status TIndakan"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'" data-tipe="'.$tipe_rujukan.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Rujukan"><i class="fa fa-edit"></i></button>
+                    $actionBtn = '<button type="button" class="edit btn btn-info btn-sm" id="btn_edit" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Tindakan"><i class="fas fa-info-circle"></i></button>
+                    <button type="button" class="edit btn btn-warning btn-sm" id="btn_edit_rujuk" data-id="'.$row->id.'" data-tipe="'.$tipe_rujukan.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Rujukan"><i class="fas fa-info-circle"></i></button>
                     <button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus_rujuk" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Batal Rujukan"><i class="fa fa-trash"></i></button>';
                 }
 
                 return $actionBtn;
             })
+
             ->rawColumns(['action','tgl_registrasi'])
             ->make(true);
     }
@@ -159,7 +163,7 @@ class TindakanPasienController extends Controller
 
         return response()->json($data);
     }
-    public function hapus($id){
+    public function hapusrujuk($id){
         $data = DB::table('tindakan_pasien')->delete($id);
         DB::commit();
         return response()->json($data);
@@ -363,71 +367,105 @@ class TindakanPasienController extends Controller
 
     }
 
-    public function get_data_lab(Request $request)
-    {
+    public function hapus($id){
+        $data = DB::table('tindakan_pasien')->delete($id);
+        DB::commit();
+        return response()->json($data);
 
     }
 
-    public function lab($id)
+    public function get_data_lab(Request $request)
     {
-        $data = DB::table('tindakan_pasien as tp')
+        $data = DB::table('request_lab as rl')
+        ->join('users as u','rl.id_user_petugas','u.id')
+        ->join('registrasi_pasien as rp','rl.id_registrasi','rp.id')
+        ->join('data_pasien as dp','rp.id_pasien','dp.id')
+        ->selectRaw('
+            rl.id,
+            dp.kode_pasien as no_rekammedis,
+            dp.nama nama_pasien,
+            rl.tgl_request,
+            rl.keterangan,
+            rl.id_pemeriksaan
+        ')
+        ->where('u.sub_role',Auth::user()->sub_role)
+        ->get();
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('tgl_request', function($row){
+                $tanggal = Carbon::createFromFormat('Y-m-d', $row->tgl_request)->format('d/m/Y');
 
-        ->select(DB::raw('
-            tp.*
-        '))
-        ->where('tp.id',$id)
-        ->first();
+                return $tanggal;
+            })
+            ->addColumn('pemeriksaan', function($row){
+                if($row){
+                    $_d = explode(",",$row->id_pemeriksaan);
+                    $temp = [];
+                    foreach($_d as $i){
+                        $txt = DB::table('pemeriksaan')->where('id',$i)->first();
+                        $temp[] = $txt->nama;
+                    }
+                    $hasil = join(', ', $temp);
 
+                    return $hasil;
+                }else{
+                    $hasil = '';
 
-        return response()->json($data);
+                    return $hasil;
+                }
+
+            })
+            ->addColumn('action', function($row){
+
+                // $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit_req_lab" data-id="'.$row->id.'">Edit</button>';
+                $actionBtn = '<button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus_req_lab" data-id="'.$row->id.'">Batalkan</button>';
+
+                return $actionBtn;
+            })
+            ->rawColumns(['action','pemeriksaan','tgl_request'])
+            ->make(true);
     }
 
     public function editlab($id)
     {
-        $data = DB::table('tindakan_pasien as tp')
-        ->join('registrasi_pasien as rp','tp.id_registrasi','rp.id')
+        $data = DB::table('request_lab as rl')
+        ->join('users as u','rl.id_user_petugas','u.id')
+        ->join('registrasi_pasien as rp','rl.id_registrasi','rp.id')
         ->join('data_pasien as dp','rp.id_pasien','dp.id')
-        ->join('dokter as d','tp.id_dokter','d.id')
-        ->join('unit as u','rp.id_unit','u.id')
-        ->leftJoin('req_ceklab as rc','tp.id','rc.id_tindakan')
-        ->select(DB::raw('
-            tp.id id_tindakan,
-            rp.no_registrasi,
-            rp.tgl_kunjungan,
-            dp.kode_pasien as no_rekam_medis,
-            dp.nama as nama_pasien,
-            dp.tgl_lahir,
-            dp.jenis_kelamin,
-            u.nama as nama_unit,
-            d.nama as nama_dokter,
-            rc.id as id_permintaan,
-            rc.keterangan
-        '))
-        ->where('tp.id',$id)
+        ->selectRaw('
+            rl.id,
+            dp.kode_pasien as no_rekammedis,
+            dp.nama nama_pasien,
+            rl.tgl_request,
+            rl.keterangan,
+            rl.id_pemeriksaan
+        ')
+        ->where('rl.id',$id)
         ->first();
-
 
         return response()->json($data);
     }
 
     public function simpanlab(Request $request)
     {
-        $id = $request->get('lab_id_permintaan');
-        $data['id_tindakan'] = $request->get('lab_id_tindakan');
-        $data['keterangan'] = $request->get('lab_keterangan');
-        $data['pemeriksaan'] = $request->get('lab_pemeriksaan');
-        $data['petugas'] = $request->get('petugas');
+        $id = $request->get('lab_id_request');
+        $data['tgl_request'] = Carbon::createFromFormat('d/m/Y', $request->get('tgl_request'))->format('Y-m-d');
+        $data['id_registrasi'] = $request->get('lab_no_regis');
+        $data['id_pemeriksaan'] = join(',',$request->get('lab_pemeriksaan'));
+        $data['id_dokter'] = $request->get('lab_dokter');
+        $data['id_user_petugas'] = $request->get('lab_petugas');
+        $data['keterangan'] = $request->get('keterangan');
 
         DB::beginTransaction();
         try{
             if($id == '' || $id == null){
                 $data['created_at'] = Carbon::now();
                 $data['updated_at'] = Carbon::now();
-                DB::table('req_ceklab')->insert($data);
+                DB::table('request_lab')->insert($data);
                 $arr = ['status' => '1'];
             }else{
                 $data['updated_at'] = Carbon::now();
-                DB::table('req_ceklab')->where(array('id' => $id))->update($data);
+                DB::table('request_lab')->where(array('id' => $id))->update($data);
                 $arr = ['status' => '1'];
             }
             DB::commit();
@@ -438,6 +476,13 @@ class TindakanPasienController extends Controller
 		}
 
         return response()->json($arr);
+
+    }
+
+    public function batallab($id){
+        $data = DB::table('request_lab')->delete($id);
+        DB::commit();
+        return response()->json($data);
 
     }
 }

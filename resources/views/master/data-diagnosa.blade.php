@@ -24,7 +24,7 @@
                                     <th>KODE ICD</th>
                                     <th>NAMA</th>
                                     <th>DESKRIPSI</th>
-                                    <th>ACTION</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>

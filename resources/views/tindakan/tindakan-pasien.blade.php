@@ -29,7 +29,7 @@
                                     <th>NO-REG</th>
                                     <th>NO. REKAM MEDIS</th>
                                     <th>NAMA PASIEN</th>
-                                    <th>KELUHAN</th>
+                                    <th>ANAMNESIS</th>
                                     <th>POLI</th>
                                     <th>ACTION</th>
                                 </tr>
@@ -66,8 +66,8 @@
                                     <th>TGL-REG</th>
                                     <th>NO. REKAM MEDIS</th>
                                     <th>NAMA PASIEN</th>
-                                    <th>PEMERIKSAAN</th>
-                                    <th>KETERANGAN</th>
+                                    <th>PERMINTAAN PEMERIKSAAN</th>
+                                    {{-- <th>PETUGAS</th> --}}
                                     <th>ACTION</th>
                                 </tr>
                             </thead>
@@ -333,11 +333,11 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer"  id="tombol_eksternal">
                 <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
                 <button type="button" id="" class="btn btn-success">Simpan & Cetak</button>
-                <button type="button" id="btn_simpan_rujuk" class="btn btn-primary">Simpan Rujuk</button>
+                <button type="button" id="btn_simpan_rujuk" class="btn btn-primary">Simpan</button>
             </div>
             {{-- </form> --}}
         </div>
@@ -424,11 +424,10 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" id="tombol_internal">
                 <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="button" id="" class="btn btn-success">Simpan & Cetak</button>
-                <button type="button" id="btn_simpan_rujuk_internal" class="btn btn-primary">Simpan Rujuk</button>
+                <button type="button" id="btn_simpan_rujuk_internal" class="btn btn-primary">Save</button>
             </div>
             {{-- </form> --}}
         </div>
@@ -446,8 +445,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="form_lab">
                 @csrf
-                    <input type="hidden" name="lab_id_tindakan">
-                    <input type="hidden" name="lab_id_permintaan">
+                    <input type="hidden" name="lab_id_request">
                     <div class="card-body">
                         {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
@@ -459,53 +457,56 @@
                             <label class="col-sm-2 col-form-label  text-secondary">Tanggal</label>
                             <div class="col-sm-10">
                                 <div class="input-group date">
-                                    {{-- <input type="text" class="form-control datetimepicker-input" value="{{date('d/m/Y')}}" readonly> --}}
-                                    <input type="text" class="form-control" name="tgl_registrasi" readonly>
-                                        {{-- <div class="input-group-append">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div> --}}
+                                    <input type="text" class="form-control" name="tgl_request" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label text-secondary">No Rekam Medis</label>
                             <div class="col">
-                                <select class="form-control select-cari-modal" name="no_rekammedis" id="id_no_rekammedis">
-                                    <option value="0" selected>Cari No. Rekam Medis</option>
-                                {{-- @foreach ($pasien as $i)
-                                    <option value="{{ $i->kode_pasien }}">{{ $i->kode_pasien }}</option>
-                                @endforeach --}}
+                                <select class="form-control select-cari-modal" name="lab_no_regis" id="lab_no_regis">
+                                    <option value="0" selected>Cari No. Registrasi</option>
+                                    @foreach ($reg_lab as $i)
+                                        <option value="{{ $i->id }}">{{ $i->no_registrasi }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <label class="col-sm-2 col-form-label text-secondary">Tindakan</label>
+                            <label class="col-sm-2 col-form-label text-secondary">Nama Pasien</label>
                             <div class="col">
                                 <input type="text" class="form-control" id="lab_nama_pasien" disabled placeholder="Nama Pasien">
-                                <input type="hidden" class="form-" name="id_pasien">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label  text-secondary">Dokter</label>
                             <div class="col">
-                                <select class="form-control labo_dokter_pengirim" name="labo_dokter_pengirim">
+                                <select class="form-control labo_dokter_pengirim" name="lab_dokter">
                                     <option value="0" selected>Cari Dokter</option>
+                                    @foreach ($dokter as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <label class="col-sm-2 col-form-label  text-secondary">Petugas</label>
                             <div class="col">
-                                <select class="form-control labo_permintaan_petugas" name="labo_permintaan_petugas">
+                                <select class="form-control labo_permintaan_petugas" name="lab_petugas">
                                     <option value="0" selected>Cari Petugas</option>
+                                    @foreach ($rujuk_internal_petugas as $i)
+                                        <option value="{{ $i->id }}">{{ $i->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label  text-secondary">Pemeriksaan</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select-cari-modal" name="lab_pemeriksaan" id="pemeriksaan">
-                                    <option value="0" selected>Pilih</option>
-                                    {{-- @foreach ($jenis as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                    @endforeach --}}
-                                </select>
+                        <div id="pemeriksaan_">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label  text-secondary">Pemeriksaan</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control select-cari-modal" name="lab_pemeriksaan[]" id="lab_pemeriksaan[]">
+                                        <option value="0" selected>Pilih</option>
+                                        @foreach ($pemeriksaan as $i)
+                                            <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">

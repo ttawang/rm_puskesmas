@@ -1,0 +1,121 @@
+<?php
+
+namespace Tests\Feature\Controller;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class TindakanPasienController extends TestCase
+{
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+
+    // public function test_get_data()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_simpan()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_edit()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_hapus()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_get_data_lab()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_simpanlab()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_edit()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_batallab()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_rujukinternal()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_simpanrujukinternal()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // public function test_editrujukinternal()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
+
+    public function test_rujuk()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_simpanrujuk()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_editrujuk()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_batalrujuk()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+}

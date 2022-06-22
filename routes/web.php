@@ -143,13 +143,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/tindakan-pasien/rujuk/{id}', [TindakanPasienController::class, 'rujuk']);
         Route::get('tindakan/tindakan-pasien/editrujuk/{id}/{tipe}', [TindakanPasienController::class, 'editrujuk']);
         Route::post('tindakan/tindakan-pasien/simpanrujuk', [TindakanPasienController::class, 'simpanrujuk']);
-        Route::get('tindakan/tindakan-pasien/get_data_lab/{id}', [TindakanPasienController::class, 'get_data_lab']);
+        Route::get('tindakan/tindakan-pasien/get_data_lab', [TindakanPasienController::class, 'get_data_lab']);
         Route::get('tindakan/tindakan-pasien/lab/{id}', [TindakanPasienController::class, 'lab']);
         Route::get('tindakan/tindakan-pasien/editlab/{id}', [TindakanPasienController::class, 'editlab']);
+        Route::get('tindakan/tindakan-pasien/batallab/{id}', [TindakanPasienController::class, 'hapuslab']);
         Route::post('tindakan/tindakan-pasien/simpanlab', [TindakanPasienController::class, 'simpanlab']);
         Route::get('tindakan/tindakan-pasien/rujuk_internal/{id}', [TindakanPasienController::class, 'rujuk_internal']);
         Route::post('tindakan/tindakan-pasien/simpanrujukinternal', [TindakanPasienController::class, 'simpanrujukinternal']);
         Route::post('tindakan/tindakan-pasien/editrujukinternal', [TindakanPasienController::class, 'editrujukinternal']);
+        Route::get('tindakan/tindakan-pasien/batalrujuk/{id}', [TindakanPasienController::class, 'hapusrujuk']);
 
     });
     Route::middleware(['admin_laboratorium'])->group(function () {

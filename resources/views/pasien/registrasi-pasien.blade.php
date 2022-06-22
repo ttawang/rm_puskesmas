@@ -217,7 +217,7 @@ $(document).ready(function () {
     //BUTTON HAPUS
     $('body').on('click', '#btn_hapus', function () {
         Swal.fire({
-        title: 'Data akan dibatalkan !',
+        title: 'Registrasi akan dibatalkan !',
         text: "Data yang dibatalkan tidak dapat dikembalikan",
         icon: 'warning',
         showCancelButton: true,
@@ -230,7 +230,7 @@ $(document).ready(function () {
                 $.get("{{ url('pasien/registrasi-pasien/hapus') }}"+'/'+id);
                 Swal.fire({
                     title: 'Batalkan!',
-                    text: 'Data telah dibatalkan.',
+                    text: 'Registrasi telah dibatalkan.',
                     type: "success"
                 }).then((result) => {
                     tb.ajax.reload();

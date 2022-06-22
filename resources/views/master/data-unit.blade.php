@@ -24,7 +24,7 @@
                                     <th>KODE RUANG</th>
                                     <th>NAMA</th>
                                     <th>KETERANGAN</th>
-                                    <th>ACTION</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>

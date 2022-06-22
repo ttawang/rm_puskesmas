@@ -17,7 +17,7 @@ $(document).ready(function () {
             {data: 'no_registrasi', name: 'no_registrasi'},
             {data: 'no_redis', name: 'no_redis'},
             {data: 'nama_pasien', name: 'nama_pasien'},
-            {data: 'keluhan', name: 'keluhan'},
+            {data: 'anamnesis', name: 'anamnesis'},
             {data: 'nama_poli', name: 'nama_poli'},
             // {data: 'nama_dokter', name: 'nama_dokter'},
             // {data: 'anamnesis', name: 'anamnesis'},
@@ -35,39 +35,33 @@ $(document).ready(function () {
 
     });
 
-    var tb = $('#tabel_permintaan_lab').DataTable({
+    var tb2 = $('#tabel_permintaan_lab').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ url('tindakan/tindakan-pasien/lab/get_data') }}",
+        ajax: "{{ url('tindakan/tindakan-pasien/get_data_lab') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'keterangan', name: 'keterangan'},
-            {data: 'keterangan', name: 'keterangan'},
-            {data: 'keterangan', name: 'keterangan'},
-            {data: 'keterangan', name: 'keterangan'},
-            {data: 'keterangan', name: 'keterangan'},
+            {data: 'tgl_request', name: 'tgl_request'},
+            {data: 'no_rekammedis', name: 'no_rekammedis'},
+            {data: 'nama_pasien', name: 'nama_pasien'},
+            {data: 'pemeriksaan', name: 'pemeriksaan'},
+            // {data: 'keterangan', name: 'keterangan'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
     });
+    $('#lab_no_regis').on('change', function() {
+        if ($('#lab_no_regis').val() == 0){
+            $('#lab_nama_pasien').val('');
+        }
+        else{
+            var id = $('[name=lab_no_regis]').val();
+            $.get("{{ url('tindakan/tindakan-pasien/get_data_pasien') }}"+'/'+id, function (data) {
+                $('#lab_nama_pasien').val(data.nama_pasien);
+            })
 
-    // var tb2 = $('#tabel_permintaan_lab').DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     ajax: "{{ url('tindakan/tindakan-pasien/get_data_lab') }}",
-    //     columns: [
-    //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-    //         {data: 'nama_pasien', name: 'nama_pasien'},
-    //         {data: 'action', name: 'action', orderable: true, searchable: true
-    //         },
-    //     ],
-    //     // columnDefs: [
-    //     //     { className: 'text-right', targets: [] },
-    //     //     { className: 'text-center', targets: [7] },
-    //     //     { width:100, targets:[7]},
-	//     // ],
-
-    // });
+        }
+    });
     $('#id_no_registrasi').on('change', function() {
         if ( this.value > 0){
             var id = $('[name=no_registrasi_tambah]').val();
@@ -119,6 +113,8 @@ $(document).ready(function () {
     $('body').on('click', '#btn_pilih_rujukan', function () {
         var id = $('#id_pilih_rujukan').val();
         var pilih = $('#pilih_rujukan').val();
+        $('#tombol_internal').show();
+        $('#tombol_eksternal').show()
         if(pilih == 'eksternal'){
             $("#modal_pilih_rujukan").modal("hide");
             $("#modal_tambah_rujukan").modal("show");
@@ -174,7 +170,7 @@ $(document).ready(function () {
 
     $("#btn_tambah_labo").click(function(){
         $("#modal_tambah_labo").modal("show");
-        $('[name=tgl_registrasi]').val(now_date());
+        $('[name=tgl_request]').val(now_date());
 
     })
 
@@ -240,8 +236,10 @@ $(document).ready(function () {
 
     $('body').on('click', '#btn_edit_rujuk', function () {
         var id = $(this).data('id');
-        console.log(id);
         var tipe = $(this).data('tipe');
+
+        $('#tombol_internal').hide();
+        $('#tombol_eksternal').hide()
 
         if(tipe == 'eksternal'){
             $.get("{{ url('tindakan/tindakan-pasien/editrujuk') }}"+'/'+id+'/'+tipe, function (data) {
@@ -348,28 +346,24 @@ $(document).ready(function () {
 
 
 
-    $('body').on('click', '#btn_edit_lab', function () {
+    $('body').on('click', '#btn_edit_req_lab', function () {
         var id = $(this).data('id');
 
         $.get("{{ url('tindakan/tindakan-pasien/editlab') }}"+'/'+id, function (data) {
             $("#modal_tambah_labo").modal("show");
-            $('[name=lab_id_tindakan]').val(data.id_tindakan);
-            $('[name=lab_id_permintaan]').val(data.id_permintaan);
-            $('[name=lab_pemeriksaan]').val(data.nama_pemeriksaan);
+            $('[name=lab_pemeriksaan]').val(data.pemeriksaan);
             $('[name=lab_keterangan]').val(data.keterangan);
-            $('[name=lab_petugas]').val(data.nama_petugas);
-            $('#lab_no_registrasi').val(data.no_registrasi);
-            $('#lab_tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
+            $('[name=lab_petugas]').val(data.id_user_petugas).trigger('change');
+            $('#lab_no_regis').val(data.no_registrasi);
+            $('#tgl_request').html(formattanggal(data.tgl_kunjungan));
             $('#lab_no_rekam_medis').val(data.no_rekam_medis);
             $('#lab_nama_pasien').val(data.nama_pasien);
-            $('#lab_usia').val(umur(data.tgl_lahir));
-            $('#lab_jenis_kelamin').val(data.jenis_kelamin);
-            $('#lab_unit').val(data.nama_unit);
-            $('#lab_dokter').val(data.nama_dokter);
+            $('#lab_dokter').val(data.nama_dokter).trigger('change');
         });
-    })
+    });
 
     $("#btn_simpan_lab").click(function(){
+        // $('[name=tgl_request]').val('')
         $.ajax({
             url: "{{ url('tindakan/tindakan-pasien/simpanlab')}} ",
             type:'POST',
@@ -423,7 +417,56 @@ $(document).ready(function () {
                 tb.ajax.reload();
             }
         })
-    });
+    })
+
+    $('body').on('click', '#btn_hapus_rujuk', function () {
+        Swal.fire({
+        title: 'Rujukan akan dibatalkan !',
+        text: "Data yang telah dibatalkan tidak dapat dikembalikan",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Batalkan'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).data('id');
+                $.get("{{ url('tindakan/tindakan-pasien/batalrujuk') }}"+'/'+id);
+                Swal.fire(
+                'Batalkan!',
+                'Rujukan telah dibatalkan',
+                'success'
+                )
+                tb.ajax.reload();
+            }
+        })
+    })
+
+
+    $('body').on('click', '#btn_hapus_req_lab', function () {
+        Swal.fire({
+        title: 'Permintaan akan dibatalkan !',
+        text: "Data yang telah dibatalkan tidak dapat dikembalikan",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Batalkan'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).data('id');
+                $.get("{{ url('tindakan/tindakan-pasien/batallab') }}"+'/'+id);
+                Swal.fire(
+                'Batalkan!',
+                'Permintaan telah dibatalkan',
+                'success'
+                )
+                tb.ajax.reload();
+            }
+        })
+    })
+
+
     $('.no_registrasi').select2({
 	    theme: 'bootstrap4',
 	    dropdownParent : $('#modal_tambah_data'),
@@ -487,14 +530,34 @@ $(document).ready(function () {
         `);
         totalInputs++;
     })
-    console.log(totalInputs);
+
     $("#kurang_obat").click(function(){
         // $("#div1").remove();
         // $('#calling-pad > span:last-child').remove();
         $("#inilo").contents().last().remove();
         // $('#inilo img').last().remove();
     });
-    console.log($('#row_obat').last);
+    $("#tambah_pemeriksaan").click(function(){
+        $("#pemeriksaan_").append(`
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label  text-secondary">Pemeriksaan</label>
+            <div class="col-sm-10">
+                <select class="form-control select-cari-modal" name="lab_pemeriksaan[]" id="lab_pemeriksaan[]">
+                    <option value="0" selected>Pilih</option>
+                    @foreach ($pemeriksaan as $i)
+                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        `);
+    })
+    $("#kurang_pemeriksaan").click(function(){
+        // $("#div1").remove();
+        // $('#calling-pad > span:last-child').remove();
+        $("#pemeriksaan_").contents().last().remove();
+        // $('#inilo img').last().remove();
+    });
 });
 
 </script>

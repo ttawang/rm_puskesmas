@@ -1,3 +1,4 @@
+
 /* BUATANKU */
 
 //input pada text menjadi angka
@@ -20,7 +21,23 @@ $('.select-cari-modal').select2({
 	theme: 'bootstrap4',
 	dropdownParent : $('.modal'),
 });
+function tgl_indo(string) {
+	bulanIndo = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September' , 'Oktober', 'November', 'Desember'];
 
+	// date = string.split(" ")[0];
+	// time = string.split(" ")[1];
+    date = string.split('-');
+    tanggal = date[2];
+    bulan = date[1];
+    tahun = date[0];
+
+    // tanggal = date.split("-")[2];
+    // bulan = date.split("-")[1];
+    // tahun = date.split("-")[0];
+
+    // return tanggal + " " + bulanIndo[Math.abs(bulan)] + " " + tahun + " " + time;
+    return tanggal + " " + bulanIndo[Math.abs(bulan)] + " " + tahun;
+}
 function formattanggal(oldDate)
 {
    return oldDate.toString().split("-").reverse().join("/");

@@ -26,7 +26,8 @@
                                     <th>PEMERIKSAAN</th>
                                     <th>HASIL</th>
                                     <th>NILAI NORMAL</th>
-                                    <th>ACTION</th>
+                                    <th>STATUS</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,7 +46,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Permintaan Cek Laboratorium</h5>
+                <h5 class="modal-title" id="modal_tambah_dataLabel">Form Pemeriksaan Laboratorium</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -53,8 +54,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
-                    <input type="hidden" name="lab_id_tindakan">
-                    <input type="hidden" name="lab_id_permintaan">
+                    <input type="hidden" name="id_request_lab">
                     <div class="card-body">
                         {{-- <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
@@ -66,18 +66,14 @@
                         <div class="form-group row">
                             <div class="col-sm-3 text-secondary"><b>Tanggal: </b></div>
                             <div class="col-sm-3" id="tgl_registrasi"></div>
-                            <input type="hidden" name="tgl_registrasi">
                             <label class="col-sm-3 text-secondary">Nama Pasien: </label>
                             <div class="col-sm-3" id="nama_pasien"></div>
-                            <input type="hidden" name="nama_pasien">
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-3 text-secondary"><b>Dokter Pengirim: </b></div>
                             <div class="col-sm-3" id="dokter_pengirim"></div>
-                            <input type="hidden" name="dokter_pengirim">
                             <label class="col-sm-3 text-secondary">Usia: </label>
-                            <div class="col-sm-3" id="nama_usia></div>
-                            <input type="hidden" name="nama_usia">
+                            <div class="col-sm-3" id="nama_usia"></div>
                         </div>
                         </div>
                         <div class="form-group row">
@@ -85,9 +81,9 @@
                             <div class="col-sm-4">
                                 <select class="form-control dokter select2-container" name="pemeriksa" id="pemeriksa">
                                     <option value="0" selected>Pilih</option>
-                                    {{-- @foreach ($dokter as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
-                                    @endforeach --}}
+                                    @foreach ($petugas as $i)
+                                        <option value="{{ $i->id }}">{{ $i->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -139,11 +135,12 @@ $(document).ready(function () {
         ajax: "{{ url('laboratorium/pemeriksaan-lab/get_data') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'tgl_request', name: 'tgl_request'},
+            {data: 'nama_pasien', name: 'nama_pasien'},
+            {data: 'pemeriksaan', name: 'pemeriksaan'},
             {data: 'hasil', name: 'hasil'},
-            {data: 'hasil', name: 'hasil'},
-            {data: 'hasil', name: 'hasil'},
-            {data: 'hasil', name: 'hasil'},
-            {data: 'hasil', name: 'hasil'},
+            {data: 'nilai', name: 'nilai'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
@@ -179,17 +176,10 @@ $(document).ready(function () {
         var id = $(this).data('id');
         $.get("{{ url('laboratorium/pemeriksaan-lab/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
-            // $('#tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
-            // $('#nama_pasien').html(data.nama_pasien);
-            // $('#no_redis').html(data.no_redis);
-            // $('#nama_unit').html(data.nama_unit);
-            // $('[name=id]').val(data.id);
-            // $('[name=no_registrasi_edit]').val(data.id_registrasi);
-            // $('[name=dokter]').val(data.id_dokter).trigger('change');
-            // $('[name=anamnesis]').val(data.anamnesis);
-            // $('[name=tindakan]').val(data.id_pemeriksaan).trigger('change');
-            // $('[name=diagnosa]').val(data.id_diagnosa).trigger('change');
-            // $('[name=obat]').val(data.id_obat).trigger('change');
+            $('#nama_pasien').html(data.nama_pasien);
+            $('#tgl_registrasi').html(formattanggal(data.tgl_request));
+            $('#dokter_pengirim').html(data.nama_dokter);
+            $('#nama_usia').html(umur(data.tgl_lahir));
         })
     });
 
@@ -228,28 +218,28 @@ $(document).ready(function () {
         // location.reload();
     })
 
-    $('body').on('click', '#btn_hapus', function () {
-        Swal.fire({
-        title: 'Data akan dihapus !',
-        text: "Data yang telah dihapus tidak dapat dikembalikan",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Hapus'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                var id = $(this).data('id');
-                $.get("{{ url('laboratorium/pemeriksaan-lab/hapus') }}"+'/'+id);
-                Swal.fire(
-                'Deleted!',
-                'Data telah dihapus',
-                'success'
-                )
-                tb.ajax.reload();
-            }
-        })
-    });
+    // $('body').on('click', '#btn_hapus', function () {
+    //     Swal.fire({
+    //     title: 'Data akan dihapus !',
+    //     text: "Data yang telah dihapus tidak dapat dikembalikan",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Hapus'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             var id = $(this).data('id');
+    //             $.get("{{ url('laboratorium/pemeriksaan-lab/hapus') }}"+'/'+id);
+    //             Swal.fire(
+    //             'Deleted!',
+    //             'Data telah dihapus',
+    //             'success'
+    //             )
+    //             tb.ajax.reload();
+    //         }
+    //     })
+    // });
 
 });
 

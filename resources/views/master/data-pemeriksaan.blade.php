@@ -25,7 +25,7 @@
                                     <th>NAMA TINDAKAN</th>
                                     <th>JENIS</th>
                                     <th>POLI</th>
-                                    <th>ACTION</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
