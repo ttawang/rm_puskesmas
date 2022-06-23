@@ -64,12 +64,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">Tahun Rekam Medis</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="tahun_rekam_medis" placeholder="Tahun Rekam Medis">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-secondary">No Identitas</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="no_identitas" placeholder="No Identitas">
@@ -97,12 +91,6 @@
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div> --}}
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Usia</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="usia" placeholder="Usia">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -188,16 +176,6 @@
                                 <input class="form-control" name="no_askes" placeholder="Nomor">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label  text-secondary">Status Pasien</label>
-                            <div class="col-sm-8">
-                                <select class="form-control select-cari-modal" name="status_pasien">
-                                    <option selected>Pilih</option>
-                                    <option value="AKTIF">AKTIF</option>
-                                    <option value="NONAKITF">NON-AKTIF</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 <!--/form-->
             </div>
@@ -245,12 +223,11 @@ $(document).ready(function () {
             $("#modal_tambah_data").modal("show");
             $('[name=id]').val(data.id);
             $('[name=no_rekam_medis]').val(data.kode_pasien);
-            $('[name=tahun_rekam_medis]').val(data.tahun_rm);
+            // $('[name=tahun_rekam_medis]').val(data.tahun_rm);
             $('[name=no_identitas]').val(data.no_identitas);
             $('[name=nama]').val(data.nama);
             $('[name=no_tlp]').val(data.no_telp);
             $('[name=tgl_lahir]').val(formattanggal(data.tgl_lahir));
-            $('[name=usia]').val(data.usia);
             $('[name=jenis_kelamin]').val(data.jenis_kelamin).trigger('change');
             $('[name=gol_darah]').val(data.id_golongan_darah).trigger('change');
             $('[name=status_menikah]').val(data.status_menikah).trigger('change');
@@ -260,7 +237,7 @@ $(document).ready(function () {
             $('[name=no_askes]').val(data.no_askes);
             $('[name=nama_keluarga]').val(data.nama_keluarga);
             $('[name=kel_pasien]').val(data.id_kelompok_pasien).trigger('change');
-            $('[name=status_pasien]').val(data.status_pasien).trigger('change');
+            // $('[name=status_pasien]').val(data.status_pasien).trigger('change');
         })
     });
 

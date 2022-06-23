@@ -97,7 +97,7 @@
   <script src="{{url('AdminLTE-3.1.0/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
   <!-- daterangepicker -->
   <script src="{{url('AdminLTE-3.1.0/plugins/moment/moment.min.js')}}"></script>
-  <script src="{{('AdminLTE-3.1.0/plugins/daterangepicker/daterangepicker.js')}}"></script>
+  <script src="{{url('AdminLTE-3.1.0/plugins/daterangepicker/daterangepicker.js')}}"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="{{url('AdminLTE-3.1.0/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
   <!-- Summernote -->
@@ -129,7 +129,6 @@
   <script src="{{ url('AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
   <script src="{{ url('AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ url('AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
 {{-- <script src="{{ url('AdminLTE-3.1.0/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ url('AdminLTE-3.1.0/plugins/jszip/jszip.min.js') }}"></script>
 <script src="{{ url('AdminLTE-3.1.0/plugins/pdfmake/pdfmake.min.js') }}"></script>
