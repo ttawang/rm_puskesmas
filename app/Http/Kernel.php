@@ -69,6 +69,6 @@ class Kernel extends HttpKernel
         'admin_unit_penunjang' => \App\Http\Middleware\AdminUnitPenunjangMiddleware::class,
         'admin_farmasi_obat' => \App\Http\Middleware\AdminFarmasiObatMiddleware::class,
         'admin_pembayaran' => \App\Http\Middleware\AdminPembayaranMiddleware::class,
-        'kepala_puskesmas' => \App\Http\Middleware\KepalaPuskesmasMiddleware::class,
+        'kepala_rekam_medis' => \App\Http\Middleware\KepalaRekamMedisMiddleware::class,
     ];
 }
