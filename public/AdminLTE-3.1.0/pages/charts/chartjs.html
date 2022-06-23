@@ -1034,7 +1034,8 @@
     //--------------
     //- AREA CHART -
     //--------------
-
+    var mode = 'index'
+    var intersect = true
     // Get context with jQuery - using jQuery's .get() method.
     var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
@@ -1042,26 +1043,28 @@
       labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
+          type: 'line',
+          data: [60, 80, 70, 67, 80, 77, 100],
+          label: 'Electronics',
+          backgroundColor: 'rgba(210, 214, 222, 1)',
+          borderColor: '#ced4da',
+          pointBorderColor: '#ced4da',
+          pointBackgroundColor: '#ced4da',
+          // fill: false
+          pointHoverBackgroundColor: '#ced4da',
+          pointHoverBorderColor    : '#ced4da'
         },
         {
-          label               : 'Electronics',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
+          type: 'line',
+          data: [100, 120, 170, 167, 180, 177, 160],
+          label: 'Items',
+          backgroundColor: 'rgb(9,127,255)',
+          borderColor: '#007bff',
+          pointBorderColor: '#007bff',
+          pointBackgroundColor: '#007bff',
+          // fill: false,
+          pointHoverBackgroundColor: '#007bff',
+          pointHoverBorderColor    : '#007bff'
         },
       ]
     }
@@ -1069,8 +1072,16 @@
     var areaChartOptions = {
       maintainAspectRatio : false,
       responsive : true,
+      tooltips: {
+        mode: mode,
+        intersect: intersect
+      },
+      hover: {
+        mode: mode,
+        intersect: intersect
+      },
       legend: {
-        display: false
+        display: true
       },
       scales: {
         xAxes: [{

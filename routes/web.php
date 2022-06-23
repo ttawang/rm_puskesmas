@@ -1,24 +1,25 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RegistrasiPasienController;
-use App\Http\Controllers\DokterController;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\JenisPemeriksaanController;
-use App\Http\Controllers\PemeriksaanController;
-use App\Http\Controllers\DiagnosaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObatController;
-use App\Http\Controllers\DataPasienController;
-use App\Http\Controllers\TindakanPasienController;
-use App\Http\Controllers\MedicalRecordController;
-use App\Http\Controllers\GolonganObatController;
-use App\Http\Controllers\SatuanObatController;
-use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RequestCeklabController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\DiagnosaController;
+use App\Http\Controllers\DataPasienController;
+use App\Http\Controllers\SatuanObatController;
+use App\Http\Controllers\PemeriksaanController;
+use App\Http\Controllers\GolonganObatController;
 use App\Http\Controllers\LaboratoriumController;
+use App\Http\Controllers\MedicalRecordController;
+use App\Http\Controllers\RequestCeklabController;
+use App\Http\Controllers\TindakanPasienController;
+use App\Http\Controllers\JenisPemeriksaanController;
+use App\Http\Controllers\RegistrasiPasienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,15 @@ use App\Http\Controllers\LaboratoriumController;
     //return view('welcome');
 //});
 
-Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+Route::get('/', function(){
+    if(empty(Auth::user())){
+        return redirect('login');
+    }else{
+        return redirect('home');
+    }
+});
 Route::get('login', [AuthController::class, 'showFormLogin'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('submitlogin');
 Route::get('register', [AuthController::class, 'showFormRegister'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
