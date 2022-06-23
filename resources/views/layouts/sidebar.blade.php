@@ -24,7 +24,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
@@ -32,7 +32,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -88,7 +88,6 @@
               </li>
             </ul>
           </li>
-
           {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -100,66 +99,6 @@
               </li>
             </ul>
           </li> --}}
-
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                  <p>LABORATORIUM</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                <a href="{{url('laboratorium/pemeriksaan-lab')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Tindakan Cek Laboratorium</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <!--a href="./index.html" class="nav-link active"-->
-                  <p>LAPORAN</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('laporan/laporan')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Sensus Harian</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          {{-- <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('laporan/laporan')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Laporan Pemeriksaan Pasien</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('laporan/laporan')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Laporan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -170,7 +109,7 @@
               </li>
             </ul>
           </li> --}}
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
@@ -178,7 +117,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -190,7 +129,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <!--a href="./index.html" class="nav-link active"-->
@@ -200,7 +139,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -332,10 +271,13 @@
             </ul>
           </li> --}}
         @elseif (Auth::user()->role == "admin_bagian_poli")
-          <li class="nav-item menu-open">
+        <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <p>RUANG BEROBAT POLI</p>
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('home')}}" class="nav-link">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
                 </a>
               </li>
             </ul>
@@ -350,21 +292,14 @@
               </li>
             </ul>
           </li>
-          {{-- <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('tindakan/request-ceklab')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Permintaan Cek Laboratorium</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
         @elseif (Auth::user()->role == "admin_registrasi")
-          <li class="nav-item menu-open">
+        <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <p>REGISTRASI</p>
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('home')}}" class="nav-link">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
                 </a>
               </li>
             </ul>
@@ -385,6 +320,61 @@
                 <a href="{{url('pasien/data-pasien')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   <p>Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @elseif (Auth::user()->role == "admin_laboratorium")
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('home')}}" class="nav-link">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('laboratorium/pemeriksaan-lab')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Tindakan Laboratorium</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @elseif (Auth::user()->role == "kepala_rekam_medis")
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!--a href="./index.html" class="nav-link active"-->
+                <a href="{{url('home')}}" class="nav-link">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Sensus Harian</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('laporan/laporan')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  <p>Laporan</p>
                 </a>
               </li>
             </ul>
