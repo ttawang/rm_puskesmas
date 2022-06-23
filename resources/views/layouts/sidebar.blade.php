@@ -81,19 +81,15 @@
           </li>
           {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('tindakan/medical-record')}}" class="nav-link">
-                  <i class="fas fa-user-edit"></i>
-                  Tindakan Medical Cek
-                </a>
-              </li>
-            </ul>
-          </li> --}}
-                  <p>Tindakan Medical Cek</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
+                <li class="nav-item">
+                    <a href="{{url('tindakan/medical-record')}}" class="nav-link">
+                    <i class="fas fa-user-edit"></i>
+                    Tindakan Medical Cek
+                    </a>
+                </li>
+                </ul>
+            </li>
+                --}}
           {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
