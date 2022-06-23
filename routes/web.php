@@ -169,8 +169,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
-    Route::middleware(['kepala_puskesmas'])->group(function () {
-
+    Route::middleware(['kepala_rekam_medis'])->group(function () {
+        Route::get('laporan/laporan', [LaporanController::class, 'index']);
+        Route::get('laporan/bulanan', [LaporanController::class, 'bulanan'])->name('laporan-bulanan');
+        Route::get('laporan/cetak/{type}/{tgl1}/{tgl2?}', [LaporanController::class, 'report']);
     });
 
 });

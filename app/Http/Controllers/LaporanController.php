@@ -17,20 +17,44 @@ class LaporanController extends Controller
         $data['judul'] = 'Laporan';
         return view('laporan.laporan',$data);
     }
-    public function cetak1($tgl1, $tgl2)
+
+
+    public function report($type,$tgl1, $tgl2 = null)
     {
+        $type = ($type == 'daily') ? $type : 'monthly' ;
+        // nama, no rekam medis, usia, kelompok pasien, diagnosa, nama
+        $getDataPasienPeriod = DB::table('tindakan_pasien','tp')
+            ->selectRaw('
+                rp.tgl_kunjungan AS repHariKunjung,
+                dp.nama AS repPasien,
+                dp.tgl_lahir AS repPasienTglLahir,
+                kp.nama AS repKelompok,
+                dp.kode_pasien AS repNoRekam,
+                d.nama AS repDiagnosa,
+                dk.nama AS repDokter,
+                dp.jenis_kelamin AS repPasienJk')
+            ->join('registrasi_pasien AS rp','rp.id','=','tp.id_registrasi')
+            ->join('data_pasien AS dp','dp.id','=','rp.id_pasien')
+            ->join('kelompok_pasien AS kp','kp.id','=','dp.id_kelompok_pasien')
+            ->join('diagnosa AS d','d.id','=','tp.id_diagnosa')
+            ->join('dokter AS dk','dk.id','=','tp.id_dokter');
 
-        $data = [
-            'nama' => 'titan',
-            'nama_perusahaan' => 'tawang',
-            'nilai' => 'ilal',
-            'tgl_mulai' => $tgl1,
-            'tgl_selesai' => $tgl2
 
-        ];
-        $pdf = PDF::loadView('laporan.cetak1',['data'=>$data]);
+        if($type == 'monthly'){
+            $periode = longdate_indo($tgl1).' s.d. '.longdate_indo($tgl2);
+            $getDataPasienPeriod = $getDataPasienPeriod->whereBetween('rp.tgl_kunjungan',[$tgl1,$tgl2])->get();
+        }else{
+            $periode = longdate_indo($tgl1);
+            $getDataPasienPeriod = $getDataPasienPeriod->where('rp.tgl_kunjungan',$tgl1)->get();
+        }
+        // dd($getDataPasienPeriod);
+        $dataPasien['Periode'] = $periode;
+        $dataPasien['Laporans'] = $getDataPasienPeriod;
 
-        return $pdf->stream('Judul Cetak1 - cetak1'.'.pdf');
+
+        $pdf = PDF::loadView('laporan.laporan-sensus-harian', $dataPasien);
+
+        return $pdf->stream('LapSensusHarian - Periode '.$periode.'.pdf');
     }
 
 }
