@@ -36,6 +36,7 @@ function tgl_indo(string) {
     // tahun = date.split("-")[0];
 
     // return tanggal + " " + bulanIndo[Math.abs(bulan)] + " " + tahun + " " + time;
+
     return tanggal + " " + bulanIndo[Math.abs(bulan)] + " " + tahun;
 }
 function formattanggal(oldDate)
