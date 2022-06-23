@@ -91,7 +91,7 @@
                                     <option value="admin_bagian_poli">Registrasi</option>
                                     <option value="admin_registrasi">Poli</option>
                                     <option value="admin_laboratorium">laboratorium</option>
-                                    <option value="kepala_RM">Kepala RM</option>
+                                    <option value="kepala_rekam_medis">Kepala RM</option>
                                 </select>
                             </div>
                         </div>
