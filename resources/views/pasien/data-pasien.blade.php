@@ -53,7 +53,7 @@
             </div>
             <div class="modal-body">
                 <!--form class="form-horizontal" action="{{url('pasien/data-pasien/simpan')}}" method="POST"-->
-                <form class="form-horizontal" id="form_tambah">
+                <form class="form-horizontal" id="form_tambah" method="POST">
                 @csrf
                     <input type="hidden" name="id">
                     <div class="card-body">
