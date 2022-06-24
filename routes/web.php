@@ -153,6 +153,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('tindakan/tindakan-pasien/simpanrujukinternal', [TindakanPasienController::class, 'simpanrujukinternal']);
         Route::post('tindakan/tindakan-pasien/editrujukinternal', [TindakanPasienController::class, 'editrujukinternal']);
         Route::get('tindakan/tindakan-pasien/batalrujuk/{id}', [TindakanPasienController::class, 'hapusrujuk']);
+        Route::get('tindakan/tindakan-pasien/get_data_rujuk/{id}', [TindakanPasienController::class, 'get_data_rujuk']);
+
 
     });
     Route::middleware(['admin_laboratorium'])->group(function () {
