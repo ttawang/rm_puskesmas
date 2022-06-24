@@ -485,4 +485,5 @@ class TindakanPasienController extends Controller
         return response()->json($data);
 
     }
+
 }

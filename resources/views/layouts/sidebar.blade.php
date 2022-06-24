@@ -273,7 +273,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('tindakan/tindakan-pasien/rujukan-pasien')}}" class="nav-link">
+                <a href="{{url('tindakan/rujukan-pasien')}}" class="nav-link">
                   <i class="fas fa-user-edit"></i>
                   Rujukan Pasien
                 </a>

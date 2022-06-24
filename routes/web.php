@@ -20,6 +20,8 @@ use App\Http\Controllers\RequestCeklabController;
 use App\Http\Controllers\TindakanPasienController;
 use App\Http\Controllers\JenisPemeriksaanController;
 use App\Http\Controllers\RegistrasiPasienController;
+use App\Http\Controllers\RujukanPasienController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -153,7 +155,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('tindakan/tindakan-pasien/simpanrujukinternal', [TindakanPasienController::class, 'simpanrujukinternal']);
         Route::post('tindakan/tindakan-pasien/editrujukinternal', [TindakanPasienController::class, 'editrujukinternal']);
         Route::get('tindakan/tindakan-pasien/batalrujuk/{id}', [TindakanPasienController::class, 'hapusrujuk']);
-        Route::get('tindakan/tindakan-pasien/get_data_rujuk/{id}', [TindakanPasienController::class, 'get_data_rujuk']);
+        Route::get('tindakan/rujukan-pasien', [RujukanPasienController::class, 'index']);
+        Route::get('tindakan/rujukan-pasien/get_data', [RujukanPasienController::class, 'get_data']);
 
 
     });
