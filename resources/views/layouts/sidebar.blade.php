@@ -270,6 +270,16 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item menu-open">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('tindakan/tindakan-pasien/rujukan-pasien')}}" class="nav-link">
+                  <i class="fas fa-user-edit"></i>
+                  Rujukan Pasien
+                </a>
+              </li>
+            </ul>
+          </li>
         @elseif (Auth::user()->role == "admin_registrasi")
         <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
@@ -337,7 +347,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-open">
+          {{-- <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{url('laporan/laporan')}}" class="nav-link">
@@ -346,7 +356,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">

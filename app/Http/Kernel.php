@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'admin_farmasi_obat' => \App\Http\Middleware\AdminFarmasiObatMiddleware::class,
         'admin_pembayaran' => \App\Http\Middleware\AdminPembayaranMiddleware::class,
         'kepala_rekam_medis' => \App\Http\Middleware\KepalaRekamMedisMiddleware::class,
+        'admin_laboratorium' => \App\Http\Middleware\AdminLaboratoriumMiddleware::class,
     ];
 }

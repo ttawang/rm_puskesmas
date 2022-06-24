@@ -26,7 +26,7 @@
                                     <th>PEMERIKSAAN</th>
                                     <th>HASIL</th>
                                     <th>NILAI NORMAL</th>
-                                    <th>STATUS</th>
+                                    {{-- <th>STATUS</th> --}}
                                     <th>AKSI</th>
                                 </tr>
                             </thead>
@@ -140,7 +140,6 @@ $(document).ready(function () {
             {data: 'pemeriksaan', name: 'pemeriksaan'},
             {data: 'hasil', name: 'hasil'},
             {data: 'nilai', name: 'nilai'},
-            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]

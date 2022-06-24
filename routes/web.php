@@ -115,13 +115,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/request-ceklab/hapus/{id}', [RequestCeklabController::class, 'hapus']);
         Route::get('tindakan/request-ceklab/get_norekammedis/{id}', [RequestCeklabController::class, 'get_norekammedis']);
 
-        Route::get('laboratorium/pemeriksaan-lab', [LaboratoriumController::class, 'index']);
-        Route::get('laboratorium/pemeriksaan-lab/get_data', [LaboratoriumController::class, 'get_data']);
-        Route::post('laboratorium/pemeriksaan-lab/simpan', [LaboratoriumController::class, 'simpan']);
-        Route::get('laboratorium/pemeriksaan-lab/edit/{id}', [LaboratoriumController::class, 'edit']);
-        Route::get('laboratorium/pemeriksaan-lab/hapus/{id}', [LaboratoriumController::class, 'hapus']);
-
-
         Route::get('laporan/laporan', [LaporanController::class, 'index']);
         Route::get('laporan/cetak1/{tgl1}/{tgl2}', [LaporanController::class, 'cetak1']);
     });
@@ -163,9 +156,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
     Route::middleware(['admin_laboratorium'])->group(function () {
-
-    });
-    Route::middleware(['admin_farmasi_obat'])->group(function () {
+        Route::get('laboratorium/pemeriksaan-lab', [LaboratoriumController::class, 'index']);
+        Route::get('laboratorium/pemeriksaan-lab/get_data', [LaboratoriumController::class, 'get_data']);
+        Route::post('laboratorium/pemeriksaan-lab/simpan', [LaboratoriumController::class, 'simpan']);
+        Route::get('laboratorium/pemeriksaan-lab/edit/{id}', [LaboratoriumController::class, 'edit']);
+        Route::get('laboratorium/pemeriksaan-lab/hapus/{id}', [LaboratoriumController::class, 'hapus']);
 
     });
 
