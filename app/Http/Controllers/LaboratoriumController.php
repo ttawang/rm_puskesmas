@@ -88,9 +88,13 @@ class LaboratoriumController extends Controller
                     return $hasil;
                 })
                 ->addColumn('action', function($row){
+                    $cek = DB::table('tindakan_lab')->where('id_request_lab',$row->id)->count();
                     //$actionBtn = '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm ">Delete</a>';
                     $actionBtn = '<button type="button" class="edit btn btn-success btn-sm" id="btn_edit" data-id="'.$row->id.'">Tindak</button>';
-                    $actionBtn .= '<button type="button" class="edit btn btn-info  btn-sm" id="btn_cetak" data-id="'.$row->id.'">Cetak</button>';
+                    if($cek >0){
+                        $actionBtn .= '<button type="button" class="edit btn btn-info  btn-sm" id="btn_cetak" data-id="'.$row->id.'">Cetak</button>';
+                    }
+
                     return $actionBtn;
 
 
@@ -142,6 +146,8 @@ class LaboratoriumController extends Controller
         ')
         ->where('rl.id',$id)
         ->first();
+
+
 
         return response()->json($data);
 
