@@ -42,27 +42,20 @@
 </div>
 
 <!--div class="modal fade" id="modal_tambah_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"-->
-<div class="modal fade" id="modal_tambah_data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_tambah_data" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal_tambah_dataLabel">Form Pemeriksaan Laboratorium</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_x">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="form_tambah">
                 @csrf
-                    <input type="hidden" name="id_request_lab">
+                    <input type="hidden" name="id_request_lab" id="id_request_lab">
                     <div class="card-body">
-                        {{-- <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-secondary">No Registrasi</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="lab_no_registrasi" disabled placeholder="No. Registrasi">
-                            </div>
-                        </div> --}}
-                        <input type="hidden" name="no_registrasi_edit">
                         <div class="form-group row">
                             <div class="col-sm-3 text-secondary"><b>Tanggal: </b></div>
                             <div class="col-sm-3" id="tgl_registrasi"></div>
@@ -88,31 +81,14 @@
                             </div>
 
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label text-secondary">Pemeriksaan</label>
-                            <div class="col">
-                                <input type="text" class="form-control" name="pemeriksaan" disabled placeholder="Pemeriksaan">
-                                    <input type="hidden" class="form-" name="id_pemeriksaan">
-                            </div>
-                            <label class="col-sm-2 col-form-label text-secondary">Hasil</label>
-                            <div class="col">
-                                <input type="text" class="form-control" name="hasil" placeholder="Hasil Pemeriksaan">
-                            </div>
+                        <div id="var">
+
                         </div>
-                        {{-- <div class="form-group row">
-                            <label class="col-sm-2 col-form-label  text-secondary">Pemeriksaan</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select-cari-modal" name="lab_pemeriksaan" id="pemeriksaan">
-                                </select>
-                            </div>
-                        </div> --}}
                     </div>
-                <!--/form-->
-            </div>
-            <div class="modal-footer">
-                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!--button type="submit" class="btn btn-primary">Save</button-->
-                <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
+                    <div class="modal-footer">
+                        <button type="button" id="btn_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btn_simpan" class="btn btn-primary">Save</button>
+                    </div>
             </div>
             </form>
         </div>
@@ -144,25 +120,6 @@ $(document).ready(function () {
             },
         ]
     });
-    // $('#id_no_registrasi').on('change', function() {
-    //     if ( this.value > 0){
-    //         var id = $('[name=no_registrasi_tambah]').val();
-    //         $("#formalitasajalah").show();
-    //         $("#toket").show();
-
-    //         $.get("{{ url('tindakan/tindakan-pasien/get_data_pasien') }}"+'/'+id, function (data) {
-    //             $("#modal_tambah_data").modal("show");
-    //             $('#tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
-    //             $('#nama_pasien').html(data.nama_pasien);
-    //             $('#no_redis').html(data.no_redis);
-    //             $('#nama_unit').html(data.nama_unit);
-    //         })
-    //     }
-    //     else{
-    //         $("#formalitasajalah").hide();
-    //         $("#toket").hide();
-    //     }
-    // });
     //SHOW MODAL/FORM
     $("#btn_tambah").click(function(){
         $("#modal_tambah_data").modal("show");
@@ -174,12 +131,40 @@ $(document).ready(function () {
     $('body').on('click', '#btn_edit', function () {
         var id = $(this).data('id');
         $.get("{{ url('laboratorium/pemeriksaan-lab/edit') }}"+'/'+id, function (data) {
+            $('#id_request_lab').val(data.id);
             $("#modal_tambah_data").modal("show");
             $('#nama_pasien').html(data.nama_pasien);
             $('#tgl_registrasi').html(formattanggal(data.tgl_request));
             $('#dokter_pengirim').html(data.nama_dokter);
             $('#nama_usia').html(umur(data.tgl_lahir));
+            id_pemeriksaan = data.id_pemeriksaan.split(',');
+            $.each(id_pemeriksaan, function( index, value ) {
+                $.get("{{ url('laboratorium/pemeriksaan-lab/pemeriksaan') }}"+'/'+value+'/'+id, function (d) {
+                    $('[name=pemeriksa]').val(d.id_user_petugas).trigger('change');
+                    $("#var").append(`
+                        <div class="form-group row">
+                                <label class="col-sm-2 col-form-label text-secondary">Pemeriksaan</label>
+                            <div class="col">
+                                <input type="text" class="form-control" name="pemeriksaan[]" disabled placeholder="Pemeriksaan" value="`+d.nama+`">
+                                    <input type="hidden" class="form-" name="id_pemeriksaan[]" value="`+d.id+`">
+                            </div>
+                            <label class="col-sm-2 col-form-label text-secondary">Hasil</label>
+                            <div class="col">
+                                <input type="text" class="form-control" name="hasil[]" placeholder="Hasil Pemeriksaan" value="`+d.hasil+`">
+                            </div>
+                        </div>
+                    `);
+                });
+            });
         })
+    });
+    $("#btn_close").click(function(){
+        $("#modal_tambah_data").modal("hide");
+        $("#var").contents().remove();
+    });
+    $("#btn_x").click(function(){
+        $("#modal_tambah_data").modal("hide");
+        $("#var").contents().remove();
     });
 
     //MELAKUKAN CONTROLLER SIMPAN
@@ -200,7 +185,8 @@ $(document).ready(function () {
                         type: "success"
                     }).then((result) => {
                         tb.ajax.reload();
-                    })
+                    });
+                    $("#var").contents().remove();
                 }else{
                     $("#modal_tambah_data").modal('hide');
                     Swal.fire({
@@ -209,36 +195,23 @@ $(document).ready(function () {
                         type: "error"
                     }).then((result) => {
                         tb.ajax.reload();
-                    })
+                    });
+                    $("#var").contents().remove();
 				}
 			}
 
         });
-        // location.reload();
-    })
 
-    // $('body').on('click', '#btn_hapus', function () {
-    //     Swal.fire({
-    //     title: 'Data akan dihapus !',
-    //     text: "Data yang telah dihapus tidak dapat dikembalikan",
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Hapus'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             var id = $(this).data('id');
-    //             $.get("{{ url('laboratorium/pemeriksaan-lab/hapus') }}"+'/'+id);
-    //             Swal.fire(
-    //             'Deleted!',
-    //             'Data telah dihapus',
-    //             'success'
-    //             )
-    //             tb.ajax.reload();
-    //         }
-    //     })
-    // });
+        // location.reload();
+
+    });
+    $('body').on('click', '#btn_cetak', function () {
+            var id = $(this).data('id');
+            console.log(id);
+            url = '{{ url('laboratorium/pemeriksaan-lab/cetak') }}'+'/'+id;
+            window.open(url, '_blank');
+
+        })
 
 });
 

@@ -157,6 +157,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/tindakan-pasien/batalrujuk/{id}', [TindakanPasienController::class, 'hapusrujuk']);
         Route::get('tindakan/rujukan-pasien', [RujukanPasienController::class, 'index']);
         Route::get('tindakan/rujukan-pasien/get_data', [RujukanPasienController::class, 'get_data']);
+        Route::get('tindakan/rujukan-pasien/edit/{id}', [RujukanPasienController::class, 'edit']);
+        Route::post('tindakan/rujukan-pasien/simpan', [RujukanPasienController::class, 'simpan']);
 
 
     });
@@ -166,6 +168,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('laboratorium/pemeriksaan-lab/simpan', [LaboratoriumController::class, 'simpan']);
         Route::get('laboratorium/pemeriksaan-lab/edit/{id}', [LaboratoriumController::class, 'edit']);
         Route::get('laboratorium/pemeriksaan-lab/hapus/{id}', [LaboratoriumController::class, 'hapus']);
+        Route::get('laboratorium/pemeriksaan-lab/pemeriksaan/{id}/{id_req}', [LaboratoriumController::class, 'pemeriksaan']);
+        Route::get('laboratorium/pemeriksaan-lab/cetak/{id}', [LaboratoriumController::class, 'cetak']);
 
     });
 
