@@ -51,8 +51,8 @@ class RujukanPasienController extends Controller
                 return $tanggal;
             })
             ->addColumn('action', function($row){
-                $cek = DB::table('rujukan_pasien as rp')->join('tindakan_pasien as tp','rp.id_tindakan','tp.id')->where([['rp.id',$row->id],['tp.tindakan_rujukan','yes']])->first();
-                // $cek = DB::table('tindakan_pasien')->join('rujukan_pasien','rujukan_pasien.id_tindakan','tindakan_pasien.id')->where('rujukan_pasien.id',$row->id)->first();
+                //$cek = DB::table('rujukan_pasien as rp')->join('tindakan_pasien as tp','rp.id_tindakan','tp.id')->where([['rp.id',$row->id],['tp.tindakan_rujukan','yes']])->first();
+                $cek = DB::table('tindakan_pasien')->join('rujukan_pasien','rujukan_pasien.id_tindakan','tindakan_pasien.id')->where('rujukan_pasien.id',$row->id)->first();
                 $actionBtn = '';
                 if($cek){
                     $actionBtn .= '<button type="button" class="delete btn btn-danger btn-sm" id="btn_hapus" data-id="'.$row->id.'" data-bs-toggle="tooltip" data-bs-placement="top" title="Batal Rujukan"><i class="fa fa-trash"></i></button>';
