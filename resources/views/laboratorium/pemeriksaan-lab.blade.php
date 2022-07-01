@@ -26,7 +26,6 @@
                                     <th>PEMERIKSAAN</th>
                                     <th>HASIL</th>
                                     <th>NILAI NORMAL</th>
-                                    {{-- <th>STATUS</th> --}}
                                     <th>AKSI</th>
                                 </tr>
                             </thead>

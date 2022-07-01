@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Controller;
+namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\TestCase;
 
-class DiagnosaControllerTest extends TestCase
+class DokterControllerTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -17,14 +17,17 @@ class DiagnosaControllerTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
     public function test_simpan()
     {
         $this->assertTrue(true);
     }
+
     public function test_edit()
     {
         $this->assertTrue(true);
     }
+
     public function test_hapus()
     {
         $this->assertTrue(true);

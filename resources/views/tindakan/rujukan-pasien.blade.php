@@ -116,7 +116,6 @@
                             <div class="form-group row">
                                 <label class="col col-form-label  text-secondary">Terapi Obat</label>
                                 <label class="col col-form-label text-secondary">Jumlah Obat</label>
-                                <label class="col col-form-label  text-secondary">Aturan Pakai</label>
                                 <label class="col col-form-label  text-secondary">Keterangan</label>
                             </div>
                             <div id="inilo">
@@ -131,11 +130,6 @@
                                 </div>
                                 <div class="col">
                                     <input type="number" class="form-control" name="jumlah_obat[]" placeholder="Jumlah Obat">
-                                </div>
-                                <div class="col">
-                                    <select class="form-control" name="aturan_pakai[]" id="aturan_pakai">
-                                        <option value="0" selected>Pilih</option>
-                                    </select>
                                 </div>
                                 <div class="col">
                                     <input type="text" class="form-control" name="ket_obat[]" placeholder="Keterangan">
@@ -184,13 +178,14 @@ $(document).ready(function () {
             {data: 'nama_pasien', name: 'nama_pasien'},
             {data: 'pemeriksaan', name: 'pemeriksaan'},
             {data: 'nama_poli', name: 'nama_poli'},
-            {data: 'nama_poli', name: 'nama_poli'},
+            // {data: 'nama_poli', name: 'nama_poli'},
+            {data: 'anamnesis', name: 'anamnesis'},
             {data: 'action', name: 'action', orderable: true, searchable: true
             },
         ]
     });
 
-    $('body').on('click', '#btn_tindak', function () {
+    $('body').on('click', '#btn_edit', function () {
         var id = $(this).data('id');
         $.get("{{ url('tindakan/rujukan-pasien/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
@@ -250,11 +245,6 @@ $(document).ready(function () {
             </div>
             <div class="col">
                 <input type="number" class="form-control" name="jumlah_obat[]" placeholder="Jumlah Obat">
-            </div>
-            <div class="col">
-                <select class="form-control" name="aturan_pakai[]" id="aturan_pakai">
-                    <option value="0" selected>Pilih</option>
-                </select>
             </div>
             <div class="col">
                 <input type="text" class="form-control" name="ket_obat[]" placeholder="Keterangan">
