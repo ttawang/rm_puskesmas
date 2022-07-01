@@ -70,16 +70,18 @@ class DataPasienController extends Controller
         $data['alamat'] = $request->get('alamat');
         $data['no_askes'] = $request->get('no_askes');
         $data['nama_keluarga'] = $request->get('nama_keluarga');
-        $data['status_pasien'] = $request->get('status_pasien');
+        // $data['status_pasien'] = $request->get('status_menikah');
         $data['id_golongan_darah'] = $request->get('gol_darah');
         $data['id_pekerjaan'] = $request->get('pekerjaan');
         $data['id_kelurahan'] = $request->get('kelurahan');
-        $data['id_kelompok_pasien'] = $request->get('kelompok_pasien');
+        $data['id_kelompok_pasien'] = $request->get('kel_pasien');
         // dd($data);
+        // dd($request->all());
         DB::beginTransaction();
         try{
             if($id == ''){
                 $data['created_at'] = Carbon::now();
+                $data['updated_at'] = Carbon::now();
                 DB::table('data_pasien')->insert($data);
                 $arr = ['status' => '1'];
             }else{
@@ -135,6 +137,18 @@ class DataPasienController extends Controller
                 $tanggal = Carbon::createFromFormat('Y-m-d', $row->tgl_kunjungan)->format('d/m/Y');
 
                 return $tanggal;
+            })
+            ->addColumn('nama_obat', function($row){
+                $temp = explode(',',$row->id_obat);
+                $obat = [];
+                if($temp){
+                    foreach($temp as $i){
+                        if($i != 0)
+                            $obat[] = DB::table('obat')->where('id', $i)->first()->nama;
+                    }
+                }
+
+                return join(', ',$obat);
             })
             ->rawColumns(['action','tgl_kunjungan'])
             ->make(true);

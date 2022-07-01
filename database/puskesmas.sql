@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : astuti
+ Source Server         : local-mysql
  Source Server Type    : MySQL
- Source Server Version : 100414
+ Source Server Version : 100416
  Source Host           : localhost:3306
- Source Schema         : rm_puskesmas
+ Source Schema         : puskesmas
 
  Target Server Type    : MySQL
- Target Server Version : 100414
+ Target Server Version : 100416
  File Encoding         : 65001
 
- Date: 25/06/2022 10:43:04
+ Date: 01/07/2022 23:41:31
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `aturan_pakai`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of aturan_pakai
@@ -58,7 +58,7 @@ CREATE TABLE `data_pasien`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of data_pasien
@@ -74,7 +74,7 @@ INSERT INTO `data_pasien` VALUES (10, '000008', 'EVINA DIANITA', '65766538726473
 INSERT INTO `data_pasien` VALUES (11, '000009', 'ALFIANSYAH', '253462827827362', '089734636546', 'Malang', '1966-08-08', 'L', 'SUDAH MENIKAH', '23283726', 'ALFIA', '3', '5', '2', '2', NULL, NULL);
 INSERT INTO `data_pasien` VALUES (12, '000010', 'DONI PRADANA', '238365615666772', '083364653678', 'Malang', '1995-12-21', 'L', 'BELUM MENIKAH', NULL, 'PRADANA', '4', '1', '4', '1', NULL, NULL);
 INSERT INTO `data_pasien` VALUES (13, '000011', 'RANI', '273626356256188', '082237646532', 'Malang', '1987-03-20', 'P', 'SUDAH MENIKAH', '21293283', 'HADI', '1', '2', '3', '2', NULL, NULL);
-INSERT INTO `data_pasien` VALUES (14, '000012', 'HADI SUHATMOKO', '232483824824828', '081384873388', 'Malang', '1987-10-01', 'L', 'SUDAH MENIKAH', '23928434', 'HATMOKO', '2', '4', '3', '2', NULL, NULL);
+INSERT INTO `data_pasien` VALUES (14, '000012', 'HADI SUHATMOKO', '232483824824828', '081384873388', 'Malang', '1987-10-01', 'L', 'SUDAH MENIKAH', '23928434', 'HATMOKO', '2', '4', '3', '2', NULL, '2022-07-01 16:36:32');
 
 -- ----------------------------
 -- Table structure for diagnosa
@@ -88,7 +88,7 @@ CREATE TABLE `diagnosa`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of diagnosa
@@ -131,7 +131,7 @@ CREATE TABLE `dokter`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dokter
@@ -164,7 +164,7 @@ CREATE TABLE `failed_jobs`  (
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of failed_jobs
@@ -180,7 +180,7 @@ CREATE TABLE `golongan_darah`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of golongan_darah
@@ -200,7 +200,7 @@ CREATE TABLE `golongan_obat`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of golongan_obat
@@ -220,7 +220,7 @@ CREATE TABLE `jabatan`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jabatan
@@ -239,7 +239,7 @@ CREATE TABLE `jenis_pemeriksaan`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jenis_pemeriksaan
@@ -262,7 +262,7 @@ CREATE TABLE `kelompok_pasien`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kelompok_pasien
@@ -280,7 +280,7 @@ CREATE TABLE `kelurahan`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kelurahan
@@ -294,6 +294,32 @@ INSERT INTO `kelurahan` VALUES (6, 'NGENEP, KEC.KARANGPLOSO, KAB.MALANG, 65152, 
 INSERT INTO `kelurahan` VALUES (7, 'NGIJO, KEC.KARANGPLOSO, KAB.MALANG, 65152, JAWA TIMUR', NULL, NULL);
 INSERT INTO `kelurahan` VALUES (8, 'TEGALGONDO, KEC.KARANGPLOSO, KAB.MALANG, 65152, JAWA TIMUR', NULL, NULL);
 INSERT INTO `kelurahan` VALUES (9, 'TAWANGARGO, KEC.KARANGPLOSO, KAB.MALANG, 65152, JAWA TIMUR', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for kunjungan_pasien
+-- ----------------------------
+DROP TABLE IF EXISTS `kunjungan_pasien`;
+CREATE TABLE `kunjungan_pasien`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tgl_kunjungan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `jam_kunjungan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `no_urut` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `jenis_kunjungan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `keluhan` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kondisi_pasien` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kelompok_pasien` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_unit` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_pasien` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `id_dokter` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of kunjungan_pasien
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for medical_record
@@ -310,7 +336,7 @@ CREATE TABLE `medical_record`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of medical_record
@@ -325,7 +351,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -350,7 +376,7 @@ CREATE TABLE `obat`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of obat
@@ -362,6 +388,92 @@ INSERT INTO `obat` VALUES (25, 'AB12345', 'Obat Demam', 'diminum', '1', '3', '20
 INSERT INTO `obat` VALUES (26, 'AB12345', 'Ponstan', 'diminum', '1', '2', '2022-01-04 19:48:10', '2022-01-25 16:08:18');
 
 -- ----------------------------
+-- Table structure for pasien
+-- ----------------------------
+DROP TABLE IF EXISTS `pasien`;
+CREATE TABLE `pasien`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pasien
+-- ----------------------------
+INSERT INTO `pasien` VALUES (1, 'tt', '2021-09-23 23:44:03', NULL);
+INSERT INTO `pasien` VALUES (7, 'ff', '2021-09-23 23:44:02', NULL);
+INSERT INTO `pasien` VALUES (8, 'ff', '2021-09-23 23:44:02', NULL);
+INSERT INTO `pasien` VALUES (9, 'tttt', '2021-09-23 23:44:01', NULL);
+INSERT INTO `pasien` VALUES (10, 'test', '2021-09-23 23:44:00', NULL);
+INSERT INTO `pasien` VALUES (11, 'titan', '2021-09-23 16:41:22', NULL);
+INSERT INTO `pasien` VALUES (12, 'twtewt', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (13, 'aku', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (14, 'aku', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (15, 'aku', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (16, 'titan', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (17, 'titan', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (18, 'tttt', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (19, 'tttt', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (20, 'tttt', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (21, 'tttt', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (22, 'test', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (23, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (24, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (25, 'tttt', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (26, 'rrr', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (27, 'rrr', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (28, 'rrr', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (29, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (30, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (31, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (32, 'Form Check List', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (33, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (34, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (35, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (36, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (37, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (38, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (39, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (40, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (41, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (42, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (43, 'SK Dekan Pembimbing TS', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (44, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (45, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (46, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (47, 'Transkrip', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (48, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (49, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (50, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (51, 'Transkrip', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (52, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (53, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (54, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (55, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (56, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (58, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (59, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (60, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (61, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (62, 'SK Dekan Pembimbing TS', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (63, 'SK Dekan Pembimbing TS', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (64, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (65, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (66, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (67, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (68, 'BAB I', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (69, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (70, 'TA-006 (Form Biodata TA)', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (71, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (72, 'r', '2021-09-23 00:00:00', '2021-09-24 00:00:00');
+INSERT INTO `pasien` VALUES (73, 'Form Check List', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (74, 'SK Dekan Pembimbing TS', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (75, 'Kwitansi', '2021-09-23 00:00:00', NULL);
+INSERT INTO `pasien` VALUES (76, 'BAB I', '2021-09-23 00:00:00', NULL);
+
+-- ----------------------------
 -- Table structure for password_resets
 -- ----------------------------
 DROP TABLE IF EXISTS `password_resets`;
@@ -370,7 +482,7 @@ CREATE TABLE `password_resets`  (
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   INDEX `password_resets_email_index`(`email`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of password_resets
@@ -386,7 +498,7 @@ CREATE TABLE `pekerjaan`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pekerjaan
@@ -417,7 +529,7 @@ CREATE TABLE `pemeriksaan`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pemeriksaan
@@ -448,7 +560,7 @@ CREATE TABLE `personal_access_tokens`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `personal_access_tokens_token_unique`(`token`) USING BTREE,
   INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type`, `tokenable_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of personal_access_tokens
@@ -468,7 +580,7 @@ CREATE TABLE `registrasi_pasien`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   `no_registrasi` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of registrasi_pasien
@@ -507,13 +619,13 @@ CREATE TABLE `request_lab`  (
   `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `tgl_request` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of request_lab
 -- ----------------------------
 INSERT INTO `request_lab` VALUES (1, '33', '7,10', '1', '3', '2022-06-20 14:33:09', '2022-06-20 14:33:09', 'rtest', '2022-06-20');
-INSERT INTO `request_lab` VALUES (2, '40', '12', '1', '3', '2022-06-22 04:24:48', '2022-06-22 04:24:48', 'xxxx', '2022-06-22');
+INSERT INTO `request_lab` VALUES (2, '40', '12,10', '1', '3', '2022-06-22 04:24:48', '2022-06-22 04:24:48', 'xxxx', '2022-06-22');
 INSERT INTO `request_lab` VALUES (3, '52', '9', '29', '3', '2022-06-22 04:32:11', '2022-06-22 04:32:11', 'xyxyxy', '2022-06-22');
 
 -- ----------------------------
@@ -527,7 +639,7 @@ CREATE TABLE `rujukan_internal`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rujukan_internal
@@ -551,7 +663,7 @@ CREATE TABLE `rujukan_pasien`  (
   `pemeriksaan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `id_user_petugas` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rujukan_pasien
@@ -561,7 +673,6 @@ INSERT INTO `rujukan_pasien` VALUES (2, 'eksternal', '6', 'test tujuan', 'test r
 INSERT INTO `rujukan_pasien` VALUES (5, 'internal', '16', '10', NULL, NULL, NULL, '2022-06-15 15:13:38', '2022-06-22 04:21:53', NULL, 'cek kbbbb', '3');
 INSERT INTO `rujukan_pasien` VALUES (6, 'internal', '11', '10', NULL, NULL, NULL, '2022-06-15 15:14:24', '2022-06-19 13:38:40', NULL, 'ererrerer', '3');
 INSERT INTO `rujukan_pasien` VALUES (8, 'internal', '13', '9', NULL, NULL, NULL, '2022-06-22 07:33:37', '2022-06-22 07:33:37', NULL, 'test pemeriksaan', '3');
-INSERT INTO `rujukan_pasien` VALUES (9, 'internal', '13', '9', NULL, NULL, NULL, '2022-06-22 07:33:38', '2022-06-22 07:33:38', NULL, 'test pemeriksaan', '3');
 INSERT INTO `rujukan_pasien` VALUES (10, 'internal', '18', '9', NULL, NULL, NULL, '2022-06-22 13:49:55', '2022-06-22 13:49:55', NULL, 'tes', '3');
 INSERT INTO `rujukan_pasien` VALUES (11, 'internal', '17', '8', NULL, NULL, NULL, '2022-06-23 08:08:26', '2022-06-23 08:08:26', NULL, 'scalling', '3');
 
@@ -575,7 +686,7 @@ CREATE TABLE `satuan_obat`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of satuan_obat
@@ -595,7 +706,7 @@ CREATE TABLE `spesialis`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of spesialis
@@ -615,7 +726,7 @@ CREATE TABLE `statkepegawaian`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of statkepegawaian
@@ -638,7 +749,7 @@ CREATE TABLE `students`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `students_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 201 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 201 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of students
@@ -845,23 +956,42 @@ INSERT INTO `students` VALUES (199, 'Nico Ryan', 'camryn60@toy.com', 'orn.duane'
 INSERT INTO `students` VALUES (200, 'Ambrose Bergnaum', 'waelchi.zane@parker.com', 'keeling.willie', '513-721-5292', '1999-09-28', NULL, NULL);
 
 -- ----------------------------
+-- Table structure for tests
+-- ----------------------------
+DROP TABLE IF EXISTS `tests`;
+CREATE TABLE `tests`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tests
+-- ----------------------------
+INSERT INTO `tests` VALUES (1, 'tt', '2021-09-22 00:39:01', '2021-09-22 00:39:02');
+
+-- ----------------------------
 -- Table structure for tindakan_lab
 -- ----------------------------
 DROP TABLE IF EXISTS `tindakan_lab`;
 CREATE TABLE `tindakan_lab`  (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `hasil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `hasil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `id_request_lab` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `id_pemeriksaan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `id_user_petugas` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tindakan_lab
 -- ----------------------------
+INSERT INTO `tindakan_lab` VALUES (1, 'test11', '2', '12', '2022-06-25 05:51:17', '2022-06-25 06:31:21', '9');
+INSERT INTO `tindakan_lab` VALUES (2, 'test22', '2', '10', '2022-06-25 05:51:17', '2022-06-25 06:31:21', '9');
 
 -- ----------------------------
 -- Table structure for tindakan_pasien
@@ -881,7 +1011,7 @@ CREATE TABLE `tindakan_pasien`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   `ket_obat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tindakan_pasien
@@ -901,6 +1031,32 @@ INSERT INTO `tindakan_pasien` VALUES (18, 'batuk berdahak tidak kunjung selesai'
 INSERT INTO `tindakan_pasien` VALUES (19, 'pusing ketika terkena sinar matahari', '3,3,2', '0', 29, '7', '3', '22,24,26', '0,0,0', '2022-06-23 08:05:20', NULL, ',,');
 
 -- ----------------------------
+-- Table structure for tindakan_pasien_rujukan
+-- ----------------------------
+DROP TABLE IF EXISTS `tindakan_pasien_rujukan`;
+CREATE TABLE `tindakan_pasien_rujukan`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `anamnesis` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `jumlah_obat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_registrasi` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_dokter` int NULL DEFAULT NULL,
+  `id_pemeriksaan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_diagnosa` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_obat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_aturan_pakai` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `ket_obat` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `id_tindakan_pasien` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tindakan_pasien_rujukan
+-- ----------------------------
+INSERT INTO `tindakan_pasien_rujukan` VALUES (2, 'tindakan pasien rujukan', '3,4', '41', 1, '7', '1', '22,23', NULL, '2022-07-01 16:03:49', '2022-07-01 16:03:49', '3,4', 13);
+
+-- ----------------------------
 -- Table structure for unit
 -- ----------------------------
 DROP TABLE IF EXISTS `unit`;
@@ -912,7 +1068,7 @@ CREATE TABLE `unit`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of unit
@@ -942,7 +1098,7 @@ CREATE TABLE `users`  (
   `no_hp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
@@ -962,20 +1118,40 @@ INSERT INTO `users` VALUES (10, 'Dina Faradina', 'kepala@user.com', NULL, '$2y$1
 -- ----------------------------
 DROP VIEW IF EXISTS `riwayat_rekam_medis`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `riwayat_rekam_medis` AS SELECT
+tp.id id_tindakan,
 rp.id AS id_registrasi,
 dp.id AS id_pasien,
 rp.tgl_kunjungan,
 d.nama as diagnosa,
 p.nama as nama_pemeriksaan,
-o.nama as nama_obat,
+tp.id_obat,
 do.nama as nama_dokter,
 tp.anamnesis
 FROM registrasi_pasien rp
 JOIN data_pasien dp ON rp.id_pasien = dp.id
-JOIN tindakan_pasien tp ON rp.id = tp.id_registrasi
+join (select 
+id,
+anamnesis,
+id_registrasi,
+id_diagnosa,
+id_pemeriksaan,
+id_dokter,
+id_obat
+from tindakan_pasien
+union all
+select 
+id,
+anamnesis,
+id_registrasi,
+id_diagnosa,
+id_pemeriksaan,
+id_dokter,
+id_obat
+from tindakan_pasien_rujukan) as tp ON rp.id = tp.id_registrasi
+
 JOIN diagnosa d ON tp.id_diagnosa = d.id
 join pemeriksaan p on tp.id_pemeriksaan = p.id
-join obat o on tp.id_obat =  o.id
+-- join obat o on tp.id_obat =  o.id
 join dokter do on tp.id_dokter = do.id ;
 
 SET FOREIGN_KEY_CHECKS = 1;

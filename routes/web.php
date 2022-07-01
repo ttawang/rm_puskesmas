@@ -159,6 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tindakan/rujukan-pasien/get_data', [RujukanPasienController::class, 'get_data']);
         Route::get('tindakan/rujukan-pasien/edit/{id}', [RujukanPasienController::class, 'edit']);
         Route::post('tindakan/rujukan-pasien/simpan', [RujukanPasienController::class, 'simpan']);
+        Route::get('tindakan/rujukan-pasien/hapus/{id}', [RujukanPasienController::class, 'hapus']);
 
 
     });

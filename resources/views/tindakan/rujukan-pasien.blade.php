@@ -53,25 +53,26 @@
                 <div class="modal-body">
                     <form class="form-horizontal" id="form_tambah">
                     @csrf
-                        <input type="hidden" name="id">
+                        {{-- <input type="hidden" name="id"> --}}
 
                         <div class="card-body">
                             <input type="hidden" name="id_registrasi">
+                            <input type="hidden" name="id_tindakan_pasien">
                             <div class="form-group row">
                                 <div class="col-sm-3 text-secondary"><b>Tanggal Registrasi: </b></div>
                                 <div class="col-sm-3" id="tgl_kunjungan"></div>
-                                <input type="hidden" name="tgl_kunjungan">
+                                {{-- <input type="hidden" name="tgl_kunjungan"> --}}
                                 <label class="col-sm-3 text-secondary">Nama Pasien: </label>
                                 <div class="col-sm-3" id="nama_pasien"></div>
-                                <input type="hidden" name="nama_pasien">
+                                {{-- <input type="hidden" name="nama_pasien"> --}}
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3 text-secondary"><b>No. Rekam Medis: </b></div>
                                 <div class="col-sm-3" id="no_redis"></div>
-                                <input type="hidden" name="no_redis">
+                                {{-- <input type="hidden" name="no_redis"> --}}
                                 <label class="col-sm-3 text-secondary">Poli: </label>
                                 <div class="col-sm-3" id="nama_unit"></div>
-                                <input type="hidden" name="nama_unit">
+                                {{-- <input type="hidden" name="nama_unit"> --}}
                             </div>
 
                             <hr>
@@ -184,18 +185,40 @@ $(document).ready(function () {
             },
         ]
     });
+    $('body').on('click', '#btn_batal', function () {
+        Swal.fire({
+        title: 'Tindakan akan dibatalkan !',
+        text: "Silahkan lakukan tindakan ulang",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Batalkan'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).data('id');
+                $.get("{{ url('tindakan/rujukan-pasien/hapus') }}"+'/'+id);
+                Swal.fire({
+                    title: 'Batalkan!',
+                    text: 'Tindakan telah dibatalkan.',
+                    type: "success"
+                }).then((result) => {
+                    tb.ajax.reload();
+                })
+            }
+        })
+    });
 
     $('body').on('click', '#btn_edit', function () {
         var id = $(this).data('id');
         $.get("{{ url('tindakan/rujukan-pasien/edit') }}"+'/'+id, function (data) {
             $("#modal_tambah_data").modal("show");
-            console.log(data.tgl_kunjungan);
             $('#tgl_kunjungan').html(formattanggal(data.tgl_kunjungan));
             $('#nama_pasien').html(data.nama_pasien);
             $('#no_redis').html(data.no_redis);
             $('#nama_unit').html(data.nama_unit);
-            $('[name=id]').val(data.id);
             $('[name=id_registrasi]').val(data.id_registrasi);
+            $('[name=id_tindakan_pasien]').val(data.id_tindakan_pasien);
         });
     })
     $("#btn_simpan").click(function(){
